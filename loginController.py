@@ -4,7 +4,7 @@ import psycopg2 as psy
 idDigitado = "0150501"
 senhaDigitada = "Rua Anita Ferraz"
 #Conectando a database
-conn = psy.connect( dbname="Vendas", user="postgres", password="Koi.io")
+conn = psy.connect( dbname="Vendas", user="postgres", password="Koi.io") #teste
 #Criando o cursor para poder fazer operações sql
 cur = conn.cursor()
 cur.execute("SELECT cep.cepid, cep.logradouro FROM cep WHERE cepid = %s and logradouro = %s", (idDigitado, senhaDigitada))
