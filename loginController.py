@@ -15,4 +15,3 @@ if len(resultado) == 0:
     print("Resultado nao encontrado")
 else:
     print(resultado)
-#nao
