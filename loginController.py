@@ -15,7 +15,3 @@ if len(resultado) == 0:
     print("Resultado nao encontrado")
 else:
     print(resultado)
-
-#TESTE, DANIEL VAGABUNDO
-#mere rme ksa
-#RODOLFREDO É DEUS
