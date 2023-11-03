@@ -2,7 +2,6 @@
 import psycopg2 as psy
 class DadosLogin:
 #Definindo os variaveis de entrada
-<<<<<<< HEAD
     def __init__(self,loginId,senha):
         self.loginId = "01505010"
         self.senha = "Rua Anita Ferraz"
@@ -19,19 +18,4 @@ class DadosLogin:
             print("Resultado nao encontrado")
         else:
             print(resultado)
-=======
-idDigitado = "01505010"
-senhaDigitada = "Rua Anita Ferraz"
-#Conectando a database
-conn = psy.connect( dbname="Vendas", user="postgres", password="Koi.io")
-#Criando o cursor para poder fazer operações sql
-cur = conn.cursor()
-cur.execute("SELECT cep.cepid, cep.logradouro FROM cep WHERE cepid = %s and logradouro = %s", (idDigitado, senhaDigitada))
-#Adicionando o resultado da consulta em uma variavel
-resultado = cur.fetchall()
-#Printando o resultado
-if len(resultado) == 0:
-    print("Resultado nao encontrado")
-else:
-    print(resultado)
->>>>>>> 4fa568cd0b06818aaa39c5ccbc782173c35ac769
+
