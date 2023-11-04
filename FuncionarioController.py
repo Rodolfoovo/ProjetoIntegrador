@@ -12,6 +12,12 @@ class FuncionarioController:
         
     #Consulta todos os funcionario, isso é para ajudar na interface para mostrar os usuários
     def consultarFuncionario(idFuncionario, CPF):
+        conn = psy.connect( dbname="Vendas", user="postgres", password="Koi.io")
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM Funcionario")
+        resultado = cur.fetchall()
+        for res in resultado:
+            print(res)
 
     #Verifica se o funcionario já existe, caso já exista então o cadastro sera reprovado. 
     def verificarFuncionarioExistente(nomeFuncionario, CPF):
