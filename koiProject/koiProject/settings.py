@@ -29,7 +29,8 @@ ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
-
+# Aplicações existentes, somente lembrando que ao criar um aplicação nova pelo terminal, para que ela exista
+# e seja detectada no sistema é necessário registra-la na sua aplicação.
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
