@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'KoiApp.apps.KoiappConfig',
+    'CRUDfuncionario',
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True

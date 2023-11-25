@@ -4,7 +4,7 @@ from django.db import models
 
 class Funcionario(models.Model):
     idFuncionario = models.AutoField(primary_key=True)
-    nivelDeAcesso = models.IntegerField(max_length=1)
+    nivelDeAcesso = models.IntegerField()
     nomeFuncionario = models.CharField(max_length=30)
     enderecoFuncionario = models.CharField(max_length=30)
     CPF = models.CharField(max_length=11)
