@@ -11,3 +11,6 @@ class Funcionario(models.Model):
     telefone = models.CharField(max_length=20)
     senha = models.CharField(max_length=30)
     funcao = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.nomeFuncionario

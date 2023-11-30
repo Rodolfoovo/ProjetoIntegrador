@@ -8,5 +8,11 @@
     </html>
     <body>
         Hello world
+
+        <ul>
+            {% for funcionario in funcionarios %}
+            <li>{{ funcionario.idFuncionario}} - {{funcionario.nomeFuncionario}}</li>
+            {% endfor %}
+        </ul>
     </body>
 </html>
