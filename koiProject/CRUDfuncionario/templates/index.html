@@ -7,12 +7,33 @@
         <title>Document</title>
     </html>
     <body>
-        Hello world
 
         <ul>
             {% for funcionario in funcionarios %}
             <li>{{ funcionario.idFuncionario}} - {{funcionario.nomeFuncionario}}</li>
             {% endfor %}
         </ul>
+
+        <form action = "{% url 'salvarFuncionario' %}" method = "POST">
+            {% csrf_token %}
+            <label> Nome
+                <input type="text",maxlength="30", name="nomeFuncionario"><br>
+                Nivel de Acesso
+                <input type="number", min="1", max="2" name="nivelDeAcesso"><br>
+                Endereço
+                <input type="text", maxlength="30" name="enderecoFuncionario"><br>
+                CPF
+                <input type="text", maxlength="11" name="CPF"><br>
+                CEP
+                <input type="text", maxlength="8" name="CEP"><br>
+                Telefone
+                <input type="text", maxlength="20" name="telefone"><br>
+                Senha
+                <input type="text", maxlength="30" name="senha"><br>
+                Função
+                <input type="text", maxlength="30" name="funcao"><br>
+            </label>
+            <button type="submit">CRIAR</button>
+        </form>
     </body>
 </html>

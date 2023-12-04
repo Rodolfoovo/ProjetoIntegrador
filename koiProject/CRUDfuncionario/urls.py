@@ -1,8 +1,9 @@
 from django.contrib import admin
 from django.urls import path
 from django.urls import include
-from .views import home
+from .views import home, salvarFuncionario
 #Especifica que ao se entrar na URL irá ser executado o metodo home.
 urlpatterns = [
     path('', home),
+    path('salvarFuncionario/', salvarFuncionario, name = "salvarFuncionario"),
 ]
