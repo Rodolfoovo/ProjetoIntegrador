@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Funcionario
+from django.shortcuts import redirect
 # Create your views here.
 # Está view está sendo utilizada para poder retornar uma request do sistema, retornando assim um template.
 def home(request):
@@ -20,3 +21,19 @@ def salvarFuncionario(request):
                                senha=vSenha,funcao=vFuncao)
     funcionarios = Funcionario.objects.all()
     return render(request,"index.html",{"funcionarios":funcionarios})
+
+def editar(request,id):
+    funcionario = Funcionario.objects.get(idFuncionario=id) 
+    return render(request, "update.html", {"funcionario": funcionario})
+
+def update(request,id):
+    vNome = request.POST.get("nome")
+    funcionarios = Funcionario.objects.get(idFuncionario=id)
+    funcionarios.nomeFuncionario = vNome
+    funcionarios.save()
+    return redirect(home)
+
+def delete(request, id):
+    funcionario = Funcionario.objects.get(idFuncionario=id) 
+    funcionario.delete()
+    return redirect(home)

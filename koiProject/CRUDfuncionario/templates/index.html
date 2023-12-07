@@ -10,7 +10,9 @@
 
         <ul>
             {% for funcionario in funcionarios %}
-            <li>{{ funcionario.idFuncionario}} - {{funcionario.nomeFuncionario}}</li>
+            <li>{{ funcionario.idFuncionario}} - {{funcionario.nomeFuncionario}} 
+                <a href="{% url 'editar' funcionario.idFuncionario %}">EDITAR</a>
+                <a href="{% url 'delete' funcionario.idFuncionario %}">DELETAR</a></li>
             {% endfor %}
         </ul>
 
@@ -33,7 +35,7 @@
                 Função
                 <input type="text", maxlength="30" name="funcao"><br>
             </label>
-            <button type="submit">CRIAR</button>
+            <button type="submit">UPDATE</button>
         </form>
     </body>
 </html>

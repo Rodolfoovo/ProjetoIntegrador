@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    {{funcionario.idFuncionario}} - {{funcionario.nomeFuncionario}}
+    <form action = "{% url 'update' funcionario.idFuncionario %}" method = "POST">
+        {% csrf_token %}
+    <input type="text" name="nome" value="{{funcionario.nomeFuncionario}}">
+    <button type="submit">UPDATE</button>
+    </form>
+</body>
+</html>
