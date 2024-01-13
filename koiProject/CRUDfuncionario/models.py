@@ -1,5 +1,5 @@
 from django.db import models
-
+#from cpf_field.models import CPFField
 # Create your models here.
 class Funcionario(models.Model):
     idFuncionario = models.AutoField(primary_key=True)

@@ -17,7 +17,7 @@ def salvarFuncionario(request):
     vSenha = request.POST.get("senha")
     vFuncao = request.POST.get("funcao")
     Funcionario.objects.create(nivelDeAcesso=vNivelDeAcesso,nomeFuncionario=vnomeFuncionario,
-                               vEnderecoFuncionario=vEnderecoFuncionario,CPF=vCPF,CEP=vCEP,telefone=vTelefone,
+                               enderecoFuncionario=vEnderecoFuncionario,CPF=vCPF,CEP=vCEP,telefone=vTelefone,
                                senha=vSenha,funcao=vFuncao)
     funcionarios = Funcionario.objects.all()
     return render(request,"index.html",{"funcionarios":funcionarios})

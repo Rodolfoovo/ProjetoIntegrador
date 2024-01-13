@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'KoiApp.apps.KoiappConfig',
     'CRUDfuncionario',
+    'cpf_field',
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
