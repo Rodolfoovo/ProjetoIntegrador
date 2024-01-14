@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from .models import Funcionario
 from django.shortcuts import redirect
+from django.contrib.auth.models import User
+from django.http.response import HttpResponse
 # Create your views here.
 # Está view está sendo utilizada para poder retornar uma request do sistema, retornando assim um template.
 def home(request):
@@ -8,20 +10,23 @@ def home(request):
     return render(request, "index.html", {"funcionarios": funcionarios})
 
 def salvarFuncionario(request):
-    vnomeFuncionario = request.POST.get("nomeFuncionario")
-    vNivelDeAcesso = request.POST.get("nivelDeAcesso")
-    vEnderecoFuncionario = request.POST.get("enderecoFuncionario")
-    vCPF = request.POST.get("CPF")
-    vCEP = request.POST.get("CEP")
-    vTelefone = request.POST.get("telefone")
-    vSenha = request.POST.get("senha")
-    vFuncao = request.POST.get("funcao")
-    Funcionario.objects.create(nivelDeAcesso=vNivelDeAcesso,nomeFuncionario=vnomeFuncionario,
-                               enderecoFuncionario=vEnderecoFuncionario,CPF=vCPF,CEP=vCEP,telefone=vTelefone,
-                               senha=vSenha,funcao=vFuncao)
-    funcionarios = Funcionario.objects.all()
-    return render(request,"index.html",{"funcionarios":funcionarios})
-
+    if request.method == 'GET':
+        return render(request, "index.html")
+    else:
+        vnomeFuncionario = request.POST.get("nomeFuncionario")
+#        user = User.objects.filter(nomeFuncionario=vnomeFuncionario)
+        vNivelDeAcesso = request.POST.get("nivelDeAcesso")
+        vEnderecoFuncionario = request.POST.get("enderecoFuncionario")
+        vCPF = request.POST.get("CPF")
+        vCEP = request.POST.get("CEP")
+        vTelefone = request.POST.get("telefone")
+        vSenha = request.POST.get("senha")
+        vFuncao = request.POST.get("funcao")
+        Funcionario.objects.create(nivelDeAcesso=vNivelDeAcesso,nomeFuncionario=vnomeFuncionario,
+                                enderecoFuncionario=vEnderecoFuncionario,CPF=vCPF,CEP=vCEP,telefone=vTelefone,
+                                senha=vSenha,funcao=vFuncao)
+        funcionarios = Funcionario.objects.all()
+        return render(request,"index.html",{"funcionarios":funcionarios})
 def editar(request,id):
     funcionario = Funcionario.objects.get(idFuncionario=id) 
     return render(request, "update.html", {"funcionario": funcionario})
