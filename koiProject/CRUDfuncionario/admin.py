@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Funcionario
+from CRUDfuncionario.models import Funcionario
 # Register your models here.
 
 admin.site.register(Funcionario)

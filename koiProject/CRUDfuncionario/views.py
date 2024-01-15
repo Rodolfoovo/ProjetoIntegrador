@@ -1,7 +1,6 @@
 from django.shortcuts import render
-from .models import Funcionario
+from CRUDfuncionario.models import Funcionario
 from django.shortcuts import redirect
-from django.contrib.auth.models import User
 from django.http.response import HttpResponse
 # Create your views here.
 # Está view está sendo utilizada para poder retornar uma request do sistema, retornando assim um template.
@@ -20,11 +19,12 @@ def salvarFuncionario(request):
         vCPF = request.POST.get("CPF")
         vCEP = request.POST.get("CEP")
         vTelefone = request.POST.get("telefone")
-        vSenha = request.POST.get("senha")
+#        vSenha = request.POST.get("senha")
+        vpassword = request.POST.get("password")
         vFuncao = request.POST.get("funcao")
         Funcionario.objects.create(nivelDeAcesso=vNivelDeAcesso,nomeFuncionario=vnomeFuncionario,
                                 enderecoFuncionario=vEnderecoFuncionario,CPF=vCPF,CEP=vCEP,telefone=vTelefone,
-                                senha=vSenha,funcao=vFuncao)
+                                password=vpassword,funcao=vFuncao)
         funcionarios = Funcionario.objects.all()
         return render(request,"index.html",{"funcionarios":funcionarios})
 def editar(request,id):
