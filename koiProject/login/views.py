@@ -8,8 +8,8 @@ def login(request):
         return render(request,'login.html')
     else:
         idFuncionario = request.POST.get("idFuncionario") 
-        senha = request.POST.get("senha")
-        user = Funcionario.objects.filter(idFuncionario=idFuncionario, senha=senha)
+        password = request.POST.get("password")
+        user = Funcionario.objects.filter(idFuncionario=idFuncionario, password=password)
         if user:
             return HttpResponse('autenticado')
         else:

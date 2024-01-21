@@ -12,29 +12,32 @@ def salvarFuncionario(request):
     if request.method == 'GET':
         return render(request, "index.html")
     else:
-        vnomeFuncionario = request.POST.get("nomeFuncionario")
-#        user = User.objects.filter(nomeFuncionario=vnomeFuncionario)
-        vNivelDeAcesso = request.POST.get("nivelDeAcesso")
-        vEnderecoFuncionario = request.POST.get("enderecoFuncionario")
-        vCPF = request.POST.get("CPF")
-        vCEP = request.POST.get("CEP")
-        vTelefone = request.POST.get("telefone")
-#        vSenha = request.POST.get("senha")
-        vpassword = request.POST.get("password")
-        vFuncao = request.POST.get("funcao")
-        Funcionario.objects.create(nivelDeAcesso=vNivelDeAcesso,nomeFuncionario=vnomeFuncionario,
-                                enderecoFuncionario=vEnderecoFuncionario,CPF=vCPF,CEP=vCEP,telefone=vTelefone,
-                                password=vpassword,funcao=vFuncao)
-        funcionarios = Funcionario.objects.all()
-        return render(request,"index.html",{"funcionarios":funcionarios})
+        try:
+            usuarioAux= Funcionario.objects.get(username=request.POST["username"])
+            if usuarioAux:
+                return render(request,"index.html", {'msg':'Erro! Já existe este nome no sistema'})
+        except Funcionario.DoesNotExist:
+            vusername = request.POST.get("username")
+    #        user = User.objects.filter(nomeFuncionario=vnomeFuncionario)
+            vEnderecoFuncionario = request.POST.get("enderecoFuncionario")
+            vCPF = request.POST.get("CPF")
+            vCEP = request.POST.get("CEP")
+            vTelefone = request.POST.get("telefone")
+            vpassword = request.POST.get("password")
+            vFuncao = request.POST.get("funcao")
+            Funcionario.objects.create(nivelDeAcesso=1,username=vusername,
+                                    enderecoFuncionario=vEnderecoFuncionario,CPF=vCPF,CEP=vCEP,telefone=vTelefone,
+                                    password=vpassword,funcao=vFuncao)
+            funcionarios = Funcionario.objects.all()
+            return render(request,"index.html",{"funcionarios":funcionarios})
 def editar(request,id):
     funcionario = Funcionario.objects.get(idFuncionario=id) 
     return render(request, "update.html", {"funcionario": funcionario})
 
 def update(request,id):
-    vNome = request.POST.get("nome")
+    vusername = request.POST.get("username")
     funcionarios = Funcionario.objects.get(idFuncionario=id)
-    funcionarios.nomeFuncionario = vNome
+    funcionarios.username = vusername
     funcionarios.save()
     return redirect(home)
 

@@ -10,7 +10,7 @@
     {{funcionario.idFuncionario}} - {{funcionario.nomeFuncionario}}
     <form action = "{% url 'update' funcionario.idFuncionario %}" method = "POST">
         {% csrf_token %}
-    <input type="text" name="nome" value="{{funcionario.nomeFuncionario}}">
+    <input type="text" name="username" value="{{funcionario.username}}">
     <button type="submit">UPDATE</button>
     </form>
 </body>

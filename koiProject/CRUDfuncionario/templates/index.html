@@ -10,7 +10,7 @@
 
         <ul>
             {% for funcionario in funcionarios %}
-            <li>{{ funcionario.idFuncionario}} - {{funcionario.nomeFuncionario}} 
+            <li>{{ funcionario.idFuncionario}} - {{funcionario.username}} 
                 <a href="{% url 'editar' funcionario.idFuncionario %}">EDITAR</a>
                 <a href="{% url 'delete' funcionario.idFuncionario %}">DELETAR</a></li>
             {% endfor %}
@@ -19,9 +19,7 @@
         <form action = "{% url 'salvarFuncionario' %}" method = "POST">
             {% csrf_token %}
             <label> Nome
-                <input type="text",maxlength="30", name="nomeFuncionario"><br>
-                Nivel de Acesso
-                <input type="number", min="1", max="2" name="nivelDeAcesso"><br>
+                <input type="text",maxlength="30", name="username"><br>
                 Endereço
                 <input type="text", maxlength="30" name="enderecoFuncionario"><br>
                 CPF

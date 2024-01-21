@@ -5,7 +5,6 @@ from django.contrib.auth.models import AbstractUser
 class Funcionario(AbstractUser):
     idFuncionario = models.AutoField(primary_key=True)
     nivelDeAcesso = models.IntegerField(default=1)
-    nomeFuncionario = models.CharField(max_length=30)
     enderecoFuncionario = models.CharField(max_length=30)
     CPF = models.CharField(max_length=11)
     CEP = models.CharField(max_length=8)
@@ -16,4 +15,4 @@ class Funcionario(AbstractUser):
     password = models.CharField(max_length=100, default='default_password')
 
     def __str__(self):
-        return self.nomeFuncionario
+        return self.username
