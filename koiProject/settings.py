@@ -33,6 +33,10 @@ INSTALLED_APPS = [
     'CRUDfuncionario',
     'cpf_field',
     'login',
+    'dashboard',
+    'UserManager',
+    'Produtos',
+    'RankProdutos',
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
