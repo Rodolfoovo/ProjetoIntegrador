@@ -3,15 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Atualizar Funcionário</title>
 </head>
 <body>
+    <h2>Atualizar Funcionário</h2>
 
-    {{funcionario.idFuncionario}} - {{funcionario.nomeFuncionario}}
-    <form action = "{% url 'update' funcionario.idFuncionario %}" method = "POST">
+    <form action="{% url 'update' funcionario.idFuncionario %}" method="POST">
         {% csrf_token %}
-    <input type="text" name="username" value="{{funcionario.username}}">
-    <button type="submit">UPDATE</button>
+        
+        <!-- Campo de Identificação -->
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" value="{{funcionario.username}}">
+        </div>
+
+        <div>
+            <label for="enderecoFuncionario">Endereço:</label>
+            <input type="text" id="enderecoFuncionario" name="enderecoFuncionario" value="{{funcionario.enderecoFuncionario}}">
+        </div>
+
+        <div>
+            <label for="CPF">CPF:</label>
+            <input type="text" id="CPF" name="CPF" value="{{funcionario.CPF}}">
+        </div>
+
+        <div>
+            <label for="CEP">CEP:</label>
+            <input type="text" id="CEP" name="CEP" value="{{funcionario.CEP}}">
+        </div>
+
+        <div>
+            <label for="telefone">Telefone:</label>
+            <input type="text" id="telefone" name="telefone" value="{{funcionario.telefone}}">
+        </div>
+
+        <div>
+            <label for="password">Senha:</label>
+            <input type="password" id="password" name="password" value="{{funcionario.password}}">
+        </div>
+
+        <div>
+            <label for="funcao">Função:</label>
+            <input type="text" id="funcao" name="funcao" value="{{funcionario.funcao}}">
+        </div>
+
+        <button type="submit">Atualizar</button>
     </form>
 </body>
 </html>

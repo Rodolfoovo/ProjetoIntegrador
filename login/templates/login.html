@@ -4,16 +4,110 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-</head>
-<body>
-    <form action= "{% url 'login' %}" method="POST">
-        {% csrf_token %}
-        <input type="text" placeholder="Identificação" name="idFuncionario">
-        <br>
+    {% load static %}
+    <style>
+        /* Estilo para o corpo da página */
+        body {
+            background: url("{% static 'Imagens/IMG_TelaLogin/Tela 64.png' %}") no-repeat center center fixed;
+            background-size: 900px auto;
+            font-family: 'Montserrat', sans-serif; /* Aplica a fonte Montserrat a todo o corpo */
+        }
 
-        <input type="text" placeholder="Senha" name="password">
-        <br>
-        <button type="submit">Login</button>
+        /* Estilo para o formulário de login */
+        .login-form {
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 400px;
+            width: 100%;
+            margin-top: 160px; 
+            margin-left: 675px; 
+        }
+
+        /* Estilo para grupos de formulários (campos de ID e senha) */
+        .form-group {
+            margin-bottom: 5px; 
+        }
+
+        /* Estilo para campos de formulário (ID e senha) */
+        .form-control {
+            width: 90%;
+            padding: 20px;
+            box-sizing: border-box;
+            border: none;
+            position: relative;
+            margin: 0 auto; 
+            
+        }
+
+        /* Estilo para o texto dentro dos campos de formulário (ID e senha) */
+        .form-control input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1.5px solid #000;
+            background: rgba(222, 222, 222, 0.93);
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif; 
+        }
+        
+
+        /* Estilo para o botão de envio */
+        .btn-submit {
+            width: 93%;
+            padding: 10px;
+            fill: linear-gradient(90deg, #C833B0 -107.18%, #FF6347 113.38%, rgba(255, 99, 71, 0.00) 113.4%);
+            border: none;
+            cursor: pointer;
+            display: block;
+            margin: 0 auto; 
+        }
+
+        /* Estilo para o texto "Esqueci minha senha" */
+        .forgot-password {
+            text-align: center;
+            margin-top: 10px;
+            color: #818181;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            text-decoration-line: underline;
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- Formulário de login -->
+    <form action="{% url 'login' %}" method="POST" class="login-form">{% csrf_token %}
+    <div class="login-container">
+        <!-- Campo de Identificação -->
+        <div class="form-group">
+            <div class="form-control" id="idFuncionario">
+                <input type="text" id="idFuncionario" name="idFuncionario" placeholder="Digite seu ID">
+            </div>
+        </div>
+
+        <!-- Campo de Senha -->
+        <div class="form-group">
+            <div class="form-control" id="password">
+                <input type="password" id="password" name="password" placeholder="Digite sua senha">
+            </div>
+        </div>
+
+        <!-- Botão de Login com imagem -->
+        <button type="submit" class="btn-submit"></button>
+
+        <!-- Texto "Esqueci minha senha" -->
+        <div class="forgot-password">
+            <a href="{% url 'reset_senha' %}">Esqueci minha senha</a>
+        </div>
+    </div>
+
+    <div class="background-container">
+
+
+    </div>
+        
     </form>
 </body>
 </html>

@@ -1,9 +1,8 @@
-from django.shortcuts import render
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
 from CRUDfuncionario.models import Funcionario
-from django.shortcuts import redirect
-from django.http.response import HttpResponse
-# Create your views here.
-# Está view está sendo utilizada para poder retornar uma request do sistema, retornando assim um template.
+from django.http import HttpResponse
+
 def home(request):
     funcionarios = Funcionario.objects.all()
     return render(request, "index.html", {"funcionarios": funcionarios})
@@ -11,36 +10,63 @@ def home(request):
 def salvarFuncionario(request):
     if request.method == 'GET':
         return render(request, "index.html")
-    else:
+    elif request.method == 'POST':
+        vusername = request.POST.get("username")
+        vEnderecoFuncionario = request.POST.get("enderecoFuncionario")
+        vCPF = request.POST.get("CPF")
+        vCEP = request.POST.get("CEP")
+        vTelefone = request.POST.get("telefone")
+        vpassword = request.POST.get("password")
+        vFuncao = request.POST.get("funcao")
+
+        # Verifica se já existe um usuário com o mesmo username
         try:
-            usuarioAux= Funcionario.objects.get(username=request.POST["username"])
-            if usuarioAux:
-                return render(request,"index.html", {'msg':'Erro! Já existe este nome no sistema'})
+            usuarioAux = Funcionario.objects.get(username=vusername)
+            return render(request, "index.html", {'msg': 'Erro! Já existe este nome no sistema'})
         except Funcionario.DoesNotExist:
-            vusername = request.POST.get("username")
-    #        user = User.objects.filter(nomeFuncionario=vnomeFuncionario)
-            vEnderecoFuncionario = request.POST.get("enderecoFuncionario")
-            vCPF = request.POST.get("CPF")
-            vCEP = request.POST.get("CEP")
-            vTelefone = request.POST.get("telefone")
-            vpassword = request.POST.get("password")
-            vFuncao = request.POST.get("funcao")
-            Funcionario.objects.create(nivelDeAcesso=1,username=vusername,
-                                    enderecoFuncionario=vEnderecoFuncionario,CPF=vCPF,CEP=vCEP,telefone=vTelefone,
-                                    password=vpassword,funcao=vFuncao)
-            funcionarios = Funcionario.objects.all()
-            return render(request,"index.html",{"funcionarios":funcionarios})
-def editar(request,id):
+            # Cria um novo usuário
+            novo_funcionario = Funcionario.objects.create(
+                nivelDeAcesso=1,
+                username=vusername,
+                enderecoFuncionario=vEnderecoFuncionario,
+                CPF=vCPF,
+                CEP=vCEP,
+                telefone=vTelefone,
+                password=vpassword,
+                funcao=vFuncao
+            )
+
+            # Autentica o novo usuário
+            user = authenticate(request, username=vusername, password=vpassword)
+            if user is not None:
+                login(request, user)
+                return HttpResponse('Usuário cadastrado e autenticado com sucesso.')
+            else:
+                return HttpResponse('Erro ao autenticar o usuário.')
+
+def editar(request, id):
     funcionario = Funcionario.objects.get(idFuncionario=id) 
     return render(request, "update.html", {"funcionario": funcionario})
 
-def update(request,id):
-    vusername = request.POST.get("username")
-    funcionarios = Funcionario.objects.get(idFuncionario=id)
-    funcionarios.username = vusername
-    funcionarios.save()
-    return redirect(home)
+def update(request, id):
+    if request.method == 'POST':
+        funcionario = Funcionario.objects.get(idFuncionario=id)
 
+        # Atualiza os campos do funcionário com base nos dados do formulário
+        funcionario.username = request.POST.get("username")
+        funcionario.enderecoFuncionario = request.POST.get("enderecoFuncionario")
+        funcionario.CPF = request.POST.get("CPF")
+        funcionario.CEP = request.POST.get("CEP")
+        funcionario.telefone = request.POST.get("telefone")
+        funcionario.password = request.POST.get("password")
+        funcionario.funcao = request.POST.get("funcao")
+
+        funcionario.save()
+        return redirect(home)
+    else:
+        # Se o método não for POST, redirecione para a página de origem ou trate conforme necessário
+        return HttpResponse('Método não permitido')
+    
 def delete(request, id):
     funcionario = Funcionario.objects.get(idFuncionario=id) 
     funcionario.delete()

@@ -1,16 +1,24 @@
+from django.contrib.auth import authenticate, login
+from django.http import HttpResponse
 from django.shortcuts import render
-from django.contrib.auth import authenticate
-from django.http.response import HttpResponse
+import logging
 from CRUDfuncionario.models import Funcionario
-# Create your views here.
-def login(request):
+
+logger = logging.getLogger(__name__)
+
+def login_view(request):
     if request.method == "GET":
         return render(request,'login.html')
     else:
         idFuncionario = request.POST.get("idFuncionario") 
         password = request.POST.get("password")
+
         user = Funcionario.objects.filter(idFuncionario=idFuncionario, password=password)
         if user:
-            return HttpResponse('autenticado')
+            return HttpResponse('Login efetuado com Sucesso!')
         else:
             return HttpResponse('Email ou senha invalidos')
+        
+def reset_senha(request):
+    # Lógica para a página de redefinição de senha
+    return render(request, 'Resetarsenha.html')

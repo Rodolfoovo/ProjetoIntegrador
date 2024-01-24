@@ -10,28 +10,28 @@
 
         <ul>
             {% for funcionario in funcionarios %}
-            <li>{{ funcionario.idFuncionario}} - {{funcionario.username}} 
+            <li>{{ funcionario.idFuncionario}} - {{funcionario.username}} - {{funcionario.password}}
                 <a href="{% url 'editar' funcionario.idFuncionario %}">EDITAR</a>
                 <a href="{% url 'delete' funcionario.idFuncionario %}">DELETAR</a></li>
             {% endfor %}
         </ul>
 
-        <form action = "{% url 'salvarFuncionario' %}" method = "POST">
-            {% csrf_token %}
-            <label> Nome
-                <input type="text",maxlength="30", name="username"><br>
+        <form action = "{% url 'salvarFuncionario' %}" method = "POST">{% csrf_token %}
+            <label> 
+                Nome
+                <input type="text",maxlength="30", name="username"><br><br>
                 Endereço
-                <input type="text", maxlength="30" name="enderecoFuncionario"><br>
+                <input type="text", maxlength="30" name="enderecoFuncionario"><br><br>
                 CPF
-                <input type="text", maxlength="11" name="CPF"><br>
+                <input type="text", maxlength="11" name="CPF"><br><br>
                 CEP
-                <input type="text", maxlength="8" name="CEP"><br>
+                <input type="text", maxlength="8" name="CEP"><br><br>
                 Telefone
-                <input type="text", maxlength="20" name="telefone"><br>
+                <input type="text", maxlength="20" name="telefone"><br><br>
                 Senha
-                <input type="text", maxlength="30" name="password"><br>
+                <input type="text", maxlength="30" name="password"><br><br>
                 Função
-                <input type="text", maxlength="30" name="funcao"><br>
+                <input type="text", maxlength="30" name="funcao"><br><br>
             </label>
             <button type="submit">CREATE</button>
         </form>
