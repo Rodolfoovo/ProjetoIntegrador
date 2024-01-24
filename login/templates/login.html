@@ -53,13 +53,26 @@
 
         /* Estilo para o botão de envio */
         .btn-submit {
-            width: 93%;
-            padding: 10px;
-            fill: linear-gradient(90deg, #C833B0 -107.18%, #FF6347 113.38%, rgba(255, 99, 71, 0.00) 113.4%);
+            width: 209px;
+            height: 43px;
+            flex-shrink: 0;
+            padding: 12px 45px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: bold;
+            background-image: linear-gradient(to right, rgba(200,51,176), rgba(255,99,71));
             border: none;
             cursor: pointer;
-            display: block;
-            margin: 0 auto; 
+            display: flex;
+            margin: 0 auto;
+            align-content: center;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: nowrap;
+            flex-direction: row;
+            text-transform: uppercase;
+            color: #FFFF;
+            
         }
 
         /* Estilo para o texto "Esqueci minha senha" */
@@ -95,7 +108,7 @@
         </div>
 
         <!-- Botão de Login com imagem -->
-        <button type="submit" class="btn-submit"></button>
+        <button type="submit" class="btn-submit">ENTRAR</button>
 
         <!-- Texto "Esqueci minha senha" -->
         <div class="forgot-password">
