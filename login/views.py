@@ -3,7 +3,6 @@ from django.http import HttpResponse
 from django.shortcuts import render
 import logging
 from CRUDfuncionario.models import Funcionario
-
 logger = logging.getLogger(__name__)
 
 def login_view(request):
@@ -13,7 +12,7 @@ def login_view(request):
         idFuncionario = request.POST.get("idFuncionario") 
         password = request.POST.get("password")
 
-        user = Funcionario.objects.filter(idFuncionario=idFuncionario, password=password)
+        user = authenticate(request,username=idFuncionario,password=password)
         if user:
             return HttpResponse('Login efetuado com Sucesso!')
         else:

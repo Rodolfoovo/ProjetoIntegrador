@@ -22,14 +22,14 @@ def salvarFuncionario(request):
         # Verifica se já existe um usuário com o mesmo username
         try:
             usuarioAux = Funcionario.objects.get(username=vusername)
-            return render(request, "index.html", {'msg': 'Erro! Já existe este nome no sistema'})
+            return redirect(home)
         except Funcionario.DoesNotExist:
             # Cria um novo usuário
-            novo_funcionario = Funcionario.objects.create(
+            novo_funcionario = Funcionario.objects.create_user(
                 nivelDeAcesso=1,
                 username=vusername,
                 enderecoFuncionario=vEnderecoFuncionario,
-                CPF=vCPF,
+                cpf=vCPF,
                 CEP=vCEP,
                 telefone=vTelefone,
                 password=vpassword,
@@ -37,12 +37,13 @@ def salvarFuncionario(request):
             )
 
             # Autentica o novo usuário
-            user = authenticate(request, username=vusername, password=vpassword)
-            if user is not None:
-                login(request, user)
-                return HttpResponse('Usuário cadastrado e autenticado com sucesso.')
+            # user = authenticate(request, username=vusername, password=vpassword)
+            
+            if user:
+                funcionarios = Funcionario.objects.all()
+                return redirect(home)
             else:
-                return HttpResponse('Erro ao autenticar o usuário.')
+                return HttpResponse(user)
 
 def editar(request, id):
     funcionario = Funcionario.objects.get(idFuncionario=id) 
