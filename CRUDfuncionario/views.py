@@ -37,7 +37,7 @@ def salvarFuncionario(request):
             )
 
             # Autentica o novo usuário
-            # user = authenticate(request, username=vusername, password=vpassword)
+            user = authenticate(request, username=vusername, password=vpassword)
             
             if user:
                 funcionarios = Funcionario.objects.all()
