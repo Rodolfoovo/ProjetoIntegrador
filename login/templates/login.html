@@ -5,120 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     {% load static %}
-    <style>
-        /* Estilo para o corpo da página */
-        body {
-            background: url("{% static 'Imagens/IMG_TelaLogin/Tela 64.png' %}") no-repeat center center fixed;
-            background-size: 900px auto;
-            font-family: 'Montserrat', sans-serif; /* Aplica a fonte Montserrat a todo o corpo */
-        }
-
-        /* Estilo para o formulário de login */
-        .login-form {
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 400px;
-            width: 100%;
-            margin-top: 160px; 
-            margin-left: 675px; 
-        }
-
-        /* Estilo para grupos de formulários (campos de ID e senha) */
-        .form-group {
-            margin-bottom: 5px; 
-        }
-
-        /* Estilo para campos de formulário (ID e senha) */
-        .form-control {
-            width: 90%;
-            padding: 20px;
-            box-sizing: border-box;
-            border: none;
-            position: relative;
-            margin: 0 auto; 
-            
-        }
-
-        /* Estilo para o texto dentro dos campos de formulário (ID e senha) */
-        .form-control input {
-            width: 100%;
-            padding: 10px;
-            box-sizing: border-box;
-            border: 1.5px solid #000;
-            background: rgba(222, 222, 222, 0.93);
-            border-radius: 4px;
-            font-family: 'Montserrat', sans-serif; 
-        }
-        
-
-        /* Estilo para o botão de envio */
-        .btn-submit {
-            width: 209px;
-            height: 43px;
-            flex-shrink: 0;
-            padding: 12px 45px;
-            border-radius: 5px;
-            font-size: 12px;
-            font-weight: bold;
-            background-image: linear-gradient(to right, rgba(200,51,176), rgba(255,99,71));
-            border: none;
-            cursor: pointer;
-            display: flex;
-            margin: 0 auto;
-            align-content: center;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: nowrap;
-            flex-direction: row;
-            text-transform: uppercase;
-            color: #FFFF;
-            
-        }
-
-        /* Estilo para o texto "Esqueci minha senha" */
-        .forgot-password {
-            text-align: center;
-            margin-top: 10px;
-            color: #818181;
-            font-style: normal;
-            font-weight: 400;
-            line-height: normal;
-            text-decoration-line: underline;
-        }
-
-    </style>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
 </head>
 
 <body>
-    <!-- Formulário de login -->
-    <form action="{% url 'login' %}" method="POST" class="login-form">{% csrf_token %}
-    <div class="login-container">
-        <!-- Campo de Identificação -->
-        <div class="form-group">
-            <div class="form-control" id="idFuncionario">
-                <input type="text" id="idFuncionario" name="idFuncionario" placeholder="Digite seu ID">
+    
+    <div class="retangulo_principal">
+        <div class="title">Bem-vindo ao
+            <div class="title_koi">KOI.IO</div>
+        </div>
+        <div class="retangulo_login">
+            <div class="title_login">LOGIN</div>
+            <!-- Formulário de login -->
+            <form action="{% url 'login' %}" method="POST" class="login-form">{% csrf_token %}
+            <!-- Campo de Identificação -->
+            <div class="form-group">
+                <div class="form-control" id="idFuncionario">
+                    <input type="text" id="idFuncionario" name="idFuncionario" placeholder="Digite seu ID">
+                </div>
             </div>
-        </div>
-
-        <!-- Campo de Senha -->
-        <div class="form-group">
-            <div class="form-control" id="password">
-                <input type="password" id="password" name="password" placeholder="Digite sua senha">
+        
+            <!-- Campo de Senha -->
+            <div class="form-group">
+                <div class="form-control" id="password">
+                    <input type="password" id="password" name="password" placeholder="Digite sua senha">
+                </div>
             </div>
+        
+            <!-- Botão de Login -->
+            <button type="submit" class="btn-submit">ENTRAR</button>
+        
+            <!-- Texto "Esqueci minha senha" -->
+            <div class="forgot-password">
+                <a href="{% url 'reset_senha' %}">Esqueci minha senha</a>
+            </div>
+    
         </div>
-
-        <!-- Botão de Login com imagem -->
-        <button type="submit" class="btn-submit">ENTRAR</button>
-
-        <!-- Texto "Esqueci minha senha" -->
-        <div class="forgot-password">
-            <a href="{% url 'reset_senha' %}">Esqueci minha senha</a>
-        </div>
-    </div>
-
-    <div class="background-container">
-
-
     </div>
         
     </form>
