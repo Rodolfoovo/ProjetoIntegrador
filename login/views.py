@@ -18,6 +18,6 @@ def login_view(request):
         else:
             return HttpResponse('Email ou senha invalidos')
         
-def reset_senha(request):
+def reset_senha_view(request):
     # Lógica para a página de redefinição de senha
     return render(request, 'Resetarsenha.html')

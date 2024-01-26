@@ -3,27 +3,28 @@
 <head>
     <title>Koi.io</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static css/style.css}
-    ">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
 </head>
 <body>
     <!-- "nav" representa uma seção de uma página que guia para outras páginas -->
     <nav id="menu-horizontal">
         <ul>
             <!-- Nos href's é onde serão colocados os links para as determinadas telas -->
-            <li><a href="https...">Dashboard</a></li>
+            <li><a href="{% url 'telainicial' %}">Dashboard</a></li>
 
-            <li><a href="https...">Relatórios</a></li>
+            <li><a href="{% url 'telainicial' %}">Relatórios</a></li>
 
-            <li><a href="https...">Rank de produtos</a></li>
+            <li><a href="{% url 'telainicial' %}">Rank de produtos</a></li>
 
-            <li><a href="https...">Entrada e saída de estoque</a></li>
+            <li><a href="{% url 'telainicial' %}">Entrada e saída de estoque</a></li>
 
-            <li><a href="https...">Produtos</a></li>
+            <li><a href="{% url 'telainicial' %}">Produtos</a></li>
 
-            <li><a href="https...">Gerenciar usuários</a></li>
+            <li><a href="{% url 'telainicial' %}">Gerenciar usuários</a></li>
 
-            <li><a href="https...">Perfil</a></li>
+            <li><a href="{% url 'telainicial' %}">Perfil</a></li>
+
         </ul>
     </nav>
 

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'UserManager',
     'Produtos',
     'RankProdutos',
+    'Dash_app'
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
