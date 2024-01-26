@@ -7,7 +7,7 @@ def home(request):
     funcionarios = Funcionario.objects.all()
     return render(request, "index.html", {"funcionarios": funcionarios})
 
-def salvarFuncionario(request):
+def salvarFuncionario_view(request):
     if request.method == 'GET':
         return render(request, "index.html")
     elif request.method == 'POST':
@@ -44,11 +44,11 @@ def salvarFuncionario(request):
             else:
                 return HttpResponse('Erro ao autenticar o usuário.')
 
-def editar(request, id):
+def editar_view(request, id):
     funcionario = Funcionario.objects.get(idFuncionario=id) 
     return render(request, "update.html", {"funcionario": funcionario})
 
-def update(request, id):
+def update_view(request, id):
     if request.method == 'POST':
         funcionario = Funcionario.objects.get(idFuncionario=id)
 
@@ -67,7 +67,7 @@ def update(request, id):
         # Se o método não for POST, redirecione para a página de origem ou trate conforme necessário
         return HttpResponse('Método não permitido')
     
-def delete(request, id):
+def delete_view(request, id):
     funcionario = Funcionario.objects.get(idFuncionario=id) 
     funcionario.delete()
     return redirect(home)
