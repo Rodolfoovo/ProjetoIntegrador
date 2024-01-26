@@ -1,7 +1,5 @@
 from django.urls import path
-from .views import telainicial_view
-
+from .views import tela_inicial
 urlpatterns = [
-    path('',telainicial_view),
-    path('telainicial/', telainicial_view, name='telainicial'), 
+    path('', tela_inicial, name='telainicial'),
 ]

@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import logging
 from CRUDfuncionario.models import Funcionario
 logger = logging.getLogger(__name__)
@@ -14,7 +14,7 @@ def login_view(request):
 
         user = authenticate(request,username=idFuncionario,password=password)
         if user:
-            return HttpResponse('Login efetuado com Sucesso!')
+            return redirect('telainicial')
         else:
             return HttpResponse('Email ou senha invalidos')
         

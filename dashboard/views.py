@@ -1,4 +1,4 @@
 from django.shortcuts import render
 
-def telainicial_view(request):
+def tela_inicial(request):
     return render(request, 'telainicial.html')
