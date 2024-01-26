@@ -79,6 +79,7 @@ AUTH_USER_MODEL = 'CRUDfuncionario.Funcionario'
 # Configuração dos backends de autenticação
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
+#    'login.backends.backendLogin',
     # Adicione outros backends de autenticação, se necessário
 ]
 
