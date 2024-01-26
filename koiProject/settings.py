@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'UserManager',
     'Produtos',
     'RankProdutos',
-    'Dash_app'
+    'Dash_app',
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -79,7 +79,6 @@ AUTH_USER_MODEL = 'CRUDfuncionario.Funcionario'
 # Configuração dos backends de autenticação
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
-#    'login.backends.backendLogin',
     # Adicione outros backends de autenticação, se necessário
 ]
 

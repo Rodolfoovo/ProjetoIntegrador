@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import telainicial_view
+from dashboard.views import telainicial_view
 
 urlpatterns = [
     path('',telainicial_view),
