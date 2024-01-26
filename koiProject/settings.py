@@ -30,15 +30,14 @@ INSTALLED_APPS = [
     'django_plotly_dash.apps.DjangoPlotlyDashConfig',
     'rest_framework',
     'corsheaders',
-    'KoiApp.apps.KoiappConfig',
     'CRUDfuncionario',
     'cpf_field',
     'login',
-    'dashboard',
     'UserManager',
     'Produtos',
     'RankProdutos',
     'Dash_app',
+    'dashboard',
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
