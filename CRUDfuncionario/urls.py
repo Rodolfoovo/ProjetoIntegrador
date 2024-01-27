@@ -1,12 +1,11 @@
 from django.contrib import admin
 from django.urls import path
-from django.urls import include
-from .views import home, salvarFuncionario, editar, update, delete
+from .views import home, salvarFuncionario_view, editar_view, update_view, delete_view
 #Especifica que ao se entrar na URL irá ser executado o metodo home.
 urlpatterns = [
     path('', home),
-    path('salvarFuncionario/', salvarFuncionario, name = "salvarFuncionario"),
-    path('editar/<int:id>', editar, name="editar"),
-    path('update/<int:id>', update, name="update"),
-    path('delete/<int:id>', delete, name="delete"),
+    path('salvarFuncionario/', salvarFuncionario_view, name = "salvarFuncionario"),
+    path('editar/<int:id>', editar_view, name="editar"),
+    path('update/<int:id>', update_view, name="update"),
+    path('delete/<int:id>', delete_view, name="delete"),
 ]

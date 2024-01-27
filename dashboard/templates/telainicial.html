@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>Koi.io</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+<body>
+    <!-- "nav" representa uma seção de uma página que guia para outras páginas -->
+    <nav id="menu-horizontal">
+        <ul>
+            <!-- Nos href's é onde serão colocados os links para as determinadas telas -->
+            <li><a href="{% url 'telainicial' %}">Dashboard</a></li>
+
+            <li><a href="{% url 'telainicial' %}">Relatórios</a></li>
+
+            <li><a href="{% url 'telainicial' %}">Rank de produtos</a></li>
+
+            <li><a href="{% url 'telainicial' %}">Entrada e saída de estoque</a></li>
+
+            <li><a href="{% url 'telainicial' %}">Produtos</a></li>
+
+            <li><a href="{% url 'telainicial' %}">Gerenciar usuários</a></li>
+
+            <li><a href="{% url 'telainicial' %}">Perfil</a></li>
+
+        </ul>
+    </nav>
+
+    <div class="retangulo">
+        <p class="h2">Overview</p>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col retangulos">7.298
+                <div class="info-rec">Estoque</div>
+            </div>
+            <div class="col retangulos">4.232
+                <div class="info-rec">Estoque Médio</div>
+            </div>
+            <div class="col retangulos">R$ 1.400
+                <div class="info-rec">Valor total em estoque</div>
+            </div>
+            <div class="col retangulos">4.656
+                <div class="info-rec">Entrada</div>
+            </div>
+            <div class="col retangulos">5.999
+                <div class="info-rec">Saída</div>
+            </div>
+        </div>
+    </div>
+        
+</body>
+</html>
