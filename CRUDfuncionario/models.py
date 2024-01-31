@@ -14,6 +14,7 @@ class Funcionario(AbstractUser):
 
     username = models.CharField(max_length=30,default='default_username', unique=True)
     password = models.CharField(max_length=100, default='default_password')
+    email = models.EmailField(unique=True, default='daniel@gmail.com')
 
     def __str__(self):
         return self.username
