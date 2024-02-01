@@ -18,6 +18,7 @@ def salvarFuncionario_view(request):
         vTelefone = request.POST.get("telefone")
         vpassword = request.POST.get("password")
         vFuncao = request.POST.get("funcao")
+        vEmail = request.POST.get("email")
 
         # Verifica se já existe um usuário com o mesmo username
         try:
@@ -33,7 +34,8 @@ def salvarFuncionario_view(request):
                 CEP=vCEP,
                 telefone=vTelefone,
                 password=vpassword,
-                funcao=vFuncao
+                funcao=vFuncao,
+                email=vEmail
             )
 
             # Autentica o novo usuário
