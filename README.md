@@ -9,7 +9,3 @@ COMPONENTES(
 ai podemos ver a implementação ali e se basear, porem temos quer ver como mudar o design disso
 https://dash.plotly.com/dash-core-components documentação desses componentes
 )
-
-CODIGO DE TESTES(
-    A parte de testes é para fazer os testes e aprender as funcionalidades do dash ploty
-    )
