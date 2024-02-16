@@ -31,7 +31,6 @@ def login_view(request):
             return HttpResponse('Email ou senha invalidos')
         
 def reset_senha_view(request):
-    # Lógica para a página de redefinição de senha
     return render(request, 'Resetarsenha.html')
 def logout_view(request):
     userData = request.session['userData']
