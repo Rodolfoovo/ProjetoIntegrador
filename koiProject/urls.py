@@ -23,7 +23,7 @@ urlpatterns = [# Cadastro das URLs na "aplicação central"
     path('admin/', admin.site.urls),
     path('django_plotly_dash/', include('django_plotly_dash.urls')),
     path('CRUDfuncionario/', include('CRUDfuncionario.urls')),
-    path('Login/', include('login.urls')),
+    path('login/', include('login.urls')),
     path('TelaInicial/', include('dashboard.urls')),
     path('RankProdutos/', include('RankProdutos.urls')),
     
