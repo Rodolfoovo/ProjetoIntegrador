@@ -25,6 +25,6 @@ urlpatterns = [# Cadastro das URLs na "aplicação central"
     path('CRUDfuncionario/', include('CRUDfuncionario.urls')),
     path('Login/', include('login.urls')),
     path('TelaInicial/', include('dashboard.urls')),
-    path('RankProdutos/', include('RankProdutos.url')),
+    path('RankProdutos/', include('RankProdutos.urls')),
     
 ]
