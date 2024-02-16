@@ -1,3 +1,4 @@
 from django.shortcuts import render
 
-# Create your views here.
+def Rank_Produtos(request):
+    return render(request, 'RankProdutos.html')
