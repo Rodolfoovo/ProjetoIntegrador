@@ -15,5 +15,9 @@
             </li>
         {% endfor %}
     </ul>
+    <form method="POST">
+        {% csrf_token %}
+        {{ produtoForm.as_p }}
+    </form>
 </body>
 </html>
