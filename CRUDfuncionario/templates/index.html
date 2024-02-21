@@ -11,12 +11,12 @@
         <ul>
             {% for funcionario in funcionarios %}
             <li>{{ funcionario.idFuncionario}} - {{funcionario.username}} - {{funcionario.password}}
-                <a href="{% url 'editar' funcionario.idFuncionario %}">EDITAR</a>
-                <a href="{% url 'delete' funcionario.idFuncionario %}">DELETAR</a></li>
+                <a href="{% url 'editar_view' funcionario.idFuncionario %}">EDITAR</a>
+                <a href="{% url 'delete_view' funcionario.idFuncionario %}">DELETAR</a></li>
             {% endfor %}
         </ul>
 
-        <form action = "{% url 'salvarFuncionario' %}" method = "POST">{% csrf_token %}
+        <form action = "{% url 'salvarFuncionario_view' %}" method = "POST">{% csrf_token %}
             <label> 
                 Nome
                 <input type="text",maxlength="30", name="username"><br><br>
