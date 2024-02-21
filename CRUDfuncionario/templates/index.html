@@ -33,14 +33,29 @@
             </ul>
         </nav>
 
-            <ul>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Password</th>
+                    <th scope="col">Editar</th>
+                    <th scope="col">Deletar</th>
+                </tr>
+            </thead>
+            <tbody>
                 {% for funcionario in funcionarios %}
-                <li>{{ funcionario.idFuncionario}} - {{funcionario.username}} - {{funcionario.password}}
-                    <a href="{% url 'editar_view' funcionario.idFuncionario %}">EDITAR</a>
-                    <a href="{% url 'delete_view' funcionario.idFuncionario %}">DELETAR</a></li>
+                <tr>
+                    <td>{{ funcionario.idFuncionario }}</td>
+                    <td>{{ funcionario.username }}</td>
+                    <td>{{ funcionario.password }}</td>
+                    <td><a href="{% url 'editar_view' funcionario.idFuncionario %}" class="btn btn-primary">EDITAR</a></td>
+                    <td><a href="{% url 'delete_view' funcionario.idFuncionario %}" class="btn btn-danger">DELETAR</a></td>
+                </tr>
                 {% endfor %}
-            </ul>
-
+            </tbody>
+        </table>
+        
             <form action = "{% url 'salvarFuncionario_view' %}" method = "POST">{% csrf_token %}
                 <label> 
                     Nome
