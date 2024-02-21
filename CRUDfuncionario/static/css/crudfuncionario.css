@@ -1,11 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Open+Sans&display=swap');
 *{
-    margin:0 auto;
+    margin:auto;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Open Sans', sans-serif;
-    background-color: #FF5722;
-
 }
 #menu-horizontal ul{
     list-style: none;
@@ -21,7 +19,6 @@
     color: #fff;
     padding: 15px;
     display: inline-block;
-    font-size: 4px;
     text-decoration: none;
     transition: background .3s;
 }
@@ -31,12 +28,4 @@
 }
 #menu-horizontal ul li:last-child a{
     float: right;
-}
-.h2{
-    color: #FFF;
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    margin-left: 10px;
 }

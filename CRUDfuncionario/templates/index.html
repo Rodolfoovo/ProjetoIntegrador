@@ -1,41 +1,66 @@
+{% load static %}
 <!DOCTYPE html> <!--Arquivo html para testar o retorno de uma request.-->
-<html lang = "en">
-    <head>
-        <meta charset="UTF-8">
-        <meta hhtp-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+    <html lang = "en">
+        <head>
+            <title>CRUDfuncionario</title>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+            <link rel="stylesheet" href="{% static 'css/crudfuncionario.css' %}">
+        </head>
+        
+        <body>
+        <!-- "nav" representa uma seção de uma página que guia para outras páginas -->
+        <nav id="menu-horizontal">
+            <ul>
+                <!-- Nos href's é onde serão colocados os links para as determinadas telas -->
+                <li><a href="{% url 'telainicial' %}">Dashboard</a></li>
+
+                <li><a href="{% url 'telainicial' %}">Relatórios</a></li>
+
+                <li><a href="{% url 'telainicial' %}">Rank de produtos</a></li>
+
+                <li><a href="{% url 'telainicial' %}">Entrada e saída de estoque</a></li>
+
+                <li><a href="{% url 'produtos' %}">Produtos</a></li>
+
+                <li><a href="{% url 'home' %}">Gerenciar usuários</a></li>
+
+                <li><a href="{% url 'fornecedor' %}">Fornecedor</a></li>
+                
+                <li><a href="{% url 'logout' %}">Perfil</a></li>
+
+            </ul>
+        </nav>
+
+            <ul>
+                {% for funcionario in funcionarios %}
+                <li>{{ funcionario.idFuncionario}} - {{funcionario.username}} - {{funcionario.password}}
+                    <a href="{% url 'editar_view' funcionario.idFuncionario %}">EDITAR</a>
+                    <a href="{% url 'delete_view' funcionario.idFuncionario %}">DELETAR</a></li>
+                {% endfor %}
+            </ul>
+
+            <form action = "{% url 'salvarFuncionario_view' %}" method = "POST">{% csrf_token %}
+                <label> 
+                    Nome
+                    <input type="text",maxlength="30", name="username"><br><br>
+                    Endereço
+                    <input type="text", maxlength="30" name="enderecoFuncionario"><br><br>
+                    CPF
+                    <input type="text", maxlength="11" name="CPF"><br><br>
+                    CEP
+                    <input type="text", maxlength="8" name="CEP"><br><br>
+                    Telefone
+                    <input type="text", maxlength="20" name="telefone"><br><br>
+                    Senha
+                    <input type="text", maxlength="30" name="password"><br><br>
+                    Função
+                    <input type="text", maxlength="30" name="funcao"><br><br>
+                    Email
+                    <input type="text", maxlength="30" name="email"><br><br>
+                </label>
+                <button type="submit">CREATE</button>
+            </form>
+        </body>
     </html>
-    <body>
-
-        <ul>
-            {% for funcionario in funcionarios %}
-            <li>{{ funcionario.idFuncionario}} - {{funcionario.username}} - {{funcionario.password}}
-                <a href="{% url 'editar_view' funcionario.idFuncionario %}">EDITAR</a>
-                <a href="{% url 'delete_view' funcionario.idFuncionario %}">DELETAR</a></li>
-            {% endfor %}
-        </ul>
-
-        <form action = "{% url 'salvarFuncionario_view' %}" method = "POST">{% csrf_token %}
-            <label> 
-                Nome
-                <input type="text",maxlength="30", name="username"><br><br>
-                Endereço
-                <input type="text", maxlength="30" name="enderecoFuncionario"><br><br>
-                CPF
-                <input type="text", maxlength="11" name="CPF"><br><br>
-                CEP
-                <input type="text", maxlength="8" name="CEP"><br><br>
-                Telefone
-                <input type="text", maxlength="20" name="telefone"><br><br>
-                Senha
-                <input type="text", maxlength="30" name="password"><br><br>
-                Função
-                <input type="text", maxlength="30" name="funcao"><br><br>
-                Email
-                <input type="text", maxlength="30" name="email"><br><br>
-            </label>
-            <button type="submit">CREATE</button>
-        </form>
-    </body>
-</html>
