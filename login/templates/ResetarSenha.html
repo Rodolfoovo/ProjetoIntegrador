@@ -8,11 +8,11 @@
     <link rel="stylesheet" href="{% static 'css/ResetarSenha.css' %}">
 </head>
 <body>
-    <div class="retangulo_login">
-        <div class="title_login">REDEFINIR SENHA</div>
+    <div class="retangulo_Reset_Senha">
+        <div class="title_Reset_Senha">REDEFINIR SENHA</div>
 
         <!-- Formulário de login -->
-        <form action="{% url 'reset_senha' %}" method="POST" class="login-form">
+        <form action="{% url 'reset_senha' %}" method="POST" class="Reset_Senha-form">
             {% csrf_token %}
             
         <!-- Campo de Identificação -->

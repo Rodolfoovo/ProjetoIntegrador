@@ -9,7 +9,7 @@ body {
     background: #EBEBEB;
 }
 
-.title_login{
+.title_Reset_Senha{
     position: absolute;
     top: 12%;
     left: 50%;
@@ -25,7 +25,7 @@ body {
 }
 
 /* Estilo para o retângulo de login */
-.retangulo_login {
+.retangulo_Reset_Senha {
     width: 350px;
     height: 530px;
     background-color: #F5F5F5;
@@ -39,7 +39,7 @@ body {
 }
 
 /* Estilo para o formulário de login */
-.login-form {
+.Reset_Senha-form {
     padding: 20px;
     border-radius: 10px;
     width: 300px;
@@ -95,3 +95,7 @@ body {
     color: #FFFF;
     
 }
+
+
+
+
