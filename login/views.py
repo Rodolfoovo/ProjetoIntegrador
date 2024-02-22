@@ -25,7 +25,7 @@ def login_view(request):
                 'email':user.email
             }
             request.session['userData'] = userData
-#            return redirect('logout')
+            #return redirect('logout')
             return redirect('telainicial')
         else:
             return HttpResponse('Email ou senha invalidos')

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'RankProdutos',
     'Dash_app',
     'dashboard',
+    'entradaSaida',
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
