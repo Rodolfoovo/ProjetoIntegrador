@@ -20,8 +20,8 @@ def salvarFuncionario_view(request):
         vpassword = request.POST.get("password")
         vFuncao = request.POST.get("funcao")
         vEmail = request.POST.get("email")
-        if validar_cpf(vCPF) != True:
-            raise ValidationError('CPF invalido')
+ #       if validar_cpf(vCPF) != True:
+ #           raise ValidationError('CPF invalido')
         # Verifica se já existe um usuário com o mesmo username
         try:
             usuarioAux = Funcionario.objects.get(username=vusername)
