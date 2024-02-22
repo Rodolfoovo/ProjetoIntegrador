@@ -30,14 +30,13 @@ INSTALLED_APPS = [
     'django_plotly_dash.apps.DjangoPlotlyDashConfig',
     'rest_framework',
     'corsheaders',
-    'CRUDfuncionario',
     'cpf_field',
+    'CRUDfuncionario',
     'login',
     'UserManager',
     'Produtos',
     'Dash_app',
     'dashboard',
-    'entradaSaida',
     'Fornecedores',
 ]
 
@@ -58,7 +57,6 @@ ROOT_URLCONF = 'koiProject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ["templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
