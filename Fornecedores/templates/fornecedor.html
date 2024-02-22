@@ -4,16 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fornecedor</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static 'css/produto.css' %}">
-    <title>Produtos</title>
+    <link rel="stylesheet" href="{% static 'css/fornecedores.css' %}">
 </head>
-<body>
+<body>  
     <!-- "nav" representa uma seção de uma página que guia para outras páginas -->
     <nav id="menu-horizontal">
         <ul>
             <!-- Nos href's é onde serão colocados os links para as determinadas telas -->
-            <li><a href="{% url 'telainicial' %}">Dashboard</a></li>
+            <li><a href="{% url 'telainicial' %}" class="pagina-atual">Dashboard</a></li>
 
             <li><a href="{% url 'telainicial' %}">Relatórios</a></li>
 
@@ -25,22 +25,25 @@
 
             <li><a href="{% url 'home' %}">Gerenciar usuários</a></li>
 
-            <li><a href="{% url 'fornecedor' %}">Fornecedor</a></li>
-            
+            <li><a href="{% url 'fornecedor' %}">Fornecedores</a></li>
+
             <li><a href="{% url 'logout' %}">Perfil</a></li>
 
         </ul>
     </nav>
-    <ul>
-        {% for produto in produtos %}
-            <li>
-                {{produto.idProduto}} - {{produto.nomeProduto}}
-            </li>
-        {% endfor %}
-    </ul>
-    <form method="POST">
-        {% csrf_token %}
-        {{ produtoForm.as_p }}
-    </form>
+    <div>
+        <ul>
+            {% for fornecedor in fornecedores %}
+                <li>
+                    {{fornecedor.idFornecedor}} - {{fornecedor.nomeFornecedor}}
+                </li>
+            {% endfor %}
+        </ul>
+        <form action="{% url 'salvarFornecedor_view' %}" method="POST">
+            {% csrf_token %}
+            {{ fornecedorForm.as_p }}
+            <button>Create</button>
+        </form>
+    </div>
 </body>
 </html>

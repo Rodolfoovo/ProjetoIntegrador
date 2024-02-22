@@ -4,8 +4,8 @@ from .views import home, salvarFuncionario_view, editar_view, update_view, delet
 #Especifica que ao se entrar na URL irá ser executado o metodo home.
 urlpatterns = [
     path('', home),
-    path('salvarFuncionario/', salvarFuncionario_view, name = "salvarFuncionario"),
-    path('editar/<int:id>', editar_view, name="editar"),
-    path('update/<int:id>', update_view, name="update"),
-    path('delete/<int:id>', delete_view, name="delete"),
+    path('salvarFuncionario/', salvarFuncionario_view, name = "salvarFuncionario_view"),
+    path('editar/<int:id>', editar_view, name="editar_view"),
+    path('update/<int:id>', update_view, name="update_view"),
+    path('delete/<int:id>', delete_view, name="delete_view"),
 ]

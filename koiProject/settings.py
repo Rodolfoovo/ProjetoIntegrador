@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'Dash_app',
     'dashboard',
     'entradaSaida',
+    'Fornecedores',
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True

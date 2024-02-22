@@ -1,14 +1,39 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/crudfuncionario.css' %}">
     <title>Atualizar Funcionário</title>
 </head>
 <body>
+    <!-- "nav" representa uma seção de uma página que guia para outras páginas -->
+    <nav id="menu-horizontal">
+        <ul>
+            <!-- Nos href's é onde serão colocados os links para as determinadas telas -->
+            <li><a href="{% url 'telainicial' %}">Dashboard</a></li>
+
+            <li><a href="{% url 'telainicial' %}">Relatórios</a></li>
+
+            <li><a href="{% url 'telainicial' %}">Rank de produtos</a></li>
+
+            <li><a href="{% url 'telainicial' %}">Entrada e saída de estoque</a></li>
+
+            <li><a href="{% url 'produtos' %}">Produtos</a></li>
+
+            <li><a href="{% url 'home' %}">Gerenciar usuários</a></li>
+
+            <li><a href="{% url 'fornecedor' %}">Fornecedor</a></li>
+            
+            <li><a href="{% url 'logout' %}">Perfil</a></li>
+
+        </ul>
+    </nav>
     <h2>Atualizar Funcionário</h2>
 
-    <form action="{% url 'update' funcionario.idFuncionario %}" method="POST">
+    <form action="{% url 'update_view' funcionario.idFuncionario %}" method="POST">
         {% csrf_token %}
         
         <!-- Campo de Identificação -->
