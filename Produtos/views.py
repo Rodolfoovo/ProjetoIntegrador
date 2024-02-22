@@ -15,11 +15,11 @@ def criaProdutos_view(request):
             produtos = form.save(commit=False)
             produtos.save()
             return redirect(produtos_view)
-def editar_view(request, id):
+def editarProdutos_view(request, id):
     produto =Produtos.objects.get(idProduto=id) 
     return render(request, "updateProduto.html", {"produto": produto})
 
-def update_view(request,id):
+def updateProdutos_view(request,id):
     if request.method == 'POST':
         produtos = Produtos.objects.get(idProduto=id)
         form = criaProdutoForm(request.POST,instance=produtos)
@@ -29,4 +29,9 @@ def update_view(request,id):
     else:
         # Se o método não for POST, redirecione para a página de origem ou trate conforme necessário
         return HttpResponse('Método não permitido')
+    
+def deleteProduto_view(request, id):
+    produto = Produtos.objects.get(idPRoduto=id) 
+    produto.delete()
+    return redirect(produtos_view)
     

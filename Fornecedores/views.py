@@ -18,11 +18,11 @@ def salvarFornecedor_view(request):
 
             fornecedor.save()
             return redirect(fornecedor_view)
-def editar_view(request, id):
+def editarFornecedor_view(request, id):
     fornecedor = Fornecedor.objects.get(idFornecedor=id) 
     return render(request, "updateFornecedor.html", {"Fornecedor": fornecedor})
 
-def update_view(request,id):
+def updateFornecedor_view(request,id):
     if request.method == 'POST':
         fornecedor = Fornecedor.objects.get(idFornecedor=id)
         form = FornecedorForm(request.POST, instance=fornecedor)
@@ -33,7 +33,7 @@ def update_view(request,id):
         # Se o método não for POST, redirecione para a página de origem ou trate conforme necessário
         return HttpResponse('Método não permitido')
     
-def delete_view(request, id):
+def deleteFornecedor_view(request, id):
     fornecedor = Fornecedor.objects.get(idFornecedor=id) 
     fornecedor.delete()
     return redirect(fornecedor_view)
