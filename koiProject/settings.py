@@ -35,7 +35,6 @@ INSTALLED_APPS = [
     'login',
     'UserManager',
     'Produtos',
-    'RankProdutos',
     'Dash_app',
     'dashboard',
     'entradaSaida',
