@@ -7,8 +7,5 @@ def produtos_view(request):
     produtoForm = criaProdutoForm()
     return render(request,"produtos.html", {"produtos": produtos, 'produtoForm':produtoForm})
 
-def fornecedor_view(request):
-    fornecedores = Fornecedor.objects.all()
-    fornecedorForm = FornecedorForm()
-    return render(request,"fornecedor.html",{"fornecedores":fornecedores, 'fornecedorForm': fornecedorForm})
+
     
