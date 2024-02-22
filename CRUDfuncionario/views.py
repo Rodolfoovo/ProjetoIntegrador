@@ -2,6 +2,7 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from CRUDfuncionario.models import Funcionario
 from django.http import HttpResponse
+from django.core.exceptions import ValidationError
 
 def home(request):
     funcionarios = Funcionario.objects.all()
@@ -19,7 +20,8 @@ def salvarFuncionario_view(request):
         vpassword = request.POST.get("password")
         vFuncao = request.POST.get("funcao")
         vEmail = request.POST.get("email")
-
+        if validar_cpf(vCPF) != True:
+            raise ValidationError('CPF invalido')
         # Verifica se já existe um usuário com o mesmo username
         try:
             usuarioAux = Funcionario.objects.get(username=vusername)
@@ -46,7 +48,6 @@ def salvarFuncionario_view(request):
                 return redirect(home)
             else:
                 return HttpResponse(user)
-
 def editar_view(request, id):
     funcionario = Funcionario.objects.get(idFuncionario=id) 
     return render(request, "update.html", {"funcionario": funcionario})
@@ -74,3 +75,22 @@ def delete_view(request, id):
     funcionario = Funcionario.objects.get(idFuncionario=id) 
     funcionario.delete()
     return redirect(home)
+def validar_cpf(cpf):
+    # Remove caracteres não numéricos
+    cpf = ''.join(filter(str.isdigit, cpf))
+    # Verifica se o CPF tem 11 dígitos
+    if len(cpf) != 11:
+        return False
+
+    # Calcula o primeiro dígito verificador
+    soma = sum(int(cpf[i]) * (10 - i) for i in range(9))
+    resto = (soma * 10) % 11
+    digito1 = 0 if resto == 10 else resto
+
+    # Calcula o segundo dígito verificador
+    soma = sum(int(cpf[i]) * (11 - i) for i in range(10))
+    resto = (soma * 10) % 11
+    digito2 = 0 if resto == 10 else resto
+
+    # Verifica se os dígitos verificadores são iguais aos dois últimos dígitos do CPF
+    return cpf[-2:] == f"{digito1}{digito2}"
