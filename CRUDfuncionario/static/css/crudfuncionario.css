@@ -29,3 +29,7 @@
 #menu-horizontal ul li:last-child a{
     float: right;
 }
+.retangulo{
+    height: 80px;
+    background-color: grey;
+}

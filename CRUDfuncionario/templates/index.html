@@ -33,28 +33,9 @@
             </ul>
         </nav>
 
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Username</th>
-                    <th scope="col">Password</th>
-                    <th scope="col">Editar</th>
-                    <th scope="col">Deletar</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for funcionario in funcionarios %}
-                <tr>
-                    <td>{{ funcionario.idFuncionario }}</td>
-                    <td>{{ funcionario.username }}</td>
-                    <td>{{ funcionario.password }}</td>
-                    <td><a href="{% url 'editar_view' funcionario.idFuncionario %}" class="btn btn-primary">EDITAR</a></td>
-                    <td><a href="{% url 'delete_view' funcionario.idFuncionario %}" class="btn btn-danger">DELETAR</a></td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div style="height: 60px; background-color: grey;">
+            <p>cadastrar funcionário</p>
+        </div>
         
             <form action = "{% url 'salvarFuncionario_view' %}" method = "POST">{% csrf_token %}
                 <label> 
@@ -77,5 +58,28 @@
                 </label>
                 <button type="submit">CREATE</button>
             </form>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Password</th>
+                        <th scope="col">Editar</th>
+                        <th scope="col">Deletar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for funcionario in funcionarios %}
+                    <tr>
+                        <td>{{ funcionario.idFuncionario }}</td>
+                        <td>{{ funcionario.username }}</td>
+                        <td>{{ funcionario.password }}</td>
+                        <td><a href="{% url 'editar_view' funcionario.idFuncionario %}" class="btn btn-primary">EDITAR</a></td>
+                        <td><a href="{% url 'delete_view' funcionario.idFuncionario %}" class="btn btn-danger">DELETAR</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </body>
     </html>

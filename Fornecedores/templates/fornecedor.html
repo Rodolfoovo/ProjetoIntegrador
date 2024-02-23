@@ -31,19 +31,34 @@
 
         </ul>
     </nav>
+
+    <div style="height: 60px; background-color: grey;">
+        <p>cadastrar fornecedor</p>
+    </div>
+
+    <form action="{% url 'salvarFornecedor_view' %}" method="POST">
+        {% csrf_token %}
+        {{ fornecedorForm.as_p }}
+        <button>Create</button>
+    </form>
+
     <div>
-        <ul>
-            {% for fornecedor in fornecedores %}
-                <li>
-                    {{fornecedor.idFornecedor}} - {{fornecedor.nomeFornecedor}}
-                </li>
-            {% endfor %}
-        </ul>
-        <form action="{% url 'salvarFornecedor_view' %}" method="POST">
-            {% csrf_token %}
-            {{ fornecedorForm.as_p }}
-            <button>Create</button>
-        </form>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">ID do Fornecedor</th>
+                    <th scope="col">Nome do Fornecedor</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for fornecedor in fornecedores %}
+                    <tr>
+                        <td>{{fornecedor.idFornecedor}}</td>
+                        <td>{{fornecedor.nomeFornecedor}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </body>
 </html>
