@@ -2,7 +2,6 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .utils import send_email
-from django.contrib.auth.views import PasswordResetConfirmView
 import logging
 logger = logging.getLogger(__name__)
 
@@ -42,7 +41,3 @@ def logout_view(request):
     else:
         # Se não existir, retorna uma resposta vazia ou outra resposta adequada
         return HttpResponse('Usuário não está logado ou dados não encontrados na sessão')
-
-#class CustomPasswordResetConfirmView(PasswordResetConfirmView):
-    #form_class = CustomSetPasswordForm
-    #template_name = 'password_reset_confirm.html' 
