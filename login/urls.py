@@ -3,15 +3,15 @@ from django.contrib.auth import views as auth_views
 from .views import login_view, logout_view
 
 urlpatterns = [
-    path('', login_view),
-    path('login/', login_view, name='login'),
+    path('', login_view, name='login'),
     path('logout/', logout_view, name="logout"),
 
-    path('ResetarSenha/', auth_views.PasswordResetView.as_view(template_name='ResetarSenha.html'), name="reset_senha"),
+    path('password_reset/', auth_views.PasswordResetView.as_view(template_name= 'password_reset.html'), name='password_reset'),
 
-    path('Envio_Reset_Senha/', auth_views.PasswordResetDoneView.as_view(), name='Reset_Senha_Done'),
+    path('reset_password_done/', auth_views.PasswordResetDoneView.as_view(template_name= 'password_reset_done.html'), name='password_reset_done'),
 
-    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='Reset_Senha_Confirmado'),
+    path('reset_password_confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
 
-    path('Reset_Senha_Completado/',auth_views.PasswordResetCompleteView.as_view(), name='Reset_Senha_Completado'),
+    path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(template_name= 'password_reset_complete.html'), name='password_reset_complete'),
+    
 ]
