@@ -62,7 +62,7 @@ def update_view(request, id):
         funcionario.CPF = request.POST.get("CPF")
         funcionario.CEP = request.POST.get("CEP")
         funcionario.telefone = request.POST.get("telefone")
-        funcionario.password = request.POST.get("password")
+        funcionario.email = request.POST.get("email")
         funcionario.funcao = request.POST.get("funcao")
 
         funcionario.save()

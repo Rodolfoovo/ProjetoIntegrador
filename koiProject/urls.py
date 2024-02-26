@@ -17,15 +17,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import include
+from django.views.generic.base import RedirectView
 
 
 urlpatterns = [# Cadastro das URLs na "aplicação central"
     path('admin/', admin.site.urls),
+    path('', RedirectView.as_view(url='/login/')),
     path('django_plotly_dash/', include('django_plotly_dash.urls')),
     path('CRUDfuncionario/', include('CRUDfuncionario.urls')),
     path('login/', include('login.urls')),
     path('telainicial/', include('dashboard.urls')),
     path('produtos/', include('Produtos.urls')),
-    path('fornecedor', include('Fornecedores.urls'))
-    
+    path('fornecedor', include('Fornecedores.urls')),
 ]
