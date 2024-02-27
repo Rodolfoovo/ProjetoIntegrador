@@ -1,20 +1,46 @@
-{% extends 'base.html' %}
 {% load static %}
-{% block title %}Produtos{% endblock %}
-    
-{% block content%}
-<link rel="stylesheet" href="{% static 'css/produto.css' %}"> 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/produto.css' %}">
+    <title>Produtos</title>
+</head>
+<body>
+    <!-- "nav" representa uma seção de uma página que guia para outras páginas -->
+    <nav id="menu-horizontal">
+        <ul>
+            <!-- Nos href's é onde serão colocados os links para as determinadas telas -->
+            <li><a href="{% url 'telainicial' %}">Dashboard</a></li>
 
-<ul>
-    {% for produto in produtos %}
-        <li>
-            {{produto.idProduto}} - {{produto.nomeProduto}}
-        </li>
-    {% endfor %}
-</ul>
+            <li><a href="{% url 'telainicial' %}">Relatórios</a></li>
 
-<form method="POST">
-    {% csrf_token %}
-    {{ produtoForm.as_p }}
-</form>
-{% endblock %}
+            <li><a href="{% url 'telainicial' %}">Rank de produtos</a></li>
+
+            <li><a href="{% url 'telainicial' %}">Entrada e saída de estoque</a></li>
+
+            <li><a href="{% url 'produtos' %}">Produtos</a></li>
+
+            <li><a href="{% url 'home' %}">Gerenciar usuários</a></li>
+
+            <li><a href="{% url 'fornecedor' %}">Fornecedor</a></li>
+            
+            <li><a href="{% url 'logout' %}">Perfil</a></li>
+
+        </ul>
+    </nav>
+    <ul>
+        {% for produto in produtos %}
+            <li>
+                {{produto.idProduto}} - {{produto.nomeProduto}}
+            </li>
+        {% endfor %}
+    </ul>
+    <form method="POST">
+        {% csrf_token %}
+        {{ produtoForm.as_p }}
+    </form>
+</body>
+</html>
