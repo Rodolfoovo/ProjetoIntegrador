@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Open+Sans&display=swap');
 
 *{
-    box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
     font-size: 13px;
 }
@@ -72,7 +71,7 @@ body {
 }
 
 /* Estilo para o campo de formulário (Email) */
-.form-control {
+.form-control_email {
     width: 300px;
     padding: 10px;
     box-sizing: border-box;
@@ -81,7 +80,7 @@ body {
 }
 
 /* Estilo para o texto dentro do campo de formulário (Email) */
-.form-control input {
+.form-control_email input {
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
