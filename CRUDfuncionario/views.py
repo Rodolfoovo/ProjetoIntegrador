@@ -6,11 +6,11 @@ from django.core.exceptions import ValidationError
 
 def home(request):
     funcionarios = Funcionario.objects.all()
-    return render(request, "index.html", {"funcionarios": funcionarios})
+    return render(request, "funcionarios.html", {"funcionarios": funcionarios})
 
 def salvarFuncionario_view(request):
     if request.method == 'GET':
-        return render(request, "index.html")
+        return render(request, "funcionarios.html")
     elif request.method == 'POST':
         vusername = request.POST.get("username")
         vEnderecoFuncionario = request.POST.get("enderecoFuncionario")
@@ -32,7 +32,7 @@ def salvarFuncionario_view(request):
                 nivelDeAcesso=1,
                 username=vusername,
                 enderecoFuncionario=vEnderecoFuncionario,
-                cpf=vCPF,
+                CPF=vCPF,
                 CEP=vCEP,
                 telefone=vTelefone,
                 password=vpassword,
