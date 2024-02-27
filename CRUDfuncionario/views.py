@@ -1,16 +1,15 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate
 from django.shortcuts import render, redirect
 from CRUDfuncionario.models import Funcionario
 from django.http import HttpResponse
-from django.core.exceptions import ValidationError
 
-def home(request):
+def Funcionarios(request):
     funcionarios = Funcionario.objects.all()
-    return render(request, "index.html", {"funcionarios": funcionarios})
+    return render(request, "funcionarios.html", {"funcionarios": funcionarios})
 
 def salvarFuncionario_view(request):
     if request.method == 'GET':
-        return render(request, "index.html")
+        return render(request, "funcionarios.html")
     elif request.method == 'POST':
         vusername = request.POST.get("username")
         vEnderecoFuncionario = request.POST.get("enderecoFuncionario")
@@ -25,14 +24,14 @@ def salvarFuncionario_view(request):
         # Verifica se já existe um usuário com o mesmo username
         try:
             usuarioAux = Funcionario.objects.get(username=vusername)
-            return redirect(home)
+            return redirect(Funcionarios)
         except Funcionario.DoesNotExist:
             # Cria um novo usuário
             novo_funcionario = Funcionario.objects.create_user(
                 nivelDeAcesso=1,
                 username=vusername,
                 enderecoFuncionario=vEnderecoFuncionario,
-                cpf=vCPF,
+                CPF=vCPF,
                 CEP=vCEP,
                 telefone=vTelefone,
                 password=vpassword,
@@ -45,7 +44,7 @@ def salvarFuncionario_view(request):
             
             if user:
                 funcionarios = Funcionario.objects.all()
-                return redirect(home)
+                return redirect(Funcionarios)
             else:
                 return HttpResponse(user)
 def editar_view(request, id):
@@ -66,7 +65,7 @@ def update_view(request, id):
         funcionario.funcao = request.POST.get("funcao")
 
         funcionario.save()
-        return redirect(home)
+        return redirect(Funcionarios)
     else:
         # Se o método não for POST, redirecione para a página de origem ou trate conforme necessário
         return HttpResponse('Método não permitido')
@@ -74,7 +73,7 @@ def update_view(request, id):
 def delete_view(request, id):
     funcionario = Funcionario.objects.get(idFuncionario=id) 
     funcionario.delete()
-    return redirect(home)
+    return redirect(Funcionarios)
 def validar_cpf(cpf):
     # Remove caracteres não numéricos
     cpf = ''.join(filter(str.isdigit, cpf))

@@ -18,7 +18,7 @@ def login_view(request):
             userData = {
                 'username': user.username,
                 'enderecoFuncionario': user.enderecoFuncionario,
-                'cpf':user.CPF,
+                'CPF':user.CPF,
                 'CEP':user.CEP,
                 'telefone':user.telefone,
                 'funcao':user.funcao,

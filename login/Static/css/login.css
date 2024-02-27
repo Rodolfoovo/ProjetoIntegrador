@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Open+Sans&display=swap');
 *{
-    box-sizing: border-box;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 13px;
 }
 /* Estilo para o corpo da página */
@@ -98,8 +97,7 @@ body {
     align-items: center; /* Centraliza os itens horizontalmente */
 }
 
-/* Estilo para campos de formulário (ID e senha) */
-.form-control {
+.custom-form-control {
     width: 300px;
     padding: 20px;
     box-sizing: border-box;
@@ -107,15 +105,14 @@ body {
     position: relative;
 }
 
-/* Estilo para o texto dentro dos campos de formulário (ID e senha) */
-.form-control input {
+.custom-form-control input {
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
     border: 1.5px solid #000;
     background: rgba(222, 222, 222, 0.93);
     border-radius: 4px;
-    font-family: 'Montserrat', sans-serif; 
+    font-family: 'Montserrat', sans-serif;
 }
 
 

@@ -4,6 +4,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
 }
 #menu-horizontal ul{
     list-style: none;
@@ -28,4 +29,48 @@
 }
 #menu-horizontal ul li:last-child a{
     float: right;
+}
+.retangulo ul{
+    height: 50px;
+    background-color: grey;
+}
+.retangulo ul li{
+    display: inline;
+}
+.retangulo ul li a{
+    color: #2c2c2c;
+    display: inline-block;
+    text-decoration: none;
+    transition: background .3s;
+}
+.retangulo ul li a:hover{
+    color: rgb(255, 255, 255);
+}
+.btn-transparent {
+    margin: 5px;
+    background: transparent;
+    border: none;
+    transition: background .3s;
+    color: white;
+}
+.btn-transparent:hover {
+    color: rgb(0, 0, 0);
+}
+.pesquisa {
+    display: flex;
+    align-items: center;
+    background-color: white;
+}
+#myInput {
+    width: 35%;
+    height: 30px;
+    background-color: #c8c8c8;
+    color: #545454;
+    margin: 10px;
+    margin-right: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.table thead th, .table tbody td {
+    text-align: center;
 }
