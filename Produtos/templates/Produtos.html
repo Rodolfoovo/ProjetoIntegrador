@@ -24,8 +24,10 @@
     </div>
     -->
 
-    <form action="{% url criaProduto_view %}" method="POST">
+    <form action="{% url 'criaProdutos_view' %}" method="POST">
         {% csrf_token %}
+        
+        <button type="submit"></button>
     </form>
 
     <table class="table table-striped">
