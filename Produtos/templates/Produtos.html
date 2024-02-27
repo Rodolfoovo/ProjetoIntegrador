@@ -15,12 +15,6 @@
             <!-- Nos href's é onde serão colocados os links para as determinadas telas -->
             <li><a href="{% url 'telainicial' %}">Dashboard</a></li>
 
-            <li><a href="{% url 'telainicial' %}">Relatórios</a></li>
-
-            <li><a href="{% url 'telainicial' %}">Rank de produtos</a></li>
-
-            <li><a href="{% url 'telainicial' %}">Entrada e saída de estoque</a></li>
-
             <li><a href="{% url 'produtos' %}">Produtos</a></li>
 
             <li><a href="{% url 'home' %}">Gerenciar usuários</a></li>
@@ -32,20 +26,58 @@
         </ul>
     </nav>
 
-    <div style="height: 60px; background-color: grey;">
-        <p>cadastrar produtos</p>
+    <div class="retangulo">
+        <ul>
+            <li>
+                <!-- Botão para abrir o modal -->
+                <button type="button" class="btn btn-transparent" data-toggle="modal" data-target=".bd-cadastro-modal-lg">
+                    CADASTRAR PRODUTO
+                </button>
+            </li>
+        </ul>
     </div>
 
-    <ul>
-        {% for produto in produtos %}
-            <li>
-                {{produto.idProduto}} - {{produto.nomeProduto}}
-            </li>
-        {% endfor %}
-    </ul>
+    <!-- 
+    <div class="pesquisa">
+        <input class="form-control" id="myInput" type="text" placeholder="Pesquisar..">
+        <button type="submit" class="btn btn-dark">
+            <i class="bi bi-search"></i> Pesquisar
+        </button>
+    </div>
+    -->
+
     <form method="POST">
         {% csrf_token %}
         {{ produtoForm.as_p }}
     </form>
+
+    <table class="table table-striped">
+        <thead class="thead">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Fornecedor</th>
+                <th scope="col">Valor Unitário</th>
+                <th scope="col">Estoque</th>
+                <th scope="col">Categoria</th>
+                <th scope="col">Subcategoria</th>
+                <th scope="col">Marca</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for produto in produtos %}
+            <tr>
+                <td>{{ Produtos.idProduto }}</td>
+                <td>{{ Produtos.nomeProduto}}</td>
+                <td>{{ Produtos.idFornecedor }}</td>
+                <td>{{ Produtos.valorUnit }}</td>
+                <td>{{ Produtos.qntEstoque }}</td>
+                <td>{{ Produtos.categoria }}</td>
+                <td>{{ Produtos.subCategoria }}</td>
+                <td>{{ Produtos.marcaProduto }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>
