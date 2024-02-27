@@ -1,33 +1,8 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html> <!--Arquivo html para testar o retorno de uma request.-->
-    <html lang = "en">
-        <head>
-            <title>CRUDfuncionario</title>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-            <link rel="stylesheet" href="{% static 'css/crudfuncionario.css' %}">
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
-        </head>
-        
-        <body>
-        <!-- "nav" representa uma seção de uma página que guia para outras páginas -->
-    <nav id="menu-horizontal">
-        <ul>
-            <!-- Nos href's é onde serão colocados os links para as determinadas telas -->
-            <li><a href="{% url 'telainicial' %}">Dashboard</a></li>
-
-            <li><a href="{% url 'produtos' %}">Produtos</a></li>
-
-            <li><a href="{% url 'home' %}">Gerenciar usuários</a></li>
-
-            <li><a href="{% url 'fornecedor' %}">Fornecedor</a></li>
-            
-            <li><a href="{% url 'logout' %}">Perfil</a></li>
-
-        </ul>
-    </nav>
-
+{% block title %}CRUDfuncionario{% endblock %}
+    
+{% block content%}
     <div class="retangulo">
         <ul>
             <li>
@@ -138,5 +113,5 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
-    </body>
-</html>
+
+{% endblock %}
