@@ -49,6 +49,7 @@ def updateFornecedor_view(request,id):
 #    else:
         # Se o método não for POST, redirecione para a página de origem ou trate conforme necessário
 #        return HttpResponse('Método não permitido')
+        fornecedor.save()
         return redirect(fornecedor_view)
     
 def deleteFornecedor_view(request, id):

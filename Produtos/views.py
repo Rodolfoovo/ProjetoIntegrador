@@ -10,11 +10,19 @@ def produtos_view(request):
 
 def criaProdutos_view(request):
     if request.method == 'POST':
-        form = criaProdutoForm(request.POST)
-        if form.is_valid():
-            produtos = form.save(commit=False)
-            produtos.save()
-            return redirect(produtos_view)
+        vnomeProduto = request.POST.get("username")
+        vEnderecoFuncionario = request.POST.get("enderecoFuncionario")
+        vCPF = request.POST.get("CPF")
+        vCEP = request.POST.get("CEP")
+        vTelefone = request.POST.get("telefone")
+        vpassword = request.POST.get("password")
+        vFuncao = request.POST.get("funcao")
+        vEmail = request.POST.get("email")
+#        form = criaProdutoForm(request.POST)
+#        if form.is_valid():
+#            produtos = form.save(commit=False)
+#            produtos.save()
+        return redirect(produtos_view)
 def editarProdutos_view(request, id):
     produto =Produtos.objects.get(idProduto=id) 
     return render(request, "updateProduto.html", {"produto": produto})
