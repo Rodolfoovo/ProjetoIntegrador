@@ -24,9 +24,8 @@
     </div>
     -->
 
-    <form method="POST">
+    <form action="{% url criaProduto_view %}" method="POST">
         {% csrf_token %}
-        {{ produtoForm.as_p }}
     </form>
 
     <table class="table table-striped">
