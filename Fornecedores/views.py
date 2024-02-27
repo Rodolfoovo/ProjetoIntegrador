@@ -13,12 +13,23 @@ def fornecedor_view(request):
 
 def salvarFornecedor_view(request):
     if request.method == 'POST':
-        form = FornecedorForm(request.POST)
-        if form.is_valid():
-            fornecedor = form.save(commit=False)
+#        form = FornecedorForm(request.POST)
+        vnomeFornecedor = request.POST.get("nomeFornecedor")
+        vendereco = request.POST.get("endereco")
+        vtelefone = request.POST.get("telefone")
+        vcep = request.POST.get("cep")
+        vcnpj = request.POST.get("cnpj")
+        fornecedor = Fornecedor.objects.create(
+            nomeFornecedor=vnomeFornecedor,
+            endereco=vendereco,
+            telefone=vtelefone,
+            cep=vcep,
+            cnpj=vcnpj)
+#        if form.is_valid():
+#            fornecedor = form.save(commit=False)
 
-            fornecedor.save()
-            return redirect(fornecedor_view)
+#            fornecedor.save()
+        return redirect(fornecedor_view)
 def editarFornecedor_view(request, id):
     fornecedor = Fornecedor.objects.get(idFornecedor=id) 
     return render(request, "updateFornecedor.html", {"Fornecedor": fornecedor})
@@ -26,13 +37,19 @@ def editarFornecedor_view(request, id):
 def updateFornecedor_view(request,id):
     if request.method == 'POST':
         fornecedor = Fornecedor.objects.get(idFornecedor=id)
-        form = FornecedorForm(request.POST, instance=fornecedor)
-        if form.is_Valid():
-            form.save()
-            return redirect(fornecedor_view)
-    else:
+        fornecedor.nomeFornecedor = request.POST.get("nomeFornecedor")
+        fornecedor.endereco = request.POST.get("endereco")
+        fornecedor.telefone = request.POST.get("telefone")
+        fornecedor.cep = request.POST.get("cep")
+        fornecedor.cnpj = request.POST.get("cnpj")
+#        form = FornecedorForm(request.POST, instance=fornecedor)
+#        if form.is_Valid():
+#            form.save()
+#            return redirect(fornecedor_view)
+#    else:
         # Se o método não for POST, redirecione para a página de origem ou trate conforme necessário
-        return HttpResponse('Método não permitido')
+#        return HttpResponse('Método não permitido')
+        return redirect(fornecedor_view)
     
 def deleteFornecedor_view(request, id):
     fornecedor = Fornecedor.objects.get(idFornecedor=id) 
