@@ -27,7 +27,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action = "{% url 'salvarFornecedor_view' %}" method = "POST">{% csrf_token %} {{ fornecedorForm.as_p }}
+                    <form action = "{% url 'salvarFornecedor_view' %}" method = "POST">{% csrf_token %}
                         <div class="mb-3">
                             <label class="form-label">Nome</label>
                             <input type="text" class="form-control" maxlength="30" name="nomeFornecedor">
@@ -38,7 +38,7 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Telefone</label>
-                            <input type="text" class="form-control" maxlength="20" name="telefone>
+                            <input type="text" class="form-control" maxlength="20" name="telefone">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">CEP</label>
@@ -48,18 +48,18 @@
                             <label class="form-label">CNPJ</label>
                             <input type="text" class="form-control" maxlength="14" name="cnpj">
                         </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Cadastrar</button>
+                        </div>
                     </form>
                 </div>  
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Cadastrar</button>
-                </div>
             </div>
         </div>
     </div>
 
     <form action="{% url 'salvarFornecedor_view' %}" method="POST">
         {% csrf_token %}
-        {{ fornecedorForm.as_p }}
+    
         <button>Create</button>
     </form>
 
