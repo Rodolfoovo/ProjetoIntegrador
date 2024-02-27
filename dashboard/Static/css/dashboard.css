@@ -5,6 +5,7 @@
     box-sizing: border-box;
     font-family: 'Open Sans', sans-serif;
     color: #fff;
+    font-size: 15px;
 }
 #menu-horizontal ul{
     list-style: none;

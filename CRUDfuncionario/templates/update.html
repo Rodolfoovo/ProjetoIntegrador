@@ -15,12 +15,6 @@
             <!-- Nos href's é onde serão colocados os links para as determinadas telas -->
             <li><a href="{% url 'telainicial' %}">Dashboard</a></li>
 
-            <li><a href="{% url 'telainicial' %}">Relatórios</a></li>
-
-            <li><a href="{% url 'telainicial' %}">Rank de produtos</a></li>
-
-            <li><a href="{% url 'telainicial' %}">Entrada e saída de estoque</a></li>
-
             <li><a href="{% url 'produtos' %}">Produtos</a></li>
 
             <li><a href="{% url 'home' %}">Gerenciar usuários</a></li>
@@ -31,6 +25,7 @@
 
         </ul>
     </nav>
+    
     <h2>Atualizar Funcionário</h2>
 
     <form action="{% url 'update_view' funcionario.idFuncionario %}" method="POST">
