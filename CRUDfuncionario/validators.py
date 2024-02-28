@@ -22,8 +22,8 @@ def valida_cnpj(cnpj):
     digito2 = (11 - soma % 11) % 10
 
     # Verifica se os dígitos calculados são iguais aos dígitos informados
-    if(cnpj[12:14] == f'{digito1}{digito2}'):
-        rais
+#    if(cnpj[12:14] == f'{digito1}{digito2}'):
+#        rais
     return cnpj[12:14] == f'{digito1}{digito2}'
         
 def valida_cpf(cpf):
