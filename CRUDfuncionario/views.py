@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate
 from django.shortcuts import render, redirect
 from CRUDfuncionario.models import Funcionario
 from django.http import HttpResponse
-
+from django.core.exceptions import ValidationError
 def Funcionarios(request):
     funcionarios = Funcionario.objects.all()
     return render(request, "funcionarios.html", {"funcionarios": funcionarios})
@@ -19,15 +19,14 @@ def salvarFuncionario_view(request):
         vpassword = request.POST.get("password")
         vFuncao = request.POST.get("funcao")
         vEmail = request.POST.get("email")
- #       if validar_cpf(vCPF) != True:
- #           raise ValidationError('CPF invalido')
+ 
         # Verifica se já existe um usuário com o mesmo username
         try:
             usuarioAux = Funcionario.objects.get(username=vusername)
             return redirect(Funcionarios)
         except Funcionario.DoesNotExist:
             # Cria um novo usuário
-            novo_funcionario = Funcionario.objects.create_user(
+            novo_funcionario = Funcionario(
                 nivelDeAcesso=1,
                 username=vusername,
                 enderecoFuncionario=vEnderecoFuncionario,
@@ -38,8 +37,22 @@ def salvarFuncionario_view(request):
                 funcao=vFuncao,
                 email=vEmail
             )
-
+            try:
+                novo_funcionario.full_clean()
+            except ValidationError as e:
+                return HttpResponse("Erro de validacao do formulário")
             # Autentica o novo usuário
+            novo_funcionario =Funcionario.objects.create_user(
+                nivelDeAcesso=1,
+                username=vusername,
+                enderecoFuncionario=vEnderecoFuncionario,
+                CPF=vCPF,
+                CEP=vCEP,
+                telefone=vTelefone,
+                password=vpassword,
+                funcao=vFuncao,
+                email=vEmail
+            )
             user = authenticate(request, username=vusername, password=vpassword)
             
             if user:
@@ -47,6 +60,7 @@ def salvarFuncionario_view(request):
                 return redirect(Funcionarios)
             else:
                 return HttpResponse(user)
+        
 def editar_view(request, id):
     funcionario = Funcionario.objects.get(idFuncionario=id) 
     return render(request, "update.html", {"funcionario": funcionario})
@@ -74,22 +88,3 @@ def delete_view(request, id):
     funcionario = Funcionario.objects.get(idFuncionario=id) 
     funcionario.delete()
     return redirect(Funcionarios)
-def validar_cpf(cpf):
-    # Remove caracteres não numéricos
-    cpf = ''.join(filter(str.isdigit, cpf))
-    # Verifica se o CPF tem 11 dígitos
-    if len(cpf) != 11:
-        return False
-
-    # Calcula o primeiro dígito verificador
-    soma = sum(int(cpf[i]) * (10 - i) for i in range(9))
-    resto = (soma * 10) % 11
-    digito1 = 0 if resto == 10 else resto
-
-    # Calcula o segundo dígito verificador
-    soma = sum(int(cpf[i]) * (11 - i) for i in range(10))
-    resto = (soma * 10) % 11
-    digito2 = 0 if resto == 10 else resto
-
-    # Verifica se os dígitos verificadores são iguais aos dois últimos dígitos do CPF
-    return cpf[-2:] == f"{digito1}{digito2}"

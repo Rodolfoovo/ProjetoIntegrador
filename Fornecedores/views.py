@@ -57,31 +57,6 @@ def deleteFornecedor_view(request, id):
     fornecedor.delete()
     return redirect(fornecedor_view)
 
-def valida_cnpj(cnpj):
-    #Função para validar o cnpj, será aplicada em trabalhos futuros
-    cnpj = ''.join(re.findall('\\d', str(cnpj)))
-
-    if (len(cnpj) != 14):
-        return False
-
-    inteiros = list(map(int, cnpj))
-    novo = inteiros[:12]
-
-    prod = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]
-    while len(novo) < 14:
-        r = sum([x*y for (x, y) in zip(novo, prod)]) % 11
-        if r > 1:
-            f = 11 - r
-        else:
-            f = 0
-        novo.append(f)
-        prod.insert(0, 6)
-
-    if novo == inteiros:
-        return True
-
-    return False
-
 def valida_cep(cep):
     # A função re.match tenta combinar a string fornecida com a expressão regular
     # A expressão regular r'^\d{5}-\d{3}$' corresponde a uma string que começa (^) com 5 dígitos (\d{5}), seguida por um hífen (-), e termina ($) com 3 dígitos (\d{3})

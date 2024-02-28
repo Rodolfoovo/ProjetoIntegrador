@@ -131,7 +131,7 @@ DEFAULT_FROM_EMAIL = 'TestSite Team <noreply@example.com>'
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
-
+DATE_INPUT_FORMATS = ['%d,%m,%Y']
 # Adiciona o AppDirectoriesFinder aos finders de arquivos estáticos
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
