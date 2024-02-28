@@ -10,5 +10,5 @@ urlpatterns = [
     path('logout/',logout_view,name='logout' ),
     path('funcionarios/', Funcionarios , name='funcionarios'),
     path('produtos/',produtos_view,name='produtos'),
-    path('fornecedor/',fornecedor_view, name='fornecedor'),
+    path('fornecedor/',fornecedor_view, name='fornecedor')
 ]
