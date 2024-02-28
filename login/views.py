@@ -2,6 +2,7 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .utils import send_email
+from CRUDfuncionario.models import Funcionario
 import logging
 logger = logging.getLogger(__name__)
 
@@ -24,11 +25,12 @@ def login_view(request):
                 'funcao':user.funcao,
                 'email':user.email
             }
+            user = Funcionario.objects.get(username=username)
             request.session['userData'] = userData
             #subject = 'Bem vindo ao Koi.io'
             #message = 'Agradecemos sua preferencia!'
             #send_email(user,subject,message)
-            return redirect('telainicial')
+            return render(request,'telainicial.html',{"user":user})
         else:
             return HttpResponse('Usuario ou senha invalidos')
         
@@ -37,7 +39,8 @@ def logout_view(request):
     userData = request.session.get('userData')
     if userData:
         # Se existir, retorna os dados do usuário
-        return render(request, 'logout.html', {'userData': userData})
+        request.session.clear()
+        return render(request, 'login.html')
     else:
         # Se não existir, retorna uma resposta vazia ou outra resposta adequada
         return HttpResponse('Usuário não está logado ou dados não encontrados na sessão')

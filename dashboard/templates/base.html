@@ -17,24 +17,21 @@
             <li><a href="{% url 'produtos' %}">Produtos</a></li>
             <li><a href="{% url 'funcionarios' %}">Gerenciar usuários</a></li>
             <li><a href="{% url 'fornecedor' %}">Fornecedor</a></li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Perfil
-                </a>
-                <ul>
+            <ul class="dropdown">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Informações do Usuário</a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <!-- Informações do Usuário -->
                         <p class="dropdown-item-text">Username: {{ userData.username }}</p>
                         <p class="dropdown-item-text">Endereço: {{ userData.enderecoFuncionario }}</p>
                         <p class="dropdown-item-text">CPF: {{ userData.cpf }}</p>
                         <p class="dropdown-item-text">Telefone: {{ userData.telefone }}</p>
                         <p class="dropdown-item-text">Função: {{ userData.funcao }}</p>
-                        <p class="dropdown-item-text">Email: {{ userData.email }}</p>>
+                        <p class="dropdown-item-text">Email: {{ userData.email }}</p>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{% url 'logout' %}">Sair</a>>
+                        <a class="dropdown-item" href="{% url 'logout' %}">Sair</a>
                     </div>
-                </ul>  
-            </li>
+                </li>
+            </ul>         
         </ul>
     </nav>
     
