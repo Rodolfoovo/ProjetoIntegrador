@@ -57,18 +57,16 @@
         </div>
     </div>
 
-    <form action="{% url 'salvarFornecedor_view' %}" method="POST">
-        {% csrf_token %}
-    
-        <button>Create</button>
-    </form>
-
     <div>
         <table class="table table-striped">
             <thead>
                 <tr>
                     <th scope="col">ID do Fornecedor</th>
                     <th scope="col">Nome do Fornecedor</th>
+                    <th scope="col">Telefone</th>
+                    <th scope="col">CNPJ</th>
+                    <th scope="col">CEP</th>
+                    <th scope="col">Endereço</th>
                 </tr>
             </thead>
             <tbody>
@@ -76,6 +74,10 @@
                     <tr>
                         <td>{{fornecedor.idFornecedor}}</td>
                         <td>{{fornecedor.nomeFornecedor}}</td>
+                        <td>{{fornecedor.telefone}}</td>
+                        <td>{{fornecedor.cnpj}}</td>
+                        <td>{{fornecedor.cep}}</td>
+                        <td>{{fornecedor.endereco}}</td>
                     </tr>
                 {% endfor %}
             </tbody>
