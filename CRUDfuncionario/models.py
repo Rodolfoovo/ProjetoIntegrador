@@ -10,7 +10,7 @@ class Funcionario(AbstractUser):
     enderecoFuncionario = models.CharField(max_length=30)
 #    CPF = models.CharField(max_length=11)
     CPF = CPFField('CPF',default='000.000.000-0')
-    CEP = models.CharField(max_length=8, validators =[valida_cep])
+    CEP = models.CharField(max_length=8)
     telefone = models.CharField(max_length=20)
     funcao = models.CharField(max_length=30)
 
