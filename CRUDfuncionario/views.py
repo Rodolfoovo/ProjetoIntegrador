@@ -40,7 +40,7 @@ def salvarFuncionario_view(request):
             try:
                 novo_funcionario.full_clean()
             except ValidationError as e:
-                return HttpResponse("Erro de validacao do formulário")
+                return HttpResponse(f"Erro de validacao do formulário: {e}")
             # Autentica o novo usuário
             novo_funcionario =Funcionario.objects.create_user(
                 nivelDeAcesso=1,
@@ -78,6 +78,10 @@ def update_view(request, id):
         funcionario.email = request.POST.get("email")
         funcionario.funcao = request.POST.get("funcao")
 
+        try:
+            funcionario.full_clean()
+        except ValidationError as e:
+            return HttpResponse(f"Erro de validacao do formulário: {e}")
         funcionario.save()
         return redirect(Funcionarios)
     else:

@@ -1,29 +1,30 @@
 import re
 from django.core.exceptions import ValidationError
+
 def valida_cnpj(cnpj):
-        #Função para validar o cnpj, será aplicada em trabalhos futuros
-    cnpj = ''.join(re.findall('\\d', str(cnpj)))
+    # Remove caracteres especiais e espaços
+    cnpj = ''.join(filter(str.isdigit, cnpj))
 
-    if (len(cnpj) != 14):
-            return False
+    # Verifica se o CNPJ possui 14 dígitos
+    if len(cnpj) != 14:
+        raise ValidationError(("Error"), code="invalid_text")
 
-    inteiros = list(map(int, cnpj))
-    novo = inteiros[:12]
+    # Calcula o primeiro dígito verificador
+    soma = 0
+    for i in range(12):
+        soma += int(cnpj[i]) * (i % 8 + 2)
+    digito1 = (11 - soma % 11) % 10
 
-    prod = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]
-    while len(novo) < 14:
-        r = sum([x*y for (x, y) in zip(novo, prod)]) % 11
-        if r > 1:
-            f = 11 - r
-        else:
-            f = 0
-        novo.append(f)
-        prod.insert(0, 6)
+    # Calcula o segundo dígito verificador
+    soma = 0
+    for i in range(13):
+        soma += int(cnpj[i]) * (i % 8 + 2)
+    digito2 = (11 - soma % 11) % 10
 
-    if novo == inteiros:
-        return True
-
-    return False
+    # Verifica se os dígitos calculados são iguais aos dígitos informados
+    if(cnpj[12:14] == f'{digito1}{digito2}'):
+        rais
+    return cnpj[12:14] == f'{digito1}{digito2}'
         
 def valida_cpf(cpf):
     # Remove caracteres não numéricos
@@ -47,6 +48,21 @@ def valida_cpf(cpf):
 def valida_texto(text):
     if not text.isalpha():
         raise ValidationError(
-            _("A string deve conter apenas letras"),
+            ("O nome de usuário está incorreto, apenas caracteres aceitos"),
             code="invalid_text",
             )
+def valida_cep(cep):
+    # Remove qualquer caractere não numérico
+    cep = re.sub(r'\D', '', cep)
+    
+    # Verifica se o CEP tem 8 dígitos
+    if len(cep) != 8:
+        raise ValidationError(("Formato CEP não aceito."), 
+                               code="invalid_text"
+                               )
+    
+    # Verifica se o CEP está no formato correto (cinco dígitos, hífen, três dígitos)
+    if not re.match(r'^\d{5}-\d{3}$', cep):
+        raise ValidationError(("Formato CEP não aceito."), 
+                               code="invalid_text"
+                               )

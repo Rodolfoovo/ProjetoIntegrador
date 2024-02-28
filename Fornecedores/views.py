@@ -3,6 +3,7 @@ from .models import Fornecedor
 from .forms import FornecedorForm
 from django.shortcuts import redirect
 from django.http import HttpResponse
+from django.core.exceptions import ValidationError
 import re
 # Create your views here.
 
@@ -19,6 +20,16 @@ def salvarFornecedor_view(request):
         vtelefone = request.POST.get("telefone")
         vcep = request.POST.get("cep")
         vcnpj = request.POST.get("cnpj")
+        fornecedor = Fornecedor(
+            nomeFornecedor=vnomeFornecedor,
+            endereco=vendereco,
+            telefone=vtelefone,
+            cep=vcep,
+            cnpj=vcnpj)
+        try:
+            fornecedor.full_clean()
+        except ValidationError as e:
+            return HttpResponse(f"Erro de validacao do formulário: {e}")
         fornecedor = Fornecedor.objects.create(
             nomeFornecedor=vnomeFornecedor,
             endereco=vendereco,
@@ -56,13 +67,5 @@ def deleteFornecedor_view(request, id):
     fornecedor = Fornecedor.objects.get(idFornecedor=id) 
     fornecedor.delete()
     return redirect(fornecedor_view)
-
-def valida_cep(cep):
-    # A função re.match tenta combinar a string fornecida com a expressão regular
-    # A expressão regular r'^\d{5}-\d{3}$' corresponde a uma string que começa (^) com 5 dígitos (\d{5}), seguida por um hífen (-), e termina ($) com 3 dígitos (\d{3})
-    # Se a string do CEP combinar com essa expressão regular, a função re.match retornará um objeto de correspondência, caso contrário, retornará None
-    # O operador 'is not None' verifica se o resultado da função re.match é diferente de None, ou seja, se houve uma correspondência
-    # Portanto, a função valida_cep retorna True se o CEP estiver no formato correto e False caso contrário
-    return re.match(r'^\d{5}-\d{3}$', cep) is not None
 
 
