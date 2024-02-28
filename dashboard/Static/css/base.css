@@ -4,6 +4,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Open Sans', sans-serif;
+    font-size: 15px ;
 }
 #menu-horizontal ul{
     list-style: none;
@@ -28,4 +29,8 @@
 }
 #menu-horizontal ul li:last-child a{
     float: right;
+}
+dl, ol, ul {
+    margin-top: 0; /* Definindo a margem superior como 0 */
+    margin-bottom: auto; /* Definindo a margem inferior como 0 */
 }

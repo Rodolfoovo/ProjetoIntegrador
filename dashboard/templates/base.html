@@ -2,17 +2,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Importação do Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <!-- Importação do jQuery -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <!-- Importação do Bootstrap JS -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <title>{% block title %} {% endblock %}</title>
 
 </head>
 <body>
+    <!-- Importação do Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
     <!-- "nav" representa uma seção de uma página que guia para outras páginas -->
     <nav id="menu-horizontal">
         <ul>
@@ -21,7 +18,7 @@
             <li><a href="{% url 'funcionarios' %}">Gerenciar usuários</a></li>
             <li><a href="{% url 'fornecedor' %}">Fornecedor</a></li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"="dropdown" aria-haspopup="true" aria-expanded="false">
                     Perfil
                 </a>
                 <ul>
@@ -44,6 +41,11 @@
 
     {% block content %} 
     {% endblock %}
-          
+    <!-- Importação do jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <!-- Importação do Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>$('.dropdown-toggle').dropdown();</script>
 </body>
 </html>
