@@ -78,6 +78,10 @@
                         <td>{{fornecedor.cnpj}}</td>
                         <td>{{fornecedor.cep}}</td>
                         <td>{{fornecedor.endereco}}</td>
+                        <td>
+                            <a href="{% url 'editarFornecedor_view' fornecedor.idFornecedor %}" class="btn btn-outline-primary">EDITAR</a>
+                            <a href="{% url 'deleteFornecedor_view' fornecedor.idFornecedor %}" class="btn btn-outline-danger">DELETAR</a>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>
