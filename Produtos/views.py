@@ -11,11 +11,14 @@ def produtos_view(request):
 
 def criaProdutos_view(request):
     if request.method == 'POST':
-        vnomeProduto = request.POST.get("nomePRoduto")
-        vidFornecedor = request.POST.get("idFornecedor")
+        idFornecedor = request.POST.get("idFornecedor")
+        fornecedor = Fornecedor.objects.get(idFornecedor=idFornecedor)
+
+        vnomeProduto = request.POST.get("nomeProduto")
+        vidFornecedor = fornecedor
         vvalorUnit = request.POST.get("valorUnit")
         vqntEstoque = request.POST.get("qntEstoque")
-        vcategoria = request.POST.get("cateogoria")
+        vcategoria = request.POST.get("categoria")
         vsubCategoria = request.POST.get("subCategoria")
         vmarcaProduto = request.POST.get("marcaProduto")
         produto = Produtos.objects.create(
@@ -33,16 +36,19 @@ def criaProdutos_view(request):
         return redirect(produtos_view)
 def editarProdutos_view(request, id):
     produto =Produtos.objects.get(idProduto=id) 
-    return render(request, "updateProduto.html", {"produto": produto})
+    fornecedores = Fornecedor.objects.all()
+    return render(request, "updateProduto.html", {"produto": produto, "fornecedores":fornecedores})
 
 def updateProdutos_view(request,id):
     if request.method == 'POST':
         produtos = Produtos.objects.get(idProduto=id)
+        idFornecedor = request.POST.get("idFornecedor")
+        fornecedor = Fornecedor.objects.get(idFornecedor=idFornecedor)
 #        form = criaProdutoForm(request.POST,instance=produtos)
 #        if form.is_valid():
 #            form.save()
         produtos.nomeProduto = request.POST.get("nomeProduto")
-        produtos.idFornecedor = request.POST.get("idFornecedor")
+        produtos.idFornecedor = fornecedor
         produtos.valorUnit = request.POST.get("valorUnit")
         produtos.qntEstoque = request.POST.get("qntEstoque")
         produtos.categoria = request.POST.get("categoria")
@@ -56,7 +62,7 @@ def updateProdutos_view(request,id):
         return HttpResponse('Método não permitido')
     
 def deleteProduto_view(request, id):
-    produto = Produtos.objects.get(idPRoduto=id) 
+    produto = Produtos.objects.get(idProduto=id) 
     produto.delete()
     return redirect(produtos_view)
     
