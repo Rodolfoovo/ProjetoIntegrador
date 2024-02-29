@@ -31,17 +31,19 @@
                         <label class="form-label">nomeProduto</label>
                         <input type="text" class="form-control" maxlength="30" name="nomeProduto">
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">idFornecedor</label>
-                        <input type="text" class="form-control" maxlength="30"name="idFornecedor">
-                    </div>
+                    <p>Fornecedor</p>
+                    <select id="idFornecedor" name="idFornecedor">
+                        {% for fornecedor in fornecedores %}
+                            <option value="{{ fornecedor.idFornecedor }}">{{ fornecedor.nomeFornecedor }}</option>
+                        {% endfor %}
+                    </select>
                     <div class="mb-3">
                         <label class="form-label">valorUnit</label>
-                        <input type="text" class="form-control" maxlength="11" name="valorUnit">
+                        <input type="number" class="form-control" minlength="0.01" maxlength="11" name="valorUnit">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">qntEstoque</label>
-                        <input type="text" class="form-control" maxlength="8" name="qntEstoque">
+                        <input type="number" class="form-control" minlength="1" maxlength="8" name="qntEstoque">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">categoria</label>
@@ -53,7 +55,7 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">marcaProduto</label>
-                        <input type="text" class="form-control" maxlength="30" name="marca">
+                        <input type="text" class="form-control" maxlength="30" name="marcaProduto">
                     </div>
                         <button type="submit" class="btn btn-primary">Cadastrar</button>
                     </div>
@@ -88,14 +90,18 @@
         <tbody>
             {% for produto in produtos %}
             <tr>
-                <td>{{ Produtos.idProduto }}</td>
-                <td>{{ Produtos.nomeProduto}}</td>
-                <td>{{ Produtos.idFornecedor }}</td>
-                <td>{{ Produtos.valorUnit }}</td>
-                <td>{{ Produtos.qntEstoque }}</td>
-                <td>{{ Produtos.categoria }}</td>
-                <td>{{ Produtos.subCategoria }}</td>
-                <td>{{ Produtos.marcaProduto }}</td>
+                <td>{{ produto.idProduto }}</td>
+                <td>{{ produto.nomeProduto}}</td>
+                <td>{{ produto.idFornecedor.nomeFornecedor }}</td>
+                <td>{{ produto.valorUnit }}</td>
+                <td>{{ produto.qntEstoque }}</td>
+                <td>{{ produto.categoria }}</td>
+                <td>{{ produto.subCategoria }}</td>
+                <td>{{ produto.marcaProduto }}</td>
+                <td>
+                    <a href="{% url 'editarProdutos_view' produto.idProduto %}" class="btn btn-outline-primary">EDITAR</a>
+                    <a href="{% url 'deleteFornecedor_view' produto.idProduto %}" class="btn btn-outline-danger">DELETAR</a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
