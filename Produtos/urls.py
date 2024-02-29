@@ -6,5 +6,5 @@ urlpatterns = [
     path('criaProduto',criaProdutos_view, name="criaProdutos_view"),
     path('editarProdutos/<int:id>',editarProdutos_view, name="editarProdutos_view"),
     path('updateProdutos/<int:id>', updateProdutos_view,name="updateProdutos_view"),
-    path('deleteProduto/<int:id>', deleteProduto_view, name="deleteProduto_view"),
+    path('deleteProduto/<int:id>', deleteProduto_view, name="deleteProdutos_view"),
 ]
