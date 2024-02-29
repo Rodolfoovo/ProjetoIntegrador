@@ -3,6 +3,11 @@
     font-family: 'Montserrat', sans-serif;
     font-size: 13px;
 }
+
+*:focus {
+    outline: none;
+}
+
 /* Estilo para o corpo da página */
 body {
     background: #EBEBEB;

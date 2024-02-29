@@ -3,50 +3,54 @@
 {% block title %}Fornecedor{% endblock %}
     
 {% block content%}
-<link rel="stylesheet" href="{% static 'css/crudfuncionario.css' %}">
-    <h2>Atualizar Fornecedor</h2>
+<link rel="stylesheet" href="{% static 'css/editar.css' %}">
 
-    <form action="{% url 'updateProdutos_view' produto.idProduto %}" method="POST">
-        {% csrf_token %}
-        
-        <!-- Campo de Identificação -->
-        <div>
-            <label for="username">Nome Produto:</label>
-            <input type="text" id="nomeProduto" name="nomeProduto" value="{{produto.nomeProduto}}">
-        </div>
+<div class="retangulo_Editar">
+    <div class="title_Editar">Editar Fornecedor</div>
+        <form action="{% url 'updateProdutos_view' produto.idProduto %}" class="editar-form" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <!-- Campo de Identificação -->
+                <div class="form-control_campos">
+                    <label for="username">Nome Produto:</label>
+                    <input type="text" id="nomeProduto" name="nomeProduto" value="{{produto.nomeProduto}}">
+                </div>
 
-        <p>Fornecedor</p>
-        <select id="idFornecedor" name="idFornecedor">
-            {% for fornecedor in fornecedores %}
-                <option value="{{ fornecedor.idFornecedor }}">{{ fornecedor.nomeFornecedor }}</option>
-            {% endfor %}
-        </select>
+                <div class="Select-Fornecedor">
+                    <label class="form-label" for="fornecedor">Fornecedor:</label>
+                    <select class="idFornecedor" id="idFornecedor" name="idFornecedor">
+                        {% for fornecedor in fornecedores %}
+                            <option value="{{ fornecedor.idFornecedor }}">{{ fornecedor.nomeFornecedor }}</option>
+                        {% endfor %}
+                </select>
+                </div>
+                <div class="form-control_campos">
+                    <label for="valorUnit">Valor Unitário:</label>
+                    <input type="text" id="valorUnit" name="valorUnit" value="{{produto.valorUnit}}">
+                </div>
 
-        <div>
-            <label for="valorUnit">Valor Unitário:</label>
-            <input type="text" id="valorUnit" name="valorUnit" value="{{produto.valorUnit}}">
-        </div>
+                <div class="form-control_campos">
+                    <label for="qntEstoque">Quantidade de Estoque:</label>
+                    <input type="text" id="qntEstoque" name="qntEstoque" value="{{produto.qntEstoque}}">
+                </div>
 
-        <div>
-            <label for="qntEstoque">Quantidade de Estoque:</label>
-            <input type="text" id="qntEstoque" name="qntEstoque" value="{{produto.qntEstoque}}">
-        </div>
+                <div class="form-control_campos">
+                    <label for="categoria">Categoria:</label>
+                    <input type="text" id="categoria" name="categoria" value="{{produto.categoria}}">
+                </div>
 
-        <div>
-            <label for="categoria">Categoria:</label>
-            <input type="text" id="categoria" name="categoria" value="{{produto.categoria}}">
-        </div>
+                <div class="form-control_campos">
+                    <label for="subCategoria">Sub-Categoria:</label>
+                    <input type="text" id="subCategoria" name="subCategoria" value="{{produto.subCategoria}}">
+                </div class="form-control_campos">
 
-        <div>
-            <label for="subCategoria">Sub-Categoria:</label>
-            <input type="text" id="subCategoria" name="subCategoria" value="{{produto.subCategoria}}">
-        </div>
-
-        <div>
-            <label for="marcaProduto">Marca:</label>
-            <input type="text" id="marcaProduto" name="marcaProduto" value="{{produto.marcaProduto}}">
-        </div>
-
-        <button type="submit">Atualizar</button>
-    </form>
+                <div class="form-control_campos">
+                    <label for="marcaProduto">Marca:</label>
+                    <input type="text" id="marcaProduto" name="marcaProduto" value="{{produto.marcaProduto}}">
+                </div>
+            </div>
+            <button type="submit" class="btn-submit">Atualizar</button>
+        </form>
+    </div>
+</div>
 {% endblock %}

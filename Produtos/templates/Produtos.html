@@ -85,6 +85,8 @@
                 <th scope="col">Categoria</th>
                 <th scope="col">Subcategoria</th>
                 <th scope="col">Marca</th>
+                <th scope="col">Editar</th>
+                <th scope="col">Deletar</th>
             </tr>
         </thead>
         <tbody>
@@ -100,6 +102,8 @@
                 <td>{{ produto.marcaProduto }}</td>
                 <td>
                     <a href="{% url 'editarProdutos_view' produto.idProduto %}" class="btn btn-outline-primary">EDITAR</a>
+                </td>
+                <td>
                     <a href="{% url 'deleteProdutos_view' produto.idProduto %}" class="btn btn-outline-danger">DELETAR</a>
                 </td>
             </tr>
