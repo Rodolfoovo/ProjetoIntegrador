@@ -13,7 +13,7 @@ def criaProdutos_view(request):
     if request.method == 'POST':
         idFornecedor = request.POST.get("idFornecedor")
         fornecedor = Fornecedor.objects.get(idFornecedor=idFornecedor)
-        
+
         vnomeProduto = request.POST.get("nomeProduto")
         vidFornecedor = fornecedor
         vvalorUnit = request.POST.get("valorUnit")
@@ -61,7 +61,7 @@ def updateProdutos_view(request,id):
         return HttpResponse('Método não permitido')
     
 def deleteProduto_view(request, id):
-    produto = Produtos.objects.get(idPRoduto=id) 
+    produto = Produtos.objects.get(idProduto=id) 
     produto.delete()
     return redirect(produtos_view)
     
