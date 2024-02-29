@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Fornecedor{% endblock %}
+    
+{% block content%}
+<link rel="stylesheet" href="{% static 'css/crudfuncionario.css' %}">
+    <h2>Atualizar Fornecedor</h2>
+
+    <form action="{% url 'updateFornecedor_view' fornecedor.idFornecedor %}" method="POST">
+        {% csrf_token %}
+        
+        <!-- Campo de Identificação -->
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="nomeFornecedor" name="nomeFornecedor" value="{{fornecedor.nomeFornecedor}}">
+        </div>
+
+        <div>
+            <label for="enderecoFuncionario">Endereço:</label>
+            <input type="text" id="telefone" name="telefone" value="{{fornecedor.telefone}}">
+        </div>
+
+        <div>
+            <label for="CPF">CPF:</label>
+            <input type="text" id="cnpj" name="cnpj" value="{{fornecedor.cnpj}}">
+        </div>
+
+        <div>
+            <label for="cep">CEP:</label>
+            <input type="text" id="cep" name="cep" value="{{fornecedor.cep}}">
+        </div>
+
+        <div>
+            <label for="endereco">Telefone:</label>
+            <input type="text" id="endereco" name="endereco" value="{{fornecedor.endereco}}">
+        </div>
+
+        <button type="submit">Atualizar</button>
+    </form>
+{% endblock %}

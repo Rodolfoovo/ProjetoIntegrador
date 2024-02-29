@@ -43,7 +43,7 @@ def salvarFornecedor_view(request):
         return redirect(fornecedor_view)
 def editarFornecedor_view(request, id):
     fornecedor = Fornecedor.objects.get(idFornecedor=id) 
-    return render(request, "updateFornecedor.html", {"Fornecedor": fornecedor})
+    return render(request, "updateFornecedor.html", {"fornecedor": fornecedor})
 
 def updateFornecedor_view(request,id):
     if request.method == 'POST':
