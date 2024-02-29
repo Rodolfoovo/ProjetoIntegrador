@@ -67,6 +67,8 @@
                     <th scope="col">CNPJ</th>
                     <th scope="col">CEP</th>
                     <th scope="col">Endereço</th>
+                    <th scope="col">Editar</th>
+                    <th scope="col">Deletar</th>
                 </tr>
             </thead>
             <tbody>
@@ -80,6 +82,8 @@
                         <td>{{fornecedor.endereco}}</td>
                         <td>
                             <a href="{% url 'editarFornecedor_view' fornecedor.idFornecedor %}" class="btn btn-outline-primary">EDITAR</a>
+                        </td>
+                        <td>
                             <a href="{% url 'deleteFornecedor_view' fornecedor.idFornecedor %}" class="btn btn-outline-danger">DELETAR</a>
                         </td>
                     </tr>

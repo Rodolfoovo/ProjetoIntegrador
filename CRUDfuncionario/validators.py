@@ -46,6 +46,8 @@ def valida_cpf(cpf):
         # Verifica se os dígitos verificadores são iguais aos dois últimos dígitos do CPF
     return cpf[-2:] == f"{digito1}{digito2}"
 def valida_texto(text):
+    text = re.sub(r"\s+", "", text)
+    print(text)
     if not text.isalpha():
         raise ValidationError(
             ("O nome de usuário está incorreto, apenas caracteres aceitos"),

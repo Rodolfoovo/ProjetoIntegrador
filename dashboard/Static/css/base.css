@@ -5,6 +5,7 @@
     box-sizing: border-box;
     font-family: 'Open Sans', sans-serif;
     font-size: 15px ;
+    outline: none; /* Remove o contorno padrão ao focar */
 }
 #menu-horizontal ul{
     list-style: none;
