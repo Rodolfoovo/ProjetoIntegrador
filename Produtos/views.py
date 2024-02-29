@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
 from .models import Produtos
 from .forms import criaProdutoForm
+from Fornecedores.models import Fornecedor
 from django.http import HttpResponse
 # Create your views here.
 def produtos_view(request):
     produtos = Produtos.objects.all()
-    produtoForm = criaProdutoForm()
-    return render(request,"produtos.html", {"produtos": produtos, 'produtoForm':produtoForm})
+    fornecedores = Fornecedor.objects.all()
+    return render(request,"produtos.html", {"produtos": produtos, "fornecedores": fornecedores})
 
 def criaProdutos_view(request):
     if request.method == 'POST':
