@@ -36,7 +36,8 @@ def criaProdutos_view(request):
         return redirect(produtos_view)
 def editarProdutos_view(request, id):
     produto =Produtos.objects.get(idProduto=id) 
-    return render(request, "updateProduto.html", {"produto": produto})
+    fornecedores = Fornecedor.objects.all()
+    return render(request, "updateProduto.html", {"produto": produto, "fornecedores":fornecedores})
 
 def updateProdutos_view(request,id):
     if request.method == 'POST':
