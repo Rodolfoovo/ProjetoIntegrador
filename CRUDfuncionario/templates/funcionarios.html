@@ -79,7 +79,9 @@
             <th scope="col">CEP</th>
             <th scope="col">Telefone</th>
             <th scope="col">E-mail</th>
-            <th scope="col">Gerenciar</th>
+            <th scope="col">Editar</th>
+            <th scope="col">Deletar</th>
+
         </tr>
     </thead>
     <tbody>
@@ -94,6 +96,8 @@
             <td>{{ funcionario.email }}</td>
             <td>
                 <a href="{% url 'editar_view' funcionario.idFuncionario %}" class="btn btn-outline-primary">EDITAR</a>
+            </td>
+            <td>
                 <a href="{% url 'delete_view' funcionario.idFuncionario %}" class="btn btn-outline-danger">DELETAR</a>
             </td>
         </tr>

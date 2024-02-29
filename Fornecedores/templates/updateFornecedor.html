@@ -3,38 +3,41 @@
 {% block title %}Fornecedor{% endblock %}
     
 {% block content%}
-<link rel="stylesheet" href="{% static 'css/crudfuncionario.css' %}">
-    <h2>Atualizar Fornecedor</h2>
+<link rel="stylesheet" href="{% static 'css/editar.css' %}">
 
-    <form action="{% url 'updateFornecedor_view' fornecedor.idFornecedor %}" method="POST">
-        {% csrf_token %}
-        
-        <!-- Campo de Identificação -->
-        <div>
-            <label for="username">Username:</label>
-            <input type="text" id="nomeFornecedor" name="nomeFornecedor" value="{{fornecedor.nomeFornecedor}}">
-        </div>
+<div class="retangulo_Editar">
+    <div class="title_Editar">Editar Fornecedor</div>
+        <form action="{% url 'updateFornecedor_view' fornecedor.idFornecedor %}" class="editar-form" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <!-- Campo de Identificação -->
+                <div class="form-control_campos">
+                    <label for="username">Username:</label>
+                    <input type="text" id="nomeFornecedor" name="nomeFornecedor" value="{{fornecedor.nomeFornecedor}}">
+                </div>
 
-        <div>
-            <label for="enderecoFuncionario">Endereço:</label>
-            <input type="text" id="telefone" name="telefone" value="{{fornecedor.telefone}}">
-        </div>
+                <div class="form-control_campos">
+                    <label for="enderecoFuncionario">Endereço:</label>
+                    <input type="text" id="telefone" name="telefone" value="{{fornecedor.telefone}}">
+                </div>
 
-        <div>
-            <label for="CPF">CPF:</label>
-            <input type="text" id="cnpj" name="cnpj" value="{{fornecedor.cnpj}}">
-        </div>
+                <div class="form-control_campos">
+                    <label for="CPF">CPF:</label>
+                    <input type="text" id="cnpj" name="cnpj" value="{{fornecedor.cnpj}}">
+                </div>
 
-        <div>
-            <label for="cep">CEP:</label>
-            <input type="text" id="cep" name="cep" value="{{fornecedor.cep}}">
-        </div>
+                <div class="form-control_campos">
+                    <label for="cep">CEP:</label>
+                    <input type="text" id="cep" name="cep" value="{{fornecedor.cep}}">
+                </div>
 
-        <div>
-            <label for="endereco">Telefone:</label>
-            <input type="text" id="endereco" name="endereco" value="{{fornecedor.endereco}}">
-        </div>
-
-        <button type="submit">Atualizar</button>
-    </form>
+                <div class="form-control_campos">
+                    <label for="endereco">Telefone:</label>
+                    <input type="text" id="endereco" name="endereco" value="{{fornecedor.endereco}}">
+                </div>
+            </div> 
+            <button type="submit" class="btn-submit">Atualizar</button>
+        </form>
+    </div>
+</div>
 {% endblock %}
