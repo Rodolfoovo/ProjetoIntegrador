@@ -77,7 +77,10 @@ def update_view(request, id):
         funcionario.telefone = request.POST.get("telefone")
         funcionario.email = request.POST.get("email")
         funcionario.funcao = request.POST.get("funcao")
-
+        try:
+            funcionario.full_clean()
+        except ValidationError as e:
+            return HttpResponse(f"Erro de validacao do formulário: {e}")
         try:
             funcionario.full_clean()
         except ValidationError as e:
