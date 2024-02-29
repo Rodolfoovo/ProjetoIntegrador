@@ -30,7 +30,20 @@
 #menu-horizontal ul li:last-child a{
     float: right;
 }
-dl, ol, ul {
-    margin-top: 0; /* Definindo a margem superior como 0 */
-    margin-bottom: auto; /* Definindo a margem inferior como 0 */
+#menu-horizontal .navbar-nav:last-child {
+    margin-left: auto;
+}
+.navbar {
+    border: none; /* Remover borda */
+    background-color: #454545;
+}
+.navbar-nav .dropdown-menu {
+    position: static;
+    float: none;
+    font: fantasy;
+    background: linear-gradient(90deg, #C833B0 -75.99%, #FF5722 106.42%, #FF6347 106.44%);
+
+}
+.custom-logout{
+    color: black;
 }

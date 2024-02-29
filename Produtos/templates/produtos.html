@@ -15,6 +15,54 @@
         </ul>
     </div>
 
+    <!-- Modal com o formulário de cadastro -->
+<div class="modal fade bd-cadastro-modal-lg" tabindex="-1" role="dialog" aria-labelledby="ModalCadastroUsuario" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalCadastroUsuario">Cadastro de usuário</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action = "{% url 'criaProdutos_view' %}" method = "POST">{% csrf_token %}
+                    <div class="mb-3">
+                        <label class="form-label">nomeProduto</label>
+                        <input type="text" class="form-control" maxlength="30" name="nomeProduto">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">idFornecedor</label>
+                        <input type="text" class="form-control" maxlength="30"name="idFornecedor">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">valorUnit</label>
+                        <input type="text" class="form-control" maxlength="11" name="valorUnit">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">qntEstoque</label>
+                        <input type="text" class="form-control" maxlength="8" name="qntEstoque">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">categoria</label>
+                        <input type="text" class="form-control" maxlength="20" name="categoria">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">subCategoria</label>
+                        <input type="text" class="form-control" maxlength="30" name="subCategoria">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">marcaProduto</label>
+                        <input type="text" class="form-control" maxlength="30" name="marca">
+                    </div>
+                        <button type="submit" class="btn btn-primary">Cadastrar</button>
+                    </div>
+                </form>
+            </div>  
+        </div>
+    </div>
+</div>
+
     <!-- 
     <div class="pesquisa">
         <input class="form-control" id="myInput" type="text" placeholder="Pesquisar..">
