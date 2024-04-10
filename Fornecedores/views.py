@@ -9,8 +9,7 @@ import re
 
 def fornecedor_view(request):
     fornecedores = Fornecedor.objects.all()
-    fornecedorForm = FornecedorForm()
-    return render(request,"fornecedor.html",{"fornecedores":fornecedores, 'fornecedorForm': fornecedorForm})
+    return render(request,"fornecedor.html",{"fornecedores":fornecedores})
 
 def salvarFornecedor_view(request):
     if request.method == 'POST':
