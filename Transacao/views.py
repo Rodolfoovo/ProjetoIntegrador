@@ -11,8 +11,8 @@ def transacao_view(request):
 
 def salvarTransacao_view(request):
     if request.method == 'POST':
-        vDataTransacao = request.POST("dataTransacao")
-        vTipoTransacao = request.POST("tipoTransacao")
+        vDataTransacao = request.POST.get("dataTransacao")
+        vTipoTransacao = request.POST.get("tipoTransacao")
         transacao = Transacao(
             dataTransacao=vDataTransacao, 
             tipoTransacao=vTipoTransacao
@@ -31,3 +31,14 @@ def editarTransacao_view(request,id):
     transacao = Transacao.objects.get(idTransacao=id)
     return render(request, "updateTransacao.html",{"transacao":transacao})
 
+def updateTransacao_view(request,id):
+    if request.method == 'POST':
+        transacao = Transacao.objects.get(id)
+        transacao.dataTransacao = request.POST.get("dataTransacao")
+        transacao.tipoTransacao = request.POST.get("tipoTransacao")
+        try:
+            transacao.full_clean()
+        except ValidationError as e:
+            return HttpResponse(f"Erro de validacao do formulário: {e}")
+        transacao.save()
+        return redirect(transacao_view)
