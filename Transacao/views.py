@@ -25,5 +25,9 @@ def salvarTransacao_view(request):
             dataTransacao = vDataTransacao,
             tipoTransacao=vTipoTransacao
         )
-        
     return redirect(transacao_view)
+
+def editarTransacao_view(request,id):
+    transacao = Transacao.objects.get(idTransacao=id)
+    return render(request, "updateTransacao.html",{"transacao":transacao})
+
