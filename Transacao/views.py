@@ -42,3 +42,11 @@ def updateTransacao_view(request,id):
             return HttpResponse(f"Erro de validacao do formulário: {e}")
         transacao.save()
         return redirect(transacao_view)
+
+def deletarTransacao_view(request,id):
+    try:
+        transacao = Transacao.objects.get(id)
+        transacao.delete()
+        redirect(transacao_view)
+    except Transacao.DoesNotExist:
+        HttpResponse("Ocorreu um erro ao deletar o objeto.")
