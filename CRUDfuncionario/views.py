@@ -4,11 +4,9 @@ from CRUDfuncionario.models import Funcionario
 from django.http import HttpResponse
 from django.core.exceptions import ValidationError
 from django.contrib.auth.decorators import login_required
-@login_required
 def Funcionarios(request):
     funcionarios = Funcionario.objects.all()
     return render(request, "funcionarios.html", {"funcionarios": funcionarios})
-@login_required
 def salvarFuncionario_view(request):
     if request.method == 'GET':
         return render(request, "funcionarios.html")
@@ -62,11 +60,9 @@ def salvarFuncionario_view(request):
                 return redirect(Funcionarios)
             else:
                 return HttpResponse(user)
-@login_required
 def editar_view(request, id):
     funcionario = Funcionario.objects.get(idFuncionario=id) 
     return render(request, "update.html", {"funcionario": funcionario})
-@login_required
 def update_view(request, id):
     if request.method == 'POST':
         funcionario = Funcionario.objects.get(idFuncionario=id)
@@ -92,7 +88,6 @@ def update_view(request, id):
     else:
         # Se o método não for POST, redirecione para a página de origem ou trate conforme necessário
         return HttpResponse('Método não permitido')
-login_required
 def delete_view(request, id):
     funcionario = Funcionario.objects.get(idFuncionario=id) 
     funcionario.delete()

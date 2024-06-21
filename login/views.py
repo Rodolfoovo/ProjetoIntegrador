@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .utils import send_email
 from CRUDfuncionario.models import Funcionario
+from django.contrib.sessions.models import Session
 import logging
 logger = logging.getLogger(__name__)
 
@@ -16,17 +17,8 @@ def login_view(request):
 
         user = authenticate(request,username=username,password=password)
         if user:
-            userData = {
-                'username': user.username,
-                'enderecoFuncionario': user.enderecoFuncionario,
-                'CPF':user.CPF,
-                'CEP':user.CEP,
-                'telefone':user.telefone,
-                'funcao':user.funcao,
-                'email':user.email
-            }
             user = Funcionario.objects.get(username=username)
-            request.session['userData'] = userData
+            criar_sessao(request,user)
             #subject = 'Bem vindo ao Koi.io'
             #message = 'Agradecemos sua preferencia!'
             #send_email(user,subject,message)
@@ -36,11 +28,17 @@ def login_view(request):
         
 def logout_view(request):
     # Verifica se a chave 'userData' existe na sessão antes de acessá-la
-    userData = request.session.get('userData')
-    if userData:
+    
+    if 'user_id' in request.session:
         # Se existir, retorna os dados do usuário
-        request.session.clear()
+        del request.session['user_id']
         return render(request, 'login.html')
     else:
         # Se não existir, retorna uma resposta vazia ou outra resposta adequada
         return HttpResponse('Usuário não está logado ou dados não encontrados na sessão')
+
+def criar_sessao(request, user):
+    request.session['user_id'] = user.idFuncionario
+
+def verifica_login(request):
+    return 'user_id' in request.session

@@ -3,7 +3,9 @@ from .models import Produtos
 from .forms import criaProdutoForm
 from Fornecedores.models import Fornecedor
 from django.http import HttpResponse
-# Create your views here.
+from django.contrib.auth.decorators import login_required
+# Create your views here
+
 def produtos_view(request):
     produtos = Produtos.objects.all()
     fornecedores = Fornecedor.objects.all()

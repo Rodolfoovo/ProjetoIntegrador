@@ -4,6 +4,7 @@ from .forms import FornecedorForm
 from django.shortcuts import redirect
 from django.http import HttpResponse
 from django.core.exceptions import ValidationError
+from django.contrib.auth.decorators import login_required
 import re
 # Create your views here.
 
