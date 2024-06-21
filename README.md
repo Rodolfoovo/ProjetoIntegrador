@@ -1,11 +1,5 @@
-Projeto Integrador
+# Projeto Integrador
 
-GRAFICOS(
-    https://www.visme.co/chart-maker/ Site para fazer graficos personalizados para importar no codigo
-    )
+O trabalho apresenta o Koi.io, um software elaborado com o propósito principal de simplificar a interpretação e a visualização de dados complexos por meio de gráficos intuitivos, trazendo consigo também o monitoramento de fornecedores. O software opera por meio da integração de informações provenientes de uma base de dados, permitindo o cálculo de classificações de produtos, acompanhamento de movimentações de estoque de itens específicos e a atualização do status de estoque, entre outras funcionalidades.
 
-COMPONENTES(
-    A parte de ExemploComponentes é a implementação dos componentes basicos que vamos usar no nosso dashboard
-ai podemos ver a implementação ali e se basear, porem temos quer ver como mudar o design disso
-https://dash.plotly.com/dash-core-components documentação desses componentes
-)
+Documentação: https://docs.google.com/document/d/18vrYpGEQqibemTo2g1HQj2KqEpbsIBHvCTMD2dfdRDk/edit?usp=sharing
