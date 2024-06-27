@@ -3,57 +3,51 @@ from django.shortcuts import render, redirect
 from CRUDfuncionario.models import Funcionario
 from django.http import HttpResponse
 from django.core.exceptions import ValidationError
-from django.contrib.auth.decorators import login_required
+from login.views import login_view, verifica_login
+
 def Funcionarios(request):
-    funcionarios = Funcionario.objects.all()
-    return render(request, "funcionarios.html", {"funcionarios": funcionarios})
+    if(verifica_login(request)):
+        funcionarios = Funcionario.objects.all()
+        return render(request, "funcionarios.html", {"funcionarios": funcionarios})
+    else:
+        return redirect(login_view)
+
 def salvarFuncionario_view(request):
     if request.method == 'GET':
         return render(request, "funcionarios.html")
     elif request.method == 'POST':
-        vusername = request.POST.get("username")
-        vEnderecoFuncionario = request.POST.get("enderecoFuncionario")
-        vCPF = request.POST.get("CPF")
-        vCEP = request.POST.get("CEP")
-        vTelefone = request.POST.get("telefone")
-        vpassword = request.POST.get("password")
-        vFuncao = request.POST.get("funcao")
-        vEmail = request.POST.get("email")
- 
         # Verifica se já existe um usuário com o mesmo username
-        try:
-            usuarioAux = Funcionario.objects.get(username=vusername)
-            return redirect(Funcionarios)
-        except Funcionario.DoesNotExist:
-            # Cria um novo usuário
-            novo_funcionario = Funcionario(
+        novo_funcionario = Funcionario(
                 nivelDeAcesso=1,
-                username=vusername,
-                enderecoFuncionario=vEnderecoFuncionario,
-                CPF=vCPF,
-                CEP=vCEP,
-                telefone=vTelefone,
-                password=vpassword,
-                funcao=vFuncao,
-                email=vEmail
+                username=request.POST.get("username"),
+                enderecoFuncionario=request.POST.get("enderecoFuncionario"),
+                CPF=request.POST.get("CPF"),
+                CEP=request.POST.get("CEP"),
+                telefone=request.POST.get("telefone"),
+                password=request.POST.get("password"),
+                funcao=request.POST.get("funcao"),
+                email=request.POST.get("email")
             )
-            try:
-                novo_funcionario.full_clean()
-            except ValidationError as e:
+        try:
+            novo_funcionario.full_clean()
+            usuarioAux = Funcionario.objects.get(username=request.POST.get("username"))
+            return redirect(Funcionarios)
+        except ValidationError as e:
                 return HttpResponse(f"Erro de validacao do formulário: {e}")
+        except Funcionario.DoesNotExist:
             # Autentica o novo usuário
             novo_funcionario =Funcionario.objects.create_user(
                 nivelDeAcesso=1,
-                username=vusername,
-                enderecoFuncionario=vEnderecoFuncionario,
-                CPF=vCPF,
-                CEP=vCEP,
-                telefone=vTelefone,
-                password=vpassword,
-                funcao=vFuncao,
-                email=vEmail
+                username=request.POST.get("username"),
+                enderecoFuncionario=request.POST.get("enderecoFuncionario"),
+                CPF=request.POST.get("CPF"),
+                CEP=request.POST.get("CEP"),
+                telefone=request.POST.get("telefone"),
+                password=request.POST.get("password"),
+                funcao=request.POST.get("funcao"),
+                email=request.POST.get("email")
             )
-            user = authenticate(request, username=vusername, password=vpassword)
+            user = authenticate(request, username=request.POST.get("username"), password=request.POST.get("password"))
             
             if user:
                 funcionarios = Funcionario.objects.all()
@@ -75,10 +69,6 @@ def update_view(request, id):
         funcionario.telefone = request.POST.get("telefone")
         funcionario.email = request.POST.get("email")
         funcionario.funcao = request.POST.get("funcao")
-        try:
-            funcionario.full_clean()
-        except ValidationError as e:
-            return HttpResponse(f"Erro de validacao do formulário: {e}")
         try:
             funcionario.full_clean()
         except ValidationError as e:
