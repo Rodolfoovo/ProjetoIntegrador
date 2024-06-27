@@ -47,6 +47,10 @@ def updateFornecedor_view(request,id):
         fornecedor.telefone = request.POST.get("telefone")
         fornecedor.cep = request.POST.get("cep")
         fornecedor.cnpj = request.POST.get("cnpj")
+        try:
+            fornecedor.full_clean()
+        except ValidationError as e:
+            return HttpResponse(f"Erro de validacao do formulário: {e}")
         fornecedor.save()
         return redirect(fornecedor_view)
     
