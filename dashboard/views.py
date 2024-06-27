@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from login.views import login_view, verifica_login
 def tela_inicial(request):
-    return render(request, 'telainicial.html')
+    if(verifica_login(request)):
+        return render(request, 'telainicial.html')
+    else:
+        return redirect(login_view)
