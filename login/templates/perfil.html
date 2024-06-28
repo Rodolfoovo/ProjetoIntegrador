@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Atualizar Funcionário{% endblock %}
+{% block title %}Fornecedor{% endblock %}
     
 {% block content%}
-    <link rel="stylesheet" href="{% static 'css/editar.css' %}">
+<link rel="stylesheet" href="{% static 'css/editar.css' %}">
     <div class="retangulo_Editar">
-        <div class="title_Editar">Editar Funcionario</div>
+        <div class="title_Editar">Perfil</div>
             <form action="{% url 'update_view' funcionario.idFuncionario %}" class="editar-form" method="POST">
                 {% csrf_token %}
                 <div class="form-group">

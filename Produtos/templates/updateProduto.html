@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="{% static 'css/editar.css' %}">
 
 <div class="retangulo_Editar">
-    <div class="title_Editar">Editar Fornecedor</div>
+    <div class="title_Editar">Editar Produto</div>
         <form action="{% url 'updateProdutos_view' produto.idProduto %}" class="editar-form" method="POST">
             {% csrf_token %}
             <div class="form-group">
