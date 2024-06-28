@@ -42,3 +42,12 @@ def criar_sessao(request, user):
 
 def verifica_login(request):
     return 'user_id' in request.session
+
+def Perfil_view(request):
+    user = request.user
+    funcionario = Funcionario.objects.get(user=user)
+    context = {
+        'user': user,
+        'funcionario': funcionario
+    }
+    return render(request, 'perfil.html', context)
