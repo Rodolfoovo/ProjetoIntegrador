@@ -34,7 +34,6 @@ INSTALLED_APPS = [
     'CRUDfuncionario',
     'login',
     'Produtos',
-    'Dash_app',
     'dashboard',
     'Fornecedores',
     'Transacao',
@@ -57,6 +56,7 @@ ROOT_URLCONF = 'koiProject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -143,6 +143,13 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
+
+# Adiciona o diretório global de arquivos estáticos
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 
 # Default primary key field type

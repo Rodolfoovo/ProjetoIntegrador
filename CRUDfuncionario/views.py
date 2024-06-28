@@ -57,13 +57,13 @@ def salvarFuncionario_view(request):
                     return HttpResponse(user)
         else:
             redirect(login_view)
-def editar_view(request, id):
+def editarFuncionario_view(request, id):
     if(verifica_login(request)):
         funcionario = Funcionario.objects.get(idFuncionario=id) 
-        return render(request, "update.html", {"funcionario": funcionario})
+        return render(request, "updateFuncionario.html", {"funcionario": funcionario})
     else:
         return redirect(login_view)
-def update_view(request, id):
+def updateFuncionario_view(request, id):
     if request.method == 'POST':
         if(verifica_login(request)):
             funcionario = Funcionario.objects.get(idFuncionario=id)
@@ -87,7 +87,7 @@ def update_view(request, id):
     else:
         # Se o método não for POST, redirecione para a página de origem ou trate conforme necessário
         return HttpResponse('Método não permitido')
-def delete_view(request, id):
+def deleteFuncionario_view(request, id):
     if(verifica_login(request)):
         funcionario = Funcionario.objects.get(idFuncionario=id) 
         funcionario.delete()
