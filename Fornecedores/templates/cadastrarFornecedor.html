@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Cadastrar Fornecedor{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/update.css' %}">
+
+<div class="retangulo">
+    <ul>
+        <li>
+            <a href="{% url 'fornecedor_view' %}" class="btn btn-transparent">Voltar para Fornecedores</a>
+        </li>
+    </ul>
+</div>
+
+<div class="retangulo_Editar">
+    <h2>Cadastrar Novo Fornecedor</h2>
+    <form method="POST" action="{% url 'cadastrarFornecedor_view' %}">
+        {% csrf_token %}
+        <div class="form-group">
+            <div class="form-control_campos">
+                <label for="nomeFornecedor">Nome do Fornecedor:</label>
+                <input type="text" class="form-control" maxlength="50" id="nomeFornecedor" name="nomeFornecedor" required>
+            </div>
+
+            <div class="form-control_campos">
+                <label for="endereco">Endereço:</label>
+                <input type="text" class="form-control" maxlength="100" id="endereco" name="endereco" required>
+            </div>
+
+            <div class="form-control_campos">
+                <label for="telefone">Telefone:</label>
+                <input type="text" class="form-control" maxlength="20" id="telefone" name="telefone" required>
+            </div>
+
+            <div class="form-control_campos">
+                <label for="cep">CEP:</label>
+                <input type="text" class="form-control" maxlength="10" id="cep" name="cep" required>
+            </div>
+
+            <div class="form-control_campos">
+                <label for="cnpj">CNPJ:</label>
+                <input type="text" class="form-control" maxlength="18" id="cnpj" name="cnpj" required>
+            </div>
+        </div>
+        <button type="submit" class="btn-submit">Cadastrar</button>
+    </form>
+</div>
+
+{% endblock %}

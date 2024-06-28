@@ -8,53 +8,10 @@
     <div class="retangulo">
         <ul>
             <li>
-                <!-- Botão para abrir o modal -->
-                <button type="button" class="btn btn-transparent" data-toggle="modal" data-target=".bd-cadastroFornecedor-modal-lg">
-                    CADASTRAR FORNECEDOR
-                </button>
+                <!-- Botão para abrir a tela de cadastro -->
+                <a href="{% url 'cadastrarFornecedor_view' %}" class="btn btn-transparent">CADASTRAR PRODUTO</a>
             </li>
         </ul>
-    </div>
-
-    <!-- Modal com o formulário de cadastro -->
-    <div class="modal fade bd-cadastroFornecedor-modal-lg" tabindex="-1" role="dialog" aria-labelledby="ModalCadastroFornecedor" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="ModalCadastroFornecedor">Cadastro de fornecedor</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action = "{% url 'salvarFornecedor_view' %}" method = "POST">{% csrf_token %}
-                        <div class="mb-3">
-                            <label class="form-label">Nome</label>
-                            <input type="text" class="form-control" maxlength="30" name="nomeFornecedor">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Endereço</label>
-                            <input type="text" class="form-control" maxlength="30" name="endereco">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Telefone</label>
-                            <input type="text" class="form-control" maxlength="20" name="telefone">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">CEP</label>
-                            <input type="text" class="form-control" maxlength="8" name="cep">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">CNPJ</label>
-                            <input type="text" class="form-control" maxlength="14" name="cnpj">
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Cadastrar</button>
-                        </div>
-                    </form>
-                </div>  
-            </div>
-        </div>
     </div>
 
     <div>
