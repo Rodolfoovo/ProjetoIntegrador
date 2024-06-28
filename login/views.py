@@ -34,8 +34,7 @@ def logout_view(request):
         del request.session['user_id']
         return render(request, 'login.html')
     else:
-        # Se não existir, retorna uma resposta vazia ou outra resposta adequada
-        return HttpResponse('Usuário não está logado ou dados não encontrados na sessão')
+        return render(request,'login.html')
 
 def criar_sessao(request, user):
     request.session['user_id'] = user.idFuncionario
@@ -44,10 +43,6 @@ def verifica_login(request):
     return 'user_id' in request.session
 
 def Perfil_view(request):
-    user = request.user
-    funcionario = Funcionario.objects.get(user=user)
-    context = {
-        'user': user,
-        'funcionario': funcionario
-    }
-    return render(request, 'perfil.html', context)
+    user_id =request.session.get('user_id')
+    user = Funcionario.objects.get(idFuncionario=user_id)
+    return render(request, 'perfil.html', {"user":user})

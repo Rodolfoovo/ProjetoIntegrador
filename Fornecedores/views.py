@@ -41,6 +41,27 @@ def salvarFornecedor_view(request):
             return redirect(fornecedor_view)
         else:
             return redirect(login_view)
+
+def cadastrarFornecedor_view(request):
+    if request.method == 'POST':
+        if verifica_login(request):
+            nomeFornecedor = request.POST.get("nomeFornecedor")
+            try:
+                fornecedorExistente = Fornecedor.objects.get(nomeFornecedor=nomeFornecedor)
+                return HttpResponse(f"Já existe um fornecedor com o nome '{nomeFornecedor}'")
+            except Fornecedor.DoesNotExist:
+                fornecedorForm = FornecedorForm(request.POST)
+                if fornecedorForm.is_valid():
+                    fornecedorForm.save()
+                    return redirect('fornecedor_view')
+                else:
+                    return HttpResponse("Erro de validação do formulário")
+        else:
+            return redirect(login_view)
+    else:
+        fornecedorForm = FornecedorForm()
+        return render(request, "cadastrarFornecedor.html", {"fornecedorForm": fornecedorForm})
+
 def editarFornecedor_view(request, id):
     if(verifica_login(request)):
         fornecedor = Fornecedor.objects.get(idFornecedor=id) 

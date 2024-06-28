@@ -7,72 +7,11 @@
     <div class="retangulo">
         <ul>
             <li>
-                <!-- Botão para abrir o modal -->
-                <button type="button" class="btn btn-transparent" data-toggle="modal" data-target=".bd-cadastro-modal-lg">
-                    CADASTRAR PRODUTO
-                </button>
+                <!-- Botão para abrir a tela de cadastro -->
+                <a href="{% url 'cadastrarProdutos_view' %}" class="btn btn-transparent">CADASTRAR PRODUTO</a>
             </li>
         </ul>
     </div>
-
-    <!-- Modal com o formulário de cadastro -->
-<div class="modal fade bd-cadastro-modal-lg" tabindex="-1" role="dialog" aria-labelledby="ModalCadastroUsuario" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="ModalCadastroUsuario">Cadastro de usuário</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action = "{% url 'criaProdutos_view' %}" method = "POST">{% csrf_token %}
-                    <div class="mb-3">
-                        <label class="form-label">Nome Produto</label>
-                        <input type="text" class="form-control" maxlength="30" name="nomeProduto">
-                    </div>
-                    <p>Fornecedor</p>
-                    <select id="idFornecedor" name="idFornecedor">
-                        {% for fornecedor in fornecedores %}
-                            <option value="{{ fornecedor.idFornecedor }}">{{ fornecedor.nomeFornecedor }}</option>
-                        {% endfor %}
-                    </select>
-                    <div class="mb-3">
-                        <label class="form-label">Valor Unitário</label>
-                        <input type="number" class="form-control" minlength="0.01" maxlength="11" name="valorUnit">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">qntEstoque</label>
-                        <input type="number" class="form-control" minlength="1" maxlength="8" name="qntEstoque">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Categoria</label>
-                        <input type="text" class="form-control" maxlength="20" name="categoria">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Sub-Categoria</label>
-                        <input type="text" class="form-control" maxlength="30" name="subCategoria">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Marca</label>
-                        <input type="text" class="form-control" maxlength="30" name="marcaProduto">
-                    </div>
-                        <button type="submit" class="btn btn-primary">Cadastrar</button>
-                    </div>
-                </form>
-            </div>  
-        </div>
-    </div>
-</div>
-
-    <!-- 
-    <div class="pesquisa">
-        <input class="form-control" id="myInput" type="text" placeholder="Pesquisar..">
-        <button type="submit" class="btn btn-dark">
-            <i class="bi bi-search"></i> Pesquisar
-        </button>
-    </div>
-    -->
 
     <table class="table table-striped">
         <thead class="thead">
