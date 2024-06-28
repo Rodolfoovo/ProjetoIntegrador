@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{% block title %} {% endblock %}</title>
+    <title>{% block title %}{% endblock %}</title>
     <!-- Importação do Bootstrap CSS -->
     <link
       rel="stylesheet"
@@ -41,9 +41,7 @@
             <a class="nav-link" href="{% url 'produtos' %}">Produtos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'funcionarios' %}"
-              >Gerenciar usuários</a
-            >
+            <a class="nav-link" href="{% url 'funcionarios' %}">Gerenciar usuários</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'fornecedor' %}">Fornecedor</a>
@@ -68,28 +66,17 @@
               aria-labelledby="navbarDropdownPerfil"
             >
               <!-- Entra no perfil do Usuario atual -->
-              <a
-                class="dropdown-item custom-perfil text-center"
-                href="{% url 'perfil' %}"
-                >Editar Perfil</a
-              >
-              <div
-                class="dropdown-divider"
-                style="background-color: black"
-              ></div>
+              <a class="dropdown-item custom-perfil text-center" href="{% url 'perfil' %}">Editar Perfil</a>
+              <div class="dropdown-divider"></div>
               <!-- Sai da Sessão -->
-              <a
-                class="dropdown-item custom-logout text-center"
-                href="{% url 'logout' %}"
-                >Sair</a
-              >
+              <a class="dropdown-item custom-logout text-center" href="{% url 'logout' %}">Sair</a>
             </div>
           </li>
         </ul>
       </div>
     </nav>
 
-    {% block content %} {% endblock %}
+    {% block content %}{% endblock %}
 
     <script>
       $(document).ready(function () {

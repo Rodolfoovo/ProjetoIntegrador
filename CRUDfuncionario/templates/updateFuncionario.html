@@ -3,10 +3,10 @@
 {% block title %}Atualizar Funcionário{% endblock %}
     
 {% block content%}
-    <link rel="stylesheet" href="{% static 'css/editar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/update.css' %}">
     <div class="retangulo_Editar">
         <div class="title_Editar">Editar Funcionario</div>
-            <form action="{% url 'update_view' funcionario.idFuncionario %}" class="editar-form" method="POST">
+            <form action="{% url 'updateFuncionario_view' funcionario.idFuncionario %}" class="editar-form" method="POST">
                 {% csrf_token %}
                 <div class="form-group">
                     <!-- Campo de Identificação -->

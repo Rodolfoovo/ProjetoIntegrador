@@ -20,7 +20,7 @@
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="ModalCadastroUsuario">Cadastro de usuário</h5>
+                <h5 class="modal-title" id="ModalCadastroUsuario">Cadastro de Funcionário</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                     <span aria-hidden="true">×</span>
                 </button>
@@ -95,10 +95,10 @@
             <td>{{ funcionario.telefone }}</td>
             <td>{{ funcionario.email }}</td>
             <td>
-                <a href="{% url 'editar_view' funcionario.idFuncionario %}" class="btn btn-outline-primary">EDITAR</a>
+                <a href="{% url 'editarFuncionario_view' funcionario.idFuncionario %}" class="btn btn-outline-primary">EDITAR</a>
             </td>
             <td>
-                <a href="{% url 'delete_view' funcionario.idFuncionario %}" class="btn btn-outline-danger">DELETAR</a>
+                <a href="{% url 'deleteFuncionario_view' funcionario.idFuncionario %}" class="btn btn-outline-danger">DELETAR</a>
             </td>
         </tr>
         {% endfor %}
