@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     'Produtos',
     'dashboard',
     'Fornecedores',
-    'Transacao',
+    'Transacao'
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True

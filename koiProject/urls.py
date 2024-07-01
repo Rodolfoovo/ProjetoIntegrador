@@ -28,4 +28,5 @@ urlpatterns = [# Cadastro das URLs na "aplicação central"
     path('telainicial/', include('dashboard.urls')),
     path('produtos/', include('Produtos.urls')),
     path('fornecedor/', include('Fornecedores.urls')),
+    path('transacao/', include('Transacao.urls')),
 ]
