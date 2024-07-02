@@ -1,5 +1,6 @@
 from django.db import models
 from Fornecedores.models import Fornecedor
+from django.core.exceptions import ValidationError
 # Create your models here.
 
 class Produtos(models.Model):
@@ -11,3 +12,10 @@ class Produtos(models.Model):
    categoria = models.CharField(max_length=15)
    subCategoria=models.CharField(max_length=15)
    marcaProduto=models.CharField(max_length=15)
+
+   def validar_dados(self,produto):
+      try:
+         produto.full_clean()
+         return True
+      except ValidationError:
+         return False

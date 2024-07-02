@@ -15,22 +15,27 @@ def cadastrarProdutos_view(request):
         idFornecedor = request.POST.get("idFornecedor")
         fornecedor = get_object_or_404(Fornecedor, idFornecedor=idFornecedor)
 
-        vnomeProduto = request.POST.get("nomeProduto")
-        vvalorUnit = request.POST.get("valorUnit")
-        vqntEstoque = request.POST.get("qntEstoque")
-        vcategoria = request.POST.get("categoria")
-        vsubCategoria = request.POST.get("subCategoria")
-        vmarcaProduto = request.POST.get("marcaProduto")
-
+        produto = Produtos(
+            idFornecedor=fornecedor,
+            nomeProduto=request.POST.get("nomeProduto"),
+            valorUnit=request.POST.get("valorUnit"),
+            qntEstoque=request.POST.get("qntEstoque"),
+            categoria=request.POST.get("categoria"),
+            subCategoria=request.POST.get("subCategoria"),
+            marcaProduto=request.POST.get("marcaProduto")
+        )
+        if(produto.validar_dados(produto) == False):
+            return HttpResponse("Erro nos dados inseridos!")
         produto = Produtos.objects.create(
             idFornecedor=fornecedor,
-            nomeProduto=vnomeProduto,
-            valorUnit=vvalorUnit,
-            qntEstoque=vqntEstoque,
-            categoria=vcategoria,
-            subCategoria=vsubCategoria,
-            marcaProduto=vmarcaProduto
+            nomeProduto=request.POST.get("nomeProduto"),
+            valorUnit=request.POST.get("valorUnit"),
+            qntEstoque=request.POST.get("qntEstoque"),
+            categoria=request.POST.get("categoria"),
+            subCategoria=request.POST.get("subCategoria"),
+            marcaProduto=request.POST.get("marcaProduto")
         )
+        produto.save()
         return redirect('produtos_view')
     else:
         fornecedores = Fornecedor.objects.all()
@@ -54,7 +59,8 @@ def updateProdutos_view(request, id):
         produtos.categoria = request.POST.get("categoria")
         produtos.subCategoria = request.POST.get("subCategoria")
         produtos.marcaProduto = request.POST.get("marcaProduto")
-
+        if(produtos.validar_dados(produtos) == False):
+            return HttpResponse("Erro nos dados inseridos!")
         produtos.save()
         return redirect('produtos_view')
     else:
