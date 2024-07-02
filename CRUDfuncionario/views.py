@@ -1,4 +1,3 @@
-from django.contrib.auth import authenticate
 from django.shortcuts import render, redirect
 from CRUDfuncionario.models import Funcionario
 from django.http import HttpResponse
@@ -62,10 +61,7 @@ def updateFuncionario_view(request, id):
             funcionario.telefone = request.POST.get("telefone")
             funcionario.email = request.POST.get("email")
             funcionario.funcao = request.POST.get("funcao")
-            try:
-                funcionario.full_clean()
-            except ValidationError as e:
-                return HttpResponse(f"Erro de validação do formulário: {e}")
+            funcionario.validar_dados(funcionario)
             funcionario.save()
             return redirect(Funcionarios)
         else:

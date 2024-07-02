@@ -4,13 +4,15 @@ from cpf_field.models import CPFField
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import EmailValidator
 from django.contrib.auth import authenticate
-from .validators import valida_texto, valida_cep
+from .validators import valida_texto, valida_cpf
+from django.core.exceptions import ValidationError
+from django.http import HttpResponse
 # Create your models here.
 class Funcionario(AbstractUser):
     idFuncionario = models.AutoField(primary_key=True)
     nivelDeAcesso = models.IntegerField(default=1)
     enderecoFuncionario = models.CharField(max_length=30)
-    CPF = CPFField('CPF',default='000.000.000-0')
+    CPF = CPFField('CPF',default='000.000.000-0',validators=[valida_cpf])
     CEP = models.CharField(max_length=8)
     telefone = models.CharField(max_length=20)
     funcao = models.CharField(max_length=30)
@@ -39,3 +41,9 @@ class Funcionario(AbstractUser):
             funcao=user.funcao,
             email=user.email
         )
+    
+    def validar_dados(self,funcionario):
+        try:
+            funcionario.full_clean()
+        except ValidationError as e:
+            return HttpResponse(f"Erro de validação do formulário: {e}")
