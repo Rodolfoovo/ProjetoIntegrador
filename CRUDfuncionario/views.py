@@ -12,38 +12,6 @@ def Funcionarios(request):
     else:
         return redirect(login_view)
 
-def salvarFuncionario_view(request):
-    if request.method == 'GET':
-        return render(request, "funcionarios.html")
-    elif request.method == 'POST':
-        if verifica_login(request):
-            # Verifica se já existe um usuário com o mesmo username
-            try:
-                username = request.POST.get("username")
-                usuarioAux = Funcionario.objects.get(username=username)
-                return HttpResponse(f"Já existe um funcionário com o username '{username}'")
-            except Funcionario.DoesNotExist:
-                # Cria um novo funcionário
-                novo_funcionario = Funcionario.objects.create_user(
-                    nivelDeAcesso=1,
-                    username=username,
-                    enderecoFuncionario=request.POST.get("enderecoFuncionario"),
-                    CPF=request.POST.get("CPF"),
-                    CEP=request.POST.get("CEP"),
-                    telefone=request.POST.get("telefone"),
-                    password=request.POST.get("password"),
-                    funcao=request.POST.get("funcao"),
-                    email=request.POST.get("email")
-                )
-                # Autentica o novo usuário
-                user = authenticate(request, username=username, password=request.POST.get("password"))
-                if user:
-                    return redirect(Funcionarios)
-                else:
-                    return HttpResponse("Falha na autenticação do usuário")
-        else:
-            return redirect(login_view)
-
 def cadastrarFuncionario_view(request):
     if request.method == 'POST':
         if verifica_login(request):
@@ -52,9 +20,9 @@ def cadastrarFuncionario_view(request):
                 usuarioAux = Funcionario.objects.get(username=username)
                 return HttpResponse(f"Já existe um funcionário com o username '{username}'")
             except Funcionario.DoesNotExist:
-                novo_funcionario = Funcionario.objects.create_user(
+                funcionario_instance = Funcionario(
                     nivelDeAcesso=1,
-                    username=username,
+                    username=request.POST.get("username"),
                     enderecoFuncionario=request.POST.get("enderecoFuncionario"),
                     CPF=request.POST.get("CPF"),
                     CEP=request.POST.get("CEP"),
@@ -63,7 +31,8 @@ def cadastrarFuncionario_view(request):
                     funcao=request.POST.get("funcao"),
                     email=request.POST.get("email")
                 )
-                user = authenticate(request, username=username, password=request.POST.get("password"))
+                novo_funcionario = funcionario_instance.criar_usuario(funcionario_instance)
+                user = funcionario_instance.autenticar(request,username, funcionario_instance.password)
                 if user:
                     return redirect(Funcionarios)
                 else:
