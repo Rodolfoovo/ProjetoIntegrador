@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from CRUDfuncionario.models import Funcionario
 from django.http import HttpResponse
-from django.core.exceptions import ValidationError
 from login.views import login_view, verifica_login
 
 def Funcionarios(request):
@@ -43,7 +42,9 @@ def cadastrarFuncionario_view(request):
 
 def editarFuncionario_view(request, id):
     if verifica_login(request):
-        funcionario = Funcionario.objects.get(idFuncionario=id)
+        funcionario = usuario_existe(id)
+        if(funcionario == None):
+            return HttpResponse("Usuario não existente.")
         return render(request, "updateFuncionario.html", {"funcionario": funcionario})
     else:
         return redirect(login_view)
@@ -51,8 +52,9 @@ def editarFuncionario_view(request, id):
 def updateFuncionario_view(request, id):
     if request.method == 'POST':
         if verifica_login(request):
-            funcionario = Funcionario.objects.get(idFuncionario=id)
-
+            funcionario = usuario_existe(id)
+            if(funcionario == None):
+                return HttpResponse("Usuario não existente.")
             # Atualiza os campos do funcionário com base nos dados do formulário
             funcionario.username = request.POST.get("username")
             funcionario.enderecoFuncionario = request.POST.get("enderecoFuncionario")
@@ -61,11 +63,8 @@ def updateFuncionario_view(request, id):
             funcionario.telefone = request.POST.get("telefone")
             funcionario.email = request.POST.get("email")
             funcionario.funcao = request.POST.get("funcao")
-            funcionario.validar_dados(funcionario)
-            try:
-                funcionario.full_clean()
-            except ValidationError as e:
-                return HttpResponse(f"Erro de validação do formulário: {e}")
+            if(funcionario.validar_dados(funcionario) is not None):
+                return HttpResponse("Erro nos dados inseridos!")
             funcionario.save()
             return redirect(Funcionarios)
         else:
@@ -76,8 +75,15 @@ def updateFuncionario_view(request, id):
 
 def deleteFuncionario_view(request, id):
     if verifica_login(request):
-        funcionario = Funcionario.objects.get(idFuncionario=id)
+        funcionario = usuario_existe(id)
         funcionario.delete()
         return redirect(Funcionarios)
     else:
         return redirect(login_view)
+    
+def usuario_existe(id):
+    try:
+        funcionario = Funcionario.objects.get(idFuncionario= id)
+        return funcionario
+    except Funcionario.DoesNotExist:
+        return None

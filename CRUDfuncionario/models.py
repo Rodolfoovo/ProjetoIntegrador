@@ -45,5 +45,6 @@ class Funcionario(AbstractUser):
     def validar_dados(self,funcionario):
         try:
             funcionario.full_clean()
+            return None
         except ValidationError as e:
-            return HttpResponse(f"Erro de validação do formulário: {e}")
+            return True
