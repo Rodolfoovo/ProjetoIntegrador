@@ -61,7 +61,10 @@ def updateFuncionario_view(request, id):
             funcionario.telefone = request.POST.get("telefone")
             funcionario.email = request.POST.get("email")
             funcionario.funcao = request.POST.get("funcao")
-            funcionario.validar_dados(funcionario)
+            try:
+                funcionario.full_clean()
+            except ValidationError as e:
+                return HttpResponse(f"Erro de validação do formulário: {e}")
             funcionario.save()
             return redirect(Funcionarios)
         else:
