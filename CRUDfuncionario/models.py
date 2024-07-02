@@ -45,6 +45,6 @@ class Funcionario(AbstractUser):
     def validar_dados(self,funcionario):
         try:
             funcionario.full_clean()
-            return None
-        except ValidationError as e:
             return True
+        except ValidationError:
+            return False

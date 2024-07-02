@@ -18,7 +18,7 @@ def cadastrarFuncionario_view(request):
                 usuarioAux = Funcionario.objects.get(username=username)
                 return HttpResponse(f"Já existe um funcionário com o username '{username}'")
             except Funcionario.DoesNotExist:
-                funcionario_instance = Funcionario(
+                funcionario = Funcionario(
                     nivelDeAcesso=1,
                     username=request.POST.get("username"),
                     enderecoFuncionario=request.POST.get("enderecoFuncionario"),
@@ -29,8 +29,10 @@ def cadastrarFuncionario_view(request):
                     funcao=request.POST.get("funcao"),
                     email=request.POST.get("email")
                 )
-                novo_funcionario = funcionario_instance.criar_usuario(funcionario_instance)
-                user = funcionario_instance.autenticar(request,username, funcionario_instance.password)
+                if(funcionario.validar_dados(funcionario) == False):
+                    return HttpResponse("Erro nos dados inseridos!")
+                novo_funcionario = funcionario.criar_usuario(funcionario)
+                user = funcionario.autenticar(request,username, funcionario.password)
                 if user:
                     return redirect(Funcionarios)
                 else:
@@ -63,7 +65,7 @@ def updateFuncionario_view(request, id):
             funcionario.telefone = request.POST.get("telefone")
             funcionario.email = request.POST.get("email")
             funcionario.funcao = request.POST.get("funcao")
-            if(funcionario.validar_dados(funcionario) is not None):
+            if(funcionario.validar_dados(funcionario) == False):
                 return HttpResponse("Erro nos dados inseridos!")
             funcionario.save()
             return redirect(Funcionarios)

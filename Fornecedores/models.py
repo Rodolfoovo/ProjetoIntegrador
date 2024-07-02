@@ -1,5 +1,6 @@
 from django.db import models
 from CRUDfuncionario.validators import valida_texto
+from django.core.exceptions import ValidationError
 # Create your models here.
 
 class Fornecedor(models.Model):
@@ -9,3 +10,10 @@ class Fornecedor(models.Model):
     telefone = models.CharField(max_length=20)
     cep = models.CharField(max_length=8)
     cnpj = models.CharField(max_length=14)
+
+    def validar_dados(self,funcionario):
+        try:
+            funcionario.full_clean()
+            return True
+        except ValidationError:
+            return False
