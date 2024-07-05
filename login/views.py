@@ -46,3 +46,6 @@ def Perfil_view(request):
     user_id =request.session.get('user_id')
     user = Funcionario.objects.get(idFuncionario=user_id)
     return render(request, 'perfil.html', {"user":user})
+
+def verifica_login(request):
+        return 'user_id' in request.session
