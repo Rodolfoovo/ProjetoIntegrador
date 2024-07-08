@@ -59,19 +59,4 @@ def deletarTransacao_view(request, id):
     else:
         return redirect('login_view')
     
-def calcular_estoque_total():
-    # Obtém todos os produtos da tabela
-    produtos = Produtos.objects.all()
 
-    # Inicializa o estoque total como zero
-    estoque_total = 0
-
-    # Itera sobre cada produto e adiciona sua quantidade de estoque ao total
-    for produto in produtos:
-        transacao = Transacao.objects.get(idTransacao= produto.idTransacao)
-        if(transacao.tipoTransacao == "Entrada"):
-            estoque_total += produto.qntEstoque
-        else:
-            estoque_total -= produto.qntEstoque
-
-    return estoque_total
