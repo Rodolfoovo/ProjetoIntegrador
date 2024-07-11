@@ -22,8 +22,19 @@ class Produtos(models.Model):
          return True
       except ValidationError:
          return False
-      
+   
    def calcular_estoque_total():
+      produtos = Produtos.objects.all()
+      total_estoque = 0
+      for produto in produtos:
+         transacao = Transacao.objects.get(idTransacao=produto.idTransacao)
+         if(transacao.tipoTransacao == "Entrada"):
+            total_estoque += produto.qntEstoque
+         else:
+            total_estoque -= produto.qntEstoque
+         
+      return total_estoque
+   def calcular_valorEstoque_total():
       # Obtém todos os produtos da tabela
       produtos = Produtos.objects.all()
 
