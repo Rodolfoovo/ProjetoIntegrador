@@ -1,7 +1,9 @@
 from django.db import models
+from datetime import date, timedelta, datetime
 from Fornecedores.models import Fornecedor
 from django.core.exceptions import ValidationError
 from Transacao.models import Transacao
+import calendar
 # Create your models here.
 
 class Produtos(models.Model):
@@ -22,18 +24,56 @@ class Produtos(models.Model):
          return False
       
    def calcular_estoque_total():
-    # Obtém todos os produtos da tabela
-    produtos = Produtos.objects.all()
+      # Obtém todos os produtos da tabela
+      produtos = Produtos.objects.all()
 
-    # Inicializa o estoque total como zero
-    estoque_total = 0
+      # Inicializa o estoque total como zero
+      estoque_total = 0
+      hoje = date.today
+      inicio = date(hoje.year, hoje.month, 1)  # Data de início do período
+      fim = date(hoje.year,hoje.month, calendar.calendar_monthrange(hoje.today,hoje.month)[1])  # Data de fim do período
+      # Itera sobre cada produto e adiciona sua quantidade de estoque ao total
+      for produto in produtos:
+         # Obtém a transação associada ao produto dentro do período especificado
+         try:
+               transacao = Transacao.objects.get(idTransacao=produto.idTransacao, dataTransacao__range=(inicio, fim))
+               if transacao.tipoTransacao == "Entrada":
+                  estoque_total += produto.qntEstoque*produto.valorUnit
+               else:
+                  estoque_total -= produto.qntEstoque*produto.valorUnit
+         except Transacao.DoesNotExist:
+               # Caso não haja transação associada, trata como erro ou define um comportamento padrão
+               pass
 
-    # Itera sobre cada produto e adiciona sua quantidade de estoque ao total
-    for produto in produtos:
-        transacao = Transacao.objects.get(idTransacao= produto.idTransacao)
-        if(transacao.tipoTransacao == "Entrada"):
-            estoque_total += produto.qntEstoque
-        else:
-            estoque_total -= produto.qntEstoque
+      return estoque_total
 
-    return estoque_total
+   def entrada_produtos_mensal():
+      hoje = date.today
+      inicio = date(hoje.year, hoje.month, 1)  # Data de início do período
+      produtos = Produtos.objects.all()
+      fim = date(hoje.year,hoje.month, calendar.calendar_monthrange(hoje.today,hoje.month)[1])
+      for produto in produtos:
+         try:
+            transacao = Transacao.objects.get(idTransacao=produto.idTransacao, 
+                                          dataTransacao__range=(inicio, fim))
+            if(transacao.tipoTransacao == "Entrada"):
+               estoque_total += produto.qntEstoque*produto.valorUnit
+         except Transacao.DoesNotExist:
+            continue
+      return produtos
+
+   def saida_produtos_mensal():
+      hoje = date.today
+      produtos = Produtos.objects.all()
+      inicio = date(hoje.year, hoje.month, 1)  # Data de início do período
+      fim = date(hoje.year,hoje.month, calendar.calendar_monthrange(hoje.today,hoje.month)[1])
+      for produto in produtos:
+         try:
+            transacao = Transacao.objects.get(idTransacao=produto.idTransacao, 
+                                          dataTransacao__range=(inicio, fim))
+            if(transacao.tipoTransacao == "Saida"):
+               estoque_total += produto.qntEstoque*produto.valorUnit
+         except Transacao.DoesNotExist:
+            continue
+      
+      return produto
