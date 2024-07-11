@@ -56,7 +56,7 @@ def entrada_produtos_mensal():
    fim = date(hoje.year,hoje.month, calendar.calendar_monthrange(hoje.today,hoje.month)[1])
    transacao = Transacao.objects.get(idTransacao=produto.idTransacao, 
                                      dataTransacao__range=(inicio, fim))
-   return produtos
+   return produto
 
 def saida_produtos_mensal():
     hoje = date.today
@@ -65,4 +65,4 @@ def saida_produtos_mensal():
     fim = date(hoje.year,hoje.month, calendar.calendar_monthrange(hoje.today,hoje.month)[1])
     transacao = Transacao.objects.get(idTransacao=produto.idTransacao, 
                                       dataTransacao__range=(inicio, fim))
-
+    return produto
