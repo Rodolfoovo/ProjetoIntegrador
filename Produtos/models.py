@@ -1,7 +1,9 @@
 from django.db import models
+from datetime import date, timedelta, datetime
 from Fornecedores.models import Fornecedor
 from django.core.exceptions import ValidationError
 from Transacao.models import Transacao
+import calendar
 # Create your models here.
 
 class Produtos(models.Model):
@@ -29,8 +31,9 @@ def calcular_estoque_total():
 
     # Inicializa o estoque total como zero
     estoque_total = 0
-    inicio = date(2024, 1, 1)  # Data de início do período
-    fim = date(2024, 12, 31)  # Data de fim do período
+    hoje = date.today
+    inicio = date(hoje.year, hoje.month, 1)  # Data de início do período
+    fim = date(hoje.year,hoje.month, calendar.calendar_monthrange(hoje.today,hoje.month)[1])  # Data de fim do período
     # Itera sobre cada produto e adiciona sua quantidade de estoque ao total
     for produto in produtos:
         # Obtém a transação associada ao produto dentro do período especificado
