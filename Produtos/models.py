@@ -49,4 +49,20 @@ def calcular_estoque_total():
 
     return estoque_total
 
+def entrada_produtos_mensal():
+   hoje = date.today
+   inicio = date(hoje.year, hoje.month, 1)  # Data de início do período
+   produto = Produtos.objects.all()
+   fim = date(hoje.year,hoje.month, calendar.calendar_monthrange(hoje.today,hoje.month)[1])
+   transacao = Transacao.objects.get(idTransacao=produto.idTransacao, 
+                                     dataTransacao__range=(inicio, fim))
+   return produtos
+
+def saida_produtos_mensal():
+    hoje = date.today
+    produto = Produtos.objects.all()
+    inicio = date(hoje.year, hoje.month, 1)  # Data de início do período
+    fim = date(hoje.year,hoje.month, calendar.calendar_monthrange(hoje.today,hoje.month)[1])
+    transacao = Transacao.objects.get(idTransacao=produto.idTransacao, 
+                                      dataTransacao__range=(inicio, fim))
 
