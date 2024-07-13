@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_plotly_dash.apps.DjangoPlotlyDashConfig',
+    'dpd_static_support',
     'rest_framework',
     'corsheaders',
     'cpf_field',
@@ -70,6 +71,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'koiProject.wsgi.application'
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 # Configuração do modelo de usuário personalizado
 AUTH_USER_MODEL = 'CRUDfuncionario.Funcionario'
