@@ -2,21 +2,22 @@ from django.shortcuts import render, redirect
 from CRUDfuncionario.models import Funcionario
 from django.http import HttpResponse
 from login.views import login_view, verifica_login
-
+from django.contrib import messages
 def Funcionarios(request):
     if verifica_login(request):
         funcionarios = Funcionario.objects.all()
         return render(request, "funcionarios.html", {"funcionarios": funcionarios})
     else:
         return redirect(login_view)
-
+    
 def cadastrarFuncionario_view(request):
     if request.method == 'POST':
         if verifica_login(request):
             username = request.POST.get("username")
             try:
                 usuarioAux = Funcionario.objects.get(username=username)
-                return HttpResponse(f"Já existe um funcionário com o username '{username}'")
+                messages.warning(request,"Já existe um funcionário com este username")
+                return redirect(request.META.get('HTTP_REFERER'))
             except Funcionario.DoesNotExist:
                 funcionario = Funcionario(
                     nivelDeAcesso=1,
@@ -30,7 +31,8 @@ def cadastrarFuncionario_view(request):
                     email=request.POST.get("email")
                 )
                 if(funcionario.validar_dados(funcionario) == False):
-                    return HttpResponse("Erro nos dados inseridos!")
+                    messages.warning(request,"Dados de cadastro incorretos!")
+                    return redirect(request.META.get('HTTP_REFERER'))
                 novo_funcionario = funcionario.criar_usuario(funcionario)
                 user = funcionario.autenticar(request,username, funcionario.password)
                 if user:
@@ -46,7 +48,7 @@ def editarFuncionario_view(request, id):
     if verifica_login(request):
         funcionario = usuario_existe(id)
         if(funcionario == None):
-            return HttpResponse("Usuario não existente.")
+            return redirect(Funcionarios)
         return render(request, "updateFuncionario.html", {"funcionario": funcionario})
     else:
         return redirect(login_view)
@@ -56,7 +58,8 @@ def updateFuncionario_view(request, id):
         if verifica_login(request):
             funcionario = usuario_existe(id)
             if(funcionario == None):
-                return HttpResponse("Usuario não existente.")
+                messages.warning(request, "Usuario não existe!")
+                return redirect(editarFuncionario_view)
             # Atualiza os campos do funcionário com base nos dados do formulário
             funcionario.username = request.POST.get("username")
             funcionario.enderecoFuncionario = request.POST.get("enderecoFuncionario")
