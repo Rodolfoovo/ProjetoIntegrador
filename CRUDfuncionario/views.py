@@ -17,7 +17,7 @@ def cadastrarFuncionario_view(request):
             try:
                 usuarioAux = Funcionario.objects.get(username=username)
                 messages.warning(request,"Já existe um funcionário com este username")
-                return redirect(request.META.get('HTTP_REFERER'))
+                return redirect(cadastrarFuncionario_view)
             except Funcionario.DoesNotExist:
                 funcionario = Funcionario(
                     nivelDeAcesso=1,
@@ -32,7 +32,7 @@ def cadastrarFuncionario_view(request):
                 )
                 if(funcionario.validar_dados(funcionario) == False):
                     messages.warning(request,"Dados de cadastro incorretos!")
-                    return redirect(request.META.get('HTTP_REFERER'))
+                    return redirect(cadastrarFuncionario_view)
                 novo_funcionario = funcionario.criar_usuario(funcionario)
                 user = funcionario.autenticar(request,username, funcionario.password)
                 if user:
@@ -69,7 +69,8 @@ def updateFuncionario_view(request, id):
             funcionario.email = request.POST.get("email")
             funcionario.funcao = request.POST.get("funcao")
             if(funcionario.validar_dados(funcionario) == False):
-                return HttpResponse("Erro nos dados inseridos!")
+                messages.warning(request,"Dados na edição incorretos!")
+                return redirect(editarFuncionario_view)
             funcionario.save()
             return redirect(Funcionarios)
         else:

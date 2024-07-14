@@ -5,6 +5,7 @@ from django.shortcuts import redirect
 from django.http import HttpResponse
 from django.core.exceptions import ValidationError
 from login.views import verifica_login, login_view
+from django.contrib import messages
 import re
 # Create your views here.
 
@@ -27,7 +28,8 @@ def salvarFornecedor_view(request):
                 cep=request.POST.get("cep"),
                 cnpj=request.POST.get("cnpj"))
             if(fornecedor.validar_dados(fornecedor) == False):
-                return HttpResponse("Erro nos dados inseridos!")
+                messages.warning(request,"Dados de cadastro incorretos!")
+                return redirect(cadastrarFornecedor_view)
             fornecedor = Fornecedor.objects.create(
                 nomeFornecedor=request.POST.get("nomeFornecedor"),
                 endereco=request.POST.get("endereco"),
@@ -51,7 +53,8 @@ def cadastrarFornecedor_view(request):
                 cep=request.POST.get("cep"),
                 cnpj=request.POST.get("cnpj"))
             if(fornecedor.validar_dados(fornecedor) == False):
-                return HttpResponse("Erro nos dados inseridos!")
+                messages.warning(request,"Dados de cadastro incorretos!")
+                return redirect(cadastrarFornecedor_view)
             fornecedor = Fornecedor.objects.create(
                 nomeFornecedor=request.POST.get("nomeFornecedor"),
                 endereco=request.POST.get("endereco"),
@@ -83,10 +86,9 @@ def updateFornecedor_view(request,id):
             fornecedor.telefone = request.POST.get("telefone")
             fornecedor.cep = request.POST.get("cep")
             fornecedor.cnpj = request.POST.get("cnpj")
-            try:
-                fornecedor.full_clean()
-            except ValidationError as e:
-                return HttpResponse(f"Erro de validacao do formulário: {e}")
+            if(fornecedor.validar_dados(fornecedor) == False):
+                messages.warning(request,"Dados de cadastro incorretos!")
+                return redirect(editarFornecedor_view)
             fornecedor.save()
             return redirect(fornecedor_view)
         else:
@@ -102,6 +104,7 @@ def deleteFornecedor_view(request, id):
         return redirect(fornecedor_view)
     else:
         return redirect(login_view)
+
 def fornecedor_existe(id):
     try:
         fornecedor = Fornecedor.objects.get(idFornecedor= id)
