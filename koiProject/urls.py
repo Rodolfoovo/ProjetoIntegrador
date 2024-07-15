@@ -29,5 +29,4 @@ urlpatterns = [# Cadastro das URLs na "aplicação central"
     path('produtos/', include('Produtos.urls')),
     path('fornecedor/', include('Fornecedores.urls')),
     path('transacao/', include('Transacao.urls')),
-    path('django_plotly_dash/', include('django_plotly_dash.urls')),
 ]
