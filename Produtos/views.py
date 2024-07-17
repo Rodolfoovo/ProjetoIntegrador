@@ -4,7 +4,7 @@ from .models import Produtos
 from Fornecedores.models import Fornecedor
 from django.contrib.auth.decorators import login_required
 from login.views import verifica_login, login_view
-
+from django.contrib import messages
 def produtos_view(request):
     if(verifica_login(request)):
         produtos = Produtos.objects.all()
@@ -29,7 +29,8 @@ def cadastrarProdutos_view(request):
                     marcaProduto=request.POST.get("marcaProduto")
                 )
                 if(produto.validar_dados(produto) == False):
-                    return HttpResponse("Erro nos dados inseridos!")
+                    messages.warning(request,"Dados de cadastro incorretos!")
+                    return redirect(cadastrarProdutos_view)
                 produto = Produtos.objects.create(
                     idFornecedor=fornecedor,
                     nomeProduto=request.POST.get("nomeProduto"),
@@ -69,7 +70,8 @@ def updateProdutos_view(request, id):
             produtos.subCategoria = request.POST.get("subCategoria")
             produtos.marcaProduto = request.POST.get("marcaProduto")
             if(produtos.validar_dados(produtos) == False):
-                return HttpResponse("Erro nos dados inseridos!")
+                messages.warning(request,"Dados de edição incorretos!")
+                return redirect(editarProdutos_view)
             produtos.save()
             return redirect('produtos_view')
         else:

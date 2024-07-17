@@ -3,7 +3,7 @@ from .models import Transacao
 from django.core.exceptions import ValidationError
 from django.http import HttpResponse
 from login.views import login_view, verifica_login
-
+from django.contrib import messages
 def transacao_view(request):
     if verifica_login(request):
         transacoes = Transacao.objects.all()
@@ -17,10 +17,9 @@ def salvarTransacao_view(request):
             vDataTransacao = request.POST.get("dataTransacao")
             vTipoTransacao = request.POST.get("tipoTransacao")
             transacao = Transacao(dataTransacao=vDataTransacao, tipoTransacao=vTipoTransacao)
-            try:
-                transacao.full_clean()
-            except ValidationError as e:
-                return HttpResponse(f"Erro de validação do formulário: {e}")
+            if(transacao.validar_dados(transacao) == False):
+                messages.warning(request,"Dados de edição incorretos!")
+                return redirect(salvarTransacao_view)
             transacao.save()
         return redirect(transacao_view)
     else:
@@ -39,10 +38,9 @@ def updateTransacao_view(request, id):
             transacao = Transacao.objects.get(id=id)
             transacao.dataTransacao = request.POST.get("dataTransacao")
             transacao.tipoTransacao = request.POST.get("tipoTransacao")
-            try:
-                transacao.full_clean()
-            except ValidationError as e:
-                return HttpResponse(f"Erro de validação do formulário: {e}")
+            if(transacao.validar_dados(transacao) == False):
+                messages.warning(request,"Dados de edição incorretos!")
+                return redirect(editarTransacao_view)
             transacao.save()
             return redirect(transacao_view)
         else:
@@ -55,6 +53,7 @@ def deletarTransacao_view(request, id):
             transacao.delete()
             return redirect(transacao_view)
         except Transacao.DoesNotExist:
-            return HttpResponse("Ocorreu um erro ao deletar o objeto.")
+            messages.warning(request,"Dados de edição incorretos!")
+            return redirect(transacao_view)
     else:
         return redirect(login_view)
