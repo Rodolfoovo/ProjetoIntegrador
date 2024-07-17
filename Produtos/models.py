@@ -59,6 +59,7 @@ class Produtos(models.Model):
       return estoque_total
 
    def entrada_produtos_mensal():
+      estoque_total = 0
       hoje = date.today
       inicio = date(hoje.year, hoje.month, 1)  # Data de início do período
       produtos = Produtos.objects.all()
@@ -74,6 +75,7 @@ class Produtos(models.Model):
       return produtos
 
    def saida_produtos_mensal():
+      estoque_total = 0
       hoje = date.today
       produtos = Produtos.objects.all()
       inicio = date(hoje.year, hoje.month, 1)  # Data de início do período
@@ -87,4 +89,4 @@ class Produtos(models.Model):
          except Transacao.DoesNotExist:
             continue
       
-      return produto
+      return estoque_total

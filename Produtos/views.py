@@ -41,7 +41,7 @@ def cadastrarProdutos_view(request):
                     marcaProduto=request.POST.get("marcaProduto")
                 )
                 produto.save()
-                return redirect('produtos_view')
+                return redirect(produtos_view)
         else:
             fornecedores = Fornecedor.objects.all()
             return render(request, "cadastrarProdutos.html", {"fornecedores": fornecedores})
@@ -73,7 +73,7 @@ def updateProdutos_view(request, id):
                 messages.warning(request,"Dados de edição incorretos!")
                 return redirect(editarProdutos_view)
             produtos.save()
-            return redirect('produtos_view')
+            return redirect(produtos_view)
         else:
             return HttpResponse('Método não permitido')
     else:
@@ -83,6 +83,6 @@ def deleteProduto_view(request, id):
     if(verifica_login(request)):
         produto = get_object_or_404(Produtos, idProduto=id)
         produto.delete()
-        return redirect('produtos_view')
+        return redirect(produtos_view)
     else:
          redirect(login_view)
