@@ -61,7 +61,7 @@ def updateProdutos_view(request, id):
             produtos = get_object_or_404(Produtos, idProduto=id)
             idFornecedor = request.POST.get("idFornecedor")
             fornecedor = get_object_or_404(Fornecedor, idFornecedor=idFornecedor)
-
+            
             produtos.nomeProduto = request.POST.get("nomeProduto")
             produtos.idFornecedor = fornecedor
             produtos.valorUnit = request.POST.get("valorUnit")
