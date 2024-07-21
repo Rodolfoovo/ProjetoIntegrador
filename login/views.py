@@ -1,9 +1,6 @@
-from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
-from .utils import send_email
+from django.shortcuts import render
 from CRUDfuncionario.models import Funcionario
-from django.contrib.sessions.models import Session
 import logging
 logger = logging.getLogger(__name__)
 
@@ -14,8 +11,8 @@ def login_view(request):
     else:
         username = request.POST.get("username") 
         password = request.POST.get("password")
-
-        user = authenticate(request,username=username,password=password)
+        funcionario = Funcionario()
+        user = funcionario.autenticar(request, username,password)
         if user:
             user = Funcionario.objects.get(username=username)
             criar_sessao(request,user)
