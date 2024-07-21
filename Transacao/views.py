@@ -38,7 +38,7 @@ def editarTransacao_view(request, id):
 def updateTransacao_view(request, id):
     if verifica_login(request):
         if request.method == 'POST':
-            transacao = Transacao.objects.get(id=id)
+            transacao = Transacao.objects.get(idTransacao=id)
             transacao.dataTransacao = request.POST.get("dataTransacao")
             transacao.tipoTransacao = request.POST.get("tipoTransacao")
             if(transacao.validar_dados(transacao) == False):

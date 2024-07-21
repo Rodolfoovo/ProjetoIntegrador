@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Fornecedor{% endblock %}
+    
+{% block content%}
+<link rel="stylesheet" href="{% static 'css/forms.css' %}">
+
+<div class="retangulo">
+    <ul>
+        <li>
+            <a href="{% url 'transacao_view' %}" class="btn btn-transparent">Voltar para Transações</a>
+        </li>
+    </ul>
+</div>
+
+<div class="retangulo_Editar">
+    <div class="title_Editar">Editar Produto</div>
+        <form action="{% url 'updateTransacao_view' transacao.idTransacao %}" class="editar-form" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <!-- Campo de Identificação -->
+                <div class="form-control_campos">
+                    <label for="dataTransacao">Data</label>
+                    <input type="date" class="form-control"  id="dataTransacao" name="dataTransacao" value="{{transacao.dataTransacao}}" required>
+                </div>
+
+                <div class="Select-Fornecedor">
+                    <label class="form-label" for="tipoTransacao">Tipo:</label>
+                    <select class="idTransacao form-select" id="tipoTransacao" name="tipoTransacao" value="{{transacao.tipoTransacao}}" required>
+                        <option value="ENTRADA">ENTRADA</option>
+                        <option value="SAIDA">SAIDA</option>
+                </select>
+            </div>
+            <button type="submit" class="btn-submit">Atualizar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
