@@ -9,6 +9,7 @@ import calendar
 class Produtos(models.Model):
    idProduto = models.AutoField(primary_key=True)
    idFornecedor = models.ForeignKey(Fornecedor,on_delete=models.CASCADE)
+   idTransacao = models.ForeignKey(Transacao,on_delete=models.CASCADE, default=1)
    nomeProduto=models.CharField(max_length= 30)
    valorUnit= models.DecimalField(max_digits=10,decimal_places=2)
    qntEstoque =models.IntegerField(default = 1)

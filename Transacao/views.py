@@ -52,11 +52,11 @@ def updateTransacao_view(request, id):
 def deletarTransacao_view(request, id):
     if verifica_login(request):
         try:
-            transacao = Transacao.objects.get(id=id)
+            transacao = Transacao.objects.get(idTransacao=id)
             transacao.delete()
             return redirect(transacao_view)
         except Transacao.DoesNotExist:
-            messages.warning(request,"Dados de edição incorretos!")
+            messages.warning(request,"Dados não existentes!")
             return redirect(transacao_view)
     else:
         return redirect(login_view)

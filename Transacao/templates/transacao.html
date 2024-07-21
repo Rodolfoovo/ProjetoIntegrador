@@ -32,10 +32,10 @@
                 <td>{{ transacao.dataTransacao }}</td>
 
                 <td>
-                    <a href="{% url 'editarTransacao_view' produto.idProduto %}" class="btn btn-outline-primary">EDITAR</a>
+                    <a href="{% url 'editarTransacao_view' transacao.idTransacao %}" class="btn btn-outline-primary">EDITAR</a>
                 </td>
                 <td>
-                    <a href="{% url 'deleteTranasacao_view' produto.idProduto %}" class="btn btn-outline-danger">DELETAR</a>
+                    <a href="{% url 'deletarTransacao_view' transacao.idTransacao %}" class="btn btn-outline-danger">DELETAR</a>
                 </td>
             </tr>
             {% endfor %}

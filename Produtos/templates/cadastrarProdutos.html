@@ -39,6 +39,15 @@
                 </select>
             </div>
 
+            <div class="Select-Fornecedor">
+                <label class="form-label" for="idTransacao">Transacao:</label>
+                <select class="idFornecedor form-select" id="idTransacao" name="idTransacao" required>
+                    {% for transacao in transacoes %}
+                        <option value="{{ transacao.idTransacao }}">{{ transacao.idTransacao }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
             <div class="form-control_campos">
                 <label for="valorUnit">Valor Unitário:</label>
                 <input type="number" class="form-control" min="0.01" max="99999999.99" step="0.01" id="valorUnit" name="valorUnit" required>
