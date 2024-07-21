@@ -1,7 +1,44 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Produtos{% endblock %}
+{% block title %}Transacao{% endblock %}
     
-{% block content %}
+{% block content%}
+    <link rel="stylesheet" href="{% static 'css/produto.css' %}">
+    
+    <div class="retangulo">
+        <ul>
+            <li>
+                <!-- Botão para abrir a tela de cadastro -->
+                <a href="{% url 'cadastrarTransacao_view' %}" class="btn btn-transparent">CADASTRAR TRANSAÇÃO</a>
+            </li>
+        </ul>
+    </div>
 
+    <table class="table table-striped">
+        <thead class="thead">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Data</th>
+                <th scope="col">Editar</th>
+                <th scope="col">Deletar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transacao in transacoes %}
+            <tr>
+                <td>{{ transacao.idTransacao }}</td>
+                <td>{{ transacao.tipoTransacao}}</td>
+                <td>{{ transacao.dataTransacao }}</td>
+
+                <td>
+                    <a href="{% url 'editarTransacao_view' produto.idProduto %}" class="btn btn-outline-primary">EDITAR</a>
+                </td>
+                <td>
+                    <a href="{% url 'deleteTranasacao_view' produto.idProduto %}" class="btn btn-outline-danger">DELETAR</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

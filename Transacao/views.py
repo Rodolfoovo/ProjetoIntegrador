@@ -11,19 +11,22 @@ def transacao_view(request):
     else:
         return redirect(login_view)
 
-def salvarTransacao_view(request):
-    if request.method == 'POST':
-        if verifica_login(request):
+def cadastrarTransacao_view(request):
+    if verifica_login(request):
+        if request.method == 'POST':
             vDataTransacao = request.POST.get("dataTransacao")
             vTipoTransacao = request.POST.get("tipoTransacao")
             transacao = Transacao(dataTransacao=vDataTransacao, tipoTransacao=vTipoTransacao)
             if(transacao.validar_dados(transacao) == False):
-                messages.warning(request,"Dados de edição incorretos!")
-                return redirect(salvarTransacao_view)
+                messages.warning(request,"Dados de criação incorretos!")
+                return redirect(cadastrarTransacao_view)
             transacao.save()
-        return redirect(transacao_view)
+            return redirect(transacao_view)
+        else:
+            return render(request, "cadastrarTransacao.html")
     else:
         return redirect(login_view)
+
 
 def editarTransacao_view(request, id):
     if verifica_login(request):
