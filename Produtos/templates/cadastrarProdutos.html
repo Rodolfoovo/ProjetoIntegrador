@@ -1,18 +1,14 @@
-{% extends 'base.html' %}
+{% extends 'navbar.html' %}
 {% load static %}
-
 {% block title %}Cadastrar Produto{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/produto.css' %}">
+{% endblock %}
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/forms.css' %}">
 
-<div class="retangulo">
-    <ul>
-        <li>
-            <a href="{% url 'produtos_view' %}" class="btn btn-transparent">Voltar para Produtos</a>
-        </li>
-    </ul>
-</div>
+<a href="{% url 'produtos_view' %}" class="bi bi-arrow-return-left">Voltar</a>
+
 {% if messages %}
     <ul class="messages">
         {% for message in messages %}

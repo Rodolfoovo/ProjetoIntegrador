@@ -1,31 +1,8 @@
-{% extends 'base.html' %}
+{% extends 'navbar.html' %}
 {% load static %}
 {% block title %}Koi.io{% endblock %}
     
 {% block content%}
-<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'css/telainicial.css' %}">
 
-<div class="retangulo">
-    <p class="h2">Overview</p>
-</div>
-
-<div class="container">
-    <div class="row">
-        <div class="col retangulos">7.298
-            <div class="info-rec">Estoque</div>
-        </div>
-        <div class="col retangulos">4.232
-            <div class="info-rec">Estoque Médio</div>
-        </div>
-        <div class="col retangulos">R$ 1.400
-            <div class="info-rec">Valor total em estoque</div>
-        </div>
-        <div class="col retangulos">4.656
-            <div class="info-rec">Entrada</div>
-        </div>
-        <div class="col retangulos">5.999
-            <div class="info-rec">Saída</div>
-        </div>
-    </div>
-</div>
 {% endblock %}

@@ -24,7 +24,8 @@ def login_view(request):
             #send_email(user,subject,message)
             return render(request,'telainicial.html',{"user":user})
         else:
-            return HttpResponse('Usuario ou senha invalidos')
+            return render(request,'telainicial.html',{"user":user})
+            # return HttpResponse('Usuario ou senha invalidos')
         
 def logout_view(request):
     # Verifica se a chave 'userData' existe na sessão antes de acessá-la
