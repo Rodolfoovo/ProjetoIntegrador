@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{% endblock %}</title>
+    <!-- Importação do Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <!-- Importação do jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <!-- Importação do Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- Importação do CSS personalizado -->
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}" />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-dark bg-dark navbar-expand-sm">
+      <div class="container-fluid">
+        <a href="" class="navbar-brand d-flex">Koio</a>
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav me-6">
+            <li class="nav-item {% if request.resolver_match.url_name == 'telainicial' %}active{% endif %}">
+              <a class="nav-link" href="{% url 'telainicial' %}">Dashboard<span class="sr-only">(current)</span></a>
+            </li> 
+            <li class="nav-item {% if request.resolver_match.url_name == 'produtos' %}active{% endif %}">
+              <a class="nav-link" href="{% url 'produtos' %}">Produtos</a>
+            </li>
+            <li class="nav-item {% if request.resolver_match.url_name == 'transacao_view' %}active{% endif %}">
+              <a class="nav-link" href="{% url 'transacao_view' %}">Transação</a>
+            </li>
+            <li class="nav-item {% if request.resolver_match.url_name == 'funcionarios' %}active{% endif %}">
+              <a class="nav-link" href="{% url 'funcionarios' %}">Funcionários</a>
+            </li>
+            <li class="nav-item {% if request.resolver_match.url_name == 'fornecedor' %}active{% endif %}">
+              <a class="nav-link" href="{% url 'fornecedor' %}">Fornecedor</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </body>
+</html>
