@@ -41,9 +41,16 @@
             <li class="nav-item {% if request.resolver_match.url_name == 'fornecedor' %}active{% endif %}">
               <a class="nav-link" href="{% url 'fornecedor' %}">Fornecedor</a>
             </li>
-            <li class="nav-item ml-auto {% if request.resolver_match.url_name == 'perfil' %}active{% endif %}">
-              <a class="nav-link" href="{% url 'perfil' %}">Fornecedor</a>
-            </li>
+            <form class="d-flex me-2">
+              <li class="nav-item dropdown {% if request.resolver_match.url_name == 'perfil' %}active{% endif %}">
+                <a class="nav-link dropdown-toggle" href="#" id="perfilDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Perfil
+                </a>
+                <div class="dropdown-menu" aria-labelledby="perfilDropdown">
+                  <a class="dropdown-item" href="{% url 'perfil' %}">Editar perfil</a>
+                  <a class="dropdown-item" href="{% url 'logout' %}">Sair</a>
+              </li>
+            </form>
           </ul>
         </div>
       </div>

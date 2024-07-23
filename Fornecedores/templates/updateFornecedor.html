@@ -8,13 +8,9 @@
 {% block content%}
 <link rel="stylesheet" href="{% static 'css/forms.css' %}">
 
-<div class="retangulo">
-    <ul>
-        <li>
-            <a href="{% url 'fornecedor_view' %}" class="btn btn-transparent">Voltar para Fornecedores</a>
-        </li>
-    </ul>
-</div>
+<button onclick="history.back(); return false;" class="btn btn-light" style="margin: 4px">
+    <i class="bi bi-arrow-return-left"></i>
+</button>
 
 <div class="retangulo_Editar">
     <div class="title_Editar">Editar Fornecedor</div>

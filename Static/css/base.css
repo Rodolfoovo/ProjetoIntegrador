@@ -36,3 +36,30 @@
     margin: 0;
     padding: 0;
 }
+.table thead th, .table tbody td {
+    text-align: center;
+}
+
+.dropdown-menu {
+  /* Estilos do dropdown */
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1;
+  display: none;
+}
+
+.dropdown-list {
+  /* Estilos da lista de produtos */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-radius: 5px;
+}
+
+.dropdown-list li {
+  /* Estilos dos itens da lista */
+  padding: 5px 10px;
+  border-bottom: 1px solid #ccc;
+}
+  

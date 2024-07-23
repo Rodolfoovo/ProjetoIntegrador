@@ -24,8 +24,7 @@ def login_view(request):
             #send_email(user,subject,message)
             return render(request,'telainicial.html',{"user":user})
         else:
-            return render(request,'telainicial.html',{"user":user})
-            # return HttpResponse('Usuario ou senha invalidos')
+            return HttpResponse('Usuario ou senha invalidos')
         
 def logout_view(request):
     # Verifica se a chave 'userData' existe na sessão antes de acessá-la
@@ -47,6 +46,7 @@ def Perfil_view(request):
     user_id =request.session.get('user_id')
     user = Funcionario.objects.get(idFuncionario=user_id)
     return render(request, 'perfil.html', {"user":user})
+
 
 def verifica_login(request):
         return 'user_id' in request.session
