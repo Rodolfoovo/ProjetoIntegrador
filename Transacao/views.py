@@ -4,6 +4,7 @@ from django.core.exceptions import ValidationError
 from django.http import HttpResponse
 from login.views import login_view, verifica_login
 from django.contrib import messages
+
 def transacao_view(request):
     if verifica_login(request):
         transacoes = Transacao.objects.all()

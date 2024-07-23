@@ -62,7 +62,7 @@ body {
 }
 
 /* Estilo para o retângulo principal */
-.retangulo_principal {
+.retangulo {
     width: 812px;
     height: 530px;
     background: linear-gradient(90deg, #C833B0 -75.99%, #FF5722 106.42%, #FF6347 106.44%);
@@ -75,12 +75,12 @@ body {
 }
 
 /* Estilo para o retângulo de login */
-.retangulo_login {
+.retangulo .retangulo_login {
     width: 350px;
-    height: 540px;
+    height: 530px;
     background-color: #F5F5F5;
     filter: drop-shadow(20px 20px 23px rgba(0, 0, 0, 0.25));
-    border-radius: 10px;
+    border-radius: 0px 10px 10px 0px;
     position: absolute;
     top: 50%;
     left: 80%;
@@ -88,9 +88,15 @@ body {
     z-index: -1;
 }
 
+.container-koio{
+    position: absolute;
+    top: 20%;
+    left: 7%;
+}
+
 /* Estilo para o formulário de login */
 .login-form {
-    padding: 20px;
+    padding: 10px;
     border-radius: 10px;
     width: 300px;
     position: absolute;
@@ -104,7 +110,7 @@ body {
 
 .custom-form-control {
     width: 300px;
-    padding: 20px;
+    padding: 10px;
     box-sizing: border-box;
     border: none;
     position: relative;
@@ -130,7 +136,7 @@ body {
     border-radius: 5px;
     font-size: 20px;
     font-weight: bold;
-    background-image: linear-gradient(to right, rgba(200,51,176), rgba(255,99,71));
+    background: linear-gradient(90deg, #C833B0 -75.99%, #FF5722 106.42%, #FF6347 106.44%);
     border: none;
     cursor: pointer;
     display: flex;
