@@ -1,24 +1,28 @@
-{% extends 'base.html' %}
+{% extends 'navbar.html' %}
 {% load static %}
 {% block title %}Produtos{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/produto.css' %}">
+{% endblock %}
     
 {% block content%}
-    <link rel="stylesheet" href="{% static 'css/produto.css' %}">
     
-    <div class="retangulo">
-        <ul>
-            <li>
-                <!-- Botão para abrir a tela de cadastro -->
-                <a href="{% url 'cadastrarProdutos_view' %}" class="btn btn-transparent">CADASTRAR PRODUTO</a>
-            </li>
-        </ul>
+<div class="container-table">
+    <div class="rectangle">
+        <form class="d-flex align-items-center">
+            <input class="form-control me-2 w-100" type="search" id="searchInput" placeholder="Pesquisar" aria-label="Search">
+            <button class="btn btn-search" type="submit">
+                <i class="bi bi-search"></i>
+            </button>
+        </form>
+        <a href="{% url 'cadastrarProdutos_view' %}" class="btn btn-dark ms-auto">Cadastrar Produto</a>
     </div>
-
-    <table class="table table-striped">
-        <thead class="thead">
+        
+    <table class="table table-striped table-responsive-lg">
+        <thead class="table-dark">
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Nome</th>
+                <th scope="col">Produto</th>
                 <th scope="col">Fornecedor</th>
                 <th scope="col">Transação</th>
                 <th scope="col">Valor Unitário</th>
@@ -26,15 +30,14 @@
                 <th scope="col">Categoria</th>
                 <th scope="col">Subcategoria</th>
                 <th scope="col">Marca</th>
-                <th scope="col">Editar</th>
-                <th scope="col">Deletar</th>
+                <th scope="col" colspan="2">Gerenciar</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="productTable">
             {% for produto in produtos %}
             <tr>
                 <td>{{ produto.idProduto }}</td>
-                <td>{{ produto.nomeProduto}}</td>
+                <td>{{ produto.nomeProduto }}</td>
                 <td>{{ produto.idFornecedor.nomeFornecedor }}</td>
                 <td>{{ produto.idTransacao.idTransacao }}</td>
                 <td>{{ produto.valorUnit }}</td>
@@ -43,13 +46,31 @@
                 <td>{{ produto.subCategoria }}</td>
                 <td>{{ produto.marcaProduto }}</td>
                 <td>
-                    <a href="{% url 'editarProdutos_view' produto.idProduto %}" class="btn btn-outline-primary">EDITAR</a>
+                    <a href="{% url 'editarProdutos_view' produto.idProduto %}" class="btn btn-outline-primary btn-sm">Editar</a>
                 </td>
                 <td>
-                    <a href="{% url 'deleteProdutos_view' produto.idProduto %}" class="btn btn-outline-danger">DELETAR</a>
+                    <a href="{% url 'deleteProdutos_view' produto.idProduto %}" class="btn btn-outline-danger btn-sm">Deletar</a>
                 </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+</div>
+
+<script>
+    document.getElementById('searchInput').addEventListener('keyup', function() {
+  var input = this.value.toLowerCase();
+  var rows = document.querySelectorAll('#productTable tr');
+  rows.forEach(function(row) {
+    var cells = row.querySelectorAll('td');
+    var match = false;
+    cells.forEach(function(cell) {
+      if (cell.textContent.toLowerCase().includes(input)) {
+        match = true;
+      }
+    });
+    row.style.display = match || input === '' ? '' : 'none';
+  });
+});
+</script>
 {% endblock %}

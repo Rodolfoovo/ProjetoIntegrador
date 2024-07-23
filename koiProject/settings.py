@@ -143,7 +143,6 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 
 # Adiciona o diretório global de arquivos estáticos
 STATICFILES_DIRS = [

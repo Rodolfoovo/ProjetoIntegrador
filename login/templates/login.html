@@ -6,37 +6,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Clogin.css' %}">
 </head>
 
 <body>
     
-    <div class="retangulo_principal">
+    <div class="retangulo">
+      <div class="container-koio">
+        <a href="https://ibb.co/T8bDhzw">
+          <img src="https://i.ibb.co/Yky4jvN/koio.png" width="400" height="400" alt="koio" border="0">
+        </a>
+      </div>
         <div class="title">Bem-vindo ao
             <div class="title_koi">KOI.IO</div>
         </div>
+
         <div class="retangulo_login">
             <div class="title_login">LOGIN</div>
-            <!-- Formulário de login -->
             <form action="{% url 'login' %}" method="POST" class="login-form">{% csrf_token %}
-                <!-- Campo de Identificação -->
                 <div class="custom-form-group">
                     <div class="custom-form-control" id="username">
                         <input type="text" id="username" name="username" placeholder="Digite seu email">
                     </div>
                 </div>
-            
-                <!-- Campo de Senha -->
                 <div class="custom-form-group">
                     <div class="custom-form-control" id="password">
                         <input type="password" id="password" name="password" placeholder="Digite sua senha">
                     </div>
                 </div>
-            
-                <!-- Botão de Login -->
                 <button type="submit" class="btn-submit">ENTRAR</button>
-            
-                <!-- Texto "Esqueci minha senha" -->
                 <div class="forgot-password">
                     <a href="{% url 'password_reset' %}">Esqueci minha senha</a>
                 </div>

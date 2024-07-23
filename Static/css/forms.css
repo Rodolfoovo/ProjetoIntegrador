@@ -9,7 +9,6 @@
 *:focus {
     outline: none;
 }
-
 /* Estilo para o corpo da página */
 body {
     background: linear-gradient(to right, rgba(200, 51, 176), rgba(255, 99, 71));
