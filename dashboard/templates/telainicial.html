@@ -1,31 +1,34 @@
-{% extends 'base.html' %}
+{% extends 'navbar.html' %}
 {% load static %}
-{% block title %}Koi.io{% endblock %}
+{% block title %}Dashboard{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/dashboard.css' %}">
+{% endblock %}
     
 {% block content%}
-<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
 
-<div class="retangulo">
-    <p class="h2">Overview</p>
-</div>
-
-<div class="container">
-    <div class="row">
-        <div class="col retangulos">7.298
-            <div class="info-rec">Estoque</div>
+<div class="container-wrapper">
+    <div class="container-rectangle">
+       <div class="white-rectangles">
+        <div class="block">
+            <h1>38.493</h1>
+            <span>Estoque total</span>
         </div>
-        <div class="col retangulos">4.232
-            <div class="info-rec">Estoque Médio</div>
+        <div class="block">
+            <h1>38.493</h1>
+            <span>Estoque total</span>
         </div>
-        <div class="col retangulos">R$ 1.400
-            <div class="info-rec">Valor total em estoque</div>
+        <div class="block">
+            <h1>38.493</h1>
+            <span>Estoque total</span>
         </div>
-        <div class="col retangulos">4.656
-            <div class="info-rec">Entrada</div>
+        <div class="block">
+            <h1>38.493</h1>
+            <span>Estoque total</span>
         </div>
-        <div class="col retangulos">5.999
-            <div class="info-rec">Saída</div>
-        </div>
+       </div>
     </div>
 </div>
+
+
 {% endblock %}
