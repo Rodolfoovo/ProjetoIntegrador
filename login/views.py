@@ -12,6 +12,7 @@ def login_view(request):
         username = request.POST.get("username") 
         password = request.POST.get("password")
         funcionario = Funcionario()
+
         user = funcionario.autenticar(request, username,password)
         if user:
             user = Funcionario.objects.get(username=username)
