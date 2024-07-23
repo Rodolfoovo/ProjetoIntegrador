@@ -1,9 +1,11 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
-from .views import login_view
+from .views import login_view, atualizar_perfil
 
 urlpatterns = [
     path('', login_view, name='login'),
+
+    path('atualizar_perfil/<int:id>/',atualizar_perfil, name="atualizar_perfil"),
 
     path('password_reset/', auth_views.PasswordResetView.as_view(template_name= 'password_reset.html'), name='password_reset'),
 

@@ -8,6 +8,7 @@ from django.contrib import messages
 def transacao_view(request):
     if verifica_login(request):
         transacoes = Transacao.objects.all()
+        
         return render(request, "transacao.html", {"transacoes": transacoes})
     else:
         return redirect(login_view)

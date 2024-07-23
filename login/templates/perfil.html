@@ -25,7 +25,7 @@
         </div>
       </div>
       <div class="col-12 col-md-7 py-3 py-md-5">
-        <form action="{% url 'perfil' %}" class="editar-form" method="POST">
+        <form action="{% url 'atualizar_perfil' user.idFuncionario %}" class="editar-form" method="POST">
         {% csrf_token %}
           <div class="row mt-2">
             <div class="col-12">
@@ -56,7 +56,7 @@
             </div>
             <div class="col-12">
               <label class="labels">Função</label>
-              <input type="text" class="form-control" id="CARGO" name="CARGOP" value="Executivo">
+              <input type="text" class="form-control" id="funcao" name="funcao" value="{{user.funcao}}">
             </div>
           </div>
           <div class="mt-4 text-right">
