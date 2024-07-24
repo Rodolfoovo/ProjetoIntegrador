@@ -28,15 +28,20 @@
           </tr>
       </thead>
       <tbody id="transTable">
+        {% for transacao in transacoes%}
             <tr style="background-color: #90EE90;">  
-            <td>Entrada</td>
+            <td>{{transacao.tipoTransacao}}</td>
             <td>Danone</td>
             <td>Caixa-12-unidades</td>
-            <td>11/04/24</td>
-            <td>11:45</td>
+            <td>{{transacao.dataTransacao | date:'d/m/Y'}}</td>
+            <td>{{transacao.horaTransacao | time:'H:i'}}</td>
             <td>R$43,99</td>
             <td>Batavo</td>
           </tr>
+          {% endfor %}
+          {% for produto in produtos%}
+           <td>{{produto.nomeProduto}}</td>
+          {% endfor %}
           <tr style="background-color: #fc6565;"> 
             <td>Saída</td>
             <td>Batata-Palha</td>

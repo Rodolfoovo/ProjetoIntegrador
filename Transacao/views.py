@@ -8,7 +8,6 @@ from django.contrib import messages
 def transacao_view(request):
     if verifica_login(request):
         transacoes = Transacao.objects.all()
-        
         return render(request, "transacao.html", {"transacoes": transacoes})
     else:
         return redirect(login_view)
@@ -33,7 +32,8 @@ def cadastrarTransacao_view(request):
 def editarTransacao_view(request, id):
     if verifica_login(request):
         transacao = Transacao.objects.get(idTransacao=id)
-        return render(request, "updateTransacao.html", {"transacao": transacao})
+        produtos = transacao.produtos_set.all()
+        return render(request, "updateTransacao.html", {"transacao": transacao, "produtos":produtos})
     else:
         return redirect(login_view)
 

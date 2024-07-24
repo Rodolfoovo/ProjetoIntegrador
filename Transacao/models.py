@@ -7,6 +7,7 @@ class Transacao(models.Model):
     idTransacao = models.AutoField(primary_key=True)
     idFornecedor = models.ForeignKey(Fornecedor,on_delete=models.CASCADE, default=1)
     dataTransacao = models.DateField()
+    horaTransacao = models.TimeField(default="00:01:02")
     tipoTransacao = models.CharField(max_length=7)
 
     def validar_dados(self,produto):
