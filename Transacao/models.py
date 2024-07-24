@@ -16,5 +16,11 @@ class Transacao(models.Model):
          return True
       except ValidationError:
          return False
+      
+    def calcular_valorTotal_transacao(produtos):
+      valorTotal = 0
+      for produto in produtos:
+          valorTotal += produto.valorUnit
+      return valorTotal
 
     
