@@ -30,6 +30,14 @@
                         {% endfor %}
                 </select>
                 </div>
+                <div class="Select-Fornecedor">
+                    <label class="form-label" for="fornecedor">Transação:</label>
+                    <select class="idFornecedor" id="idFornecedor" name="idTransacao">
+                        {% for transacao in transacoes %}
+                            <option value="{{ transacao.idTransacao }}">{{ transacao.idTransacao }}</option>
+                        {% endfor %}
+                </select>
+                </div>
                 <div class="form-control_campos">
                     <label for="valorUnit">Valor Unitário:</label>
                     <input type="text" id="valorUnit" name="valorUnit" value="{{produto.valorUnit}}">

@@ -59,7 +59,8 @@ def editarProdutos_view(request, id):
     if(login_view(request)):
         produto = get_object_or_404(Produtos, idProduto=id)
         fornecedores = Fornecedor.objects.all()
-        return render(request, "updateProduto.html", {"produto": produto, "fornecedores": fornecedores})
+        transacoes = Transacao.objects.all()
+        return render(request, "updateProduto.html", {"produto": produto, "fornecedores": fornecedores, "transacoes": transacoes})
     else:
          redirect(login_view)
 def updateProdutos_view(request, id):
