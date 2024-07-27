@@ -59,7 +59,7 @@ def updateFuncionario_view(request, id):
             funcionario = usuario_existe(id)
             if(funcionario == None):
                 messages.warning(request, "Usuario não existe!")
-                return redirect(editarFuncionario_view)
+                return redirect('editarFuncionario_view', id=id)
             # Atualiza os campos do funcionário com base nos dados do formulário
             funcionario.username = request.POST.get("username")
             funcionario.enderecoFuncionario = request.POST.get("enderecoFuncionario")
@@ -70,7 +70,7 @@ def updateFuncionario_view(request, id):
             funcionario.funcao = request.POST.get("funcao")
             if(funcionario.validar_dados(funcionario) == False):
                 messages.warning(request,"Dados na edição incorretos!")
-                return redirect(editarFuncionario_view)
+                return redirect('editarFuncionario_view', id=id)
             funcionario.save()
             return redirect(Funcionarios)
         else:

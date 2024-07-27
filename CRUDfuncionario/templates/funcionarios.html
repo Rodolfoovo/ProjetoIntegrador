@@ -33,6 +33,7 @@
         </thead>
         <tbody id="funcTable">
             {% for funcionario in funcionarios %}
+            {% if not request.user_id == funcionario.idFuncionario %}
             <tr>
                 <td>{{ funcionario.idFuncionario }}</td>
                 <td>{{ funcionario.username }}</td>
@@ -47,6 +48,7 @@
                 <td>
                     <a href="{% url 'deleteFuncionario_view' funcionario.idFuncionario %}" class="btn btn-outline-danger btn-sm">Deletar</a>
                 </td>
+            {% endif %}
             </tr>
             {% endfor %}
         </tbody>

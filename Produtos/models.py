@@ -28,8 +28,8 @@ class Produtos(models.Model):
       produtos = Produtos.objects.all()
       total_estoque = 0
       for produto in produtos:
-         transacao = Transacao.objects.get(idTransacao=produto.idTransacao)
-         if(transacao.tipoTransacao == "Entrada"):
+         transacao = Transacao.objects.get(idTransacao=produto.idTransacao.idTransacao)
+         if(transacao.tipoTransacao == "ENTRADA"):
             total_estoque += produto.qntEstoque
          else:
             total_estoque -= produto.qntEstoque
@@ -41,15 +41,15 @@ class Produtos(models.Model):
 
       # Inicializa o estoque total como zero
       estoque_total = 0
-      hoje = date.today
+      hoje = date.today()
       inicio = date(hoje.year, hoje.month, 1)  # Data de início do período
-      fim = date(hoje.year,hoje.month, calendar.calendar_monthrange(hoje.today,hoje.month)[1])  # Data de fim do período
+      fim = date(hoje.year, hoje.month, calendar.monthrange(hoje.year, hoje.month)[1]) # Data de fim do período
       # Itera sobre cada produto e adiciona sua quantidade de estoque ao total
       for produto in produtos:
          # Obtém a transação associada ao produto dentro do período especificado
          try:
-               transacao = Transacao.objects.get(idTransacao=produto.idTransacao, dataTransacao__range=(inicio, fim))
-               if transacao.tipoTransacao == "Entrada":
+               transacao = Transacao.objects.get(idTransacao=produto.idTransacao.idTransacao, dataTransacao__range=(inicio, fim))
+               if transacao.tipoTransacao == "ENTRADA":
                   estoque_total += produto.qntEstoque*produto.valorUnit
                else:
                   estoque_total -= produto.qntEstoque*produto.valorUnit
@@ -60,32 +60,33 @@ class Produtos(models.Model):
       return estoque_total
 
    def entrada_produtos_mensal():
-      estoque_total = 0
-      hoje = date.today
-      inicio = date(hoje.year, hoje.month, 1)  # Data de início do período
-      produtos = Produtos.objects.all()
-      fim = date(hoje.year,hoje.month, calendar.calendar_monthrange(hoje.today,hoje.month)[1])
-      for produto in produtos:
-         try:
-            transacao = Transacao.objects.get(idTransacao=produto.idTransacao, 
-                                          dataTransacao__range=(inicio, fim))
-            if(transacao.tipoTransacao == "Entrada"):
-               estoque_total += produto.qntEstoque*produto.valorUnit
-         except Transacao.DoesNotExist:
+    estoque_total = 0
+    hoje = date.today()
+    inicio = date(hoje.year, hoje.month, 1)  # Data de início do período
+    produtos = Produtos.objects.all()
+    fim = date(hoje.year, hoje.month, calendar.monthrange(hoje.year, hoje.month)[1])  # Corrigido aqui
+
+    for produto in produtos:
+        try:
+            transacao = Transacao.objects.get(idTransacao=produto.idTransacao.idTransacao, dataTransacao__range=(inicio, fim))
+            if transacao.tipoTransacao == "ENTRADA":
+                estoque_total += produto.qntEstoque * produto.valorUnit
+        except Transacao.DoesNotExist:
             continue
-      return produtos
+
+    return estoque_total
 
    def saida_produtos_mensal():
       estoque_total = 0
-      hoje = date.today
+      hoje = date.today()
       produtos = Produtos.objects.all()
       inicio = date(hoje.year, hoje.month, 1)  # Data de início do período
-      fim = date(hoje.year,hoje.month, calendar.calendar_monthrange(hoje.today,hoje.month)[1])
+      fim = date(hoje.year, hoje.month, calendar.monthrange(hoje.year, hoje.month)[1])
       for produto in produtos:
          try:
-            transacao = Transacao.objects.get(idTransacao=produto.idTransacao, 
+            transacao = Transacao.objects.get(idTransacao=produto.idTransacao.idTransacao, 
                                           dataTransacao__range=(inicio, fim))
-            if(transacao.tipoTransacao == "Saida"):
+            if(transacao.tipoTransacao == "SAIDA"):
                estoque_total += produto.qntEstoque*produto.valorUnit
          except Transacao.DoesNotExist:
             continue
