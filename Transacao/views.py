@@ -45,7 +45,7 @@ def updateTransacao_view(request, id):
             transacao.tipoTransacao = request.POST.get("tipoTransacao")
             if(transacao.validar_dados(transacao) == False):
                 messages.warning(request,"Dados de edição incorretos!")
-                return redirect(editarTransacao_view)
+                return redirect('editarTransacao_view', id=id)
             transacao.save()
             return redirect(transacao_view)
         else:

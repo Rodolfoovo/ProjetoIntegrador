@@ -88,7 +88,7 @@ def updateFornecedor_view(request,id):
             fornecedor.cnpj = request.POST.get("cnpj")
             if(fornecedor.validar_dados(fornecedor) == False):
                 messages.warning(request,"Dados de cadastro incorretos!")
-                return redirect(editarFornecedor_view)
+                return redirect('editarFornecedor_view', id=id)
             fornecedor.save()
             return redirect(fornecedor_view)
         else:
