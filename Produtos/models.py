@@ -28,7 +28,7 @@ class Produtos(models.Model):
       produtos = Produtos.objects.all()
       total_estoque = 0
       for produto in produtos:
-         transacao = Transacao.objects.get(idTransacao=produto.idTransacao)
+         transacao = Transacao.objects.get(idTransacao=produto.idTransacao.idTransacao)
          if(transacao.tipoTransacao == "Entrada"):
             total_estoque += produto.qntEstoque
          else:

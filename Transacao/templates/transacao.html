@@ -19,8 +19,6 @@
       <thead class="table-dark">
           <tr>
               <th scope="col">Operação</th>
-              <th scope="col">Produto</th>
-              <th scope="col">Quantidade</th>
               <th scope="col">Data</th>
               <th scope="col">Horário</th>
               <th scope="col">Valor total</th>
@@ -31,26 +29,12 @@
         {% for transacao in transacoes%}
             <tr style="background-color: #90EE90;">  
             <td>{{transacao.tipoTransacao}}</td>
-            <td>Danone</td>
-            <td>Caixa-12-unidades</td>
             <td>{{transacao.dataTransacao | date:'d/m/Y'}}</td>
             <td>{{transacao.horaTransacao | time:'H:i'}}</td>
             <td>R$43,99</td>
             <td>Batavo</td>
           </tr>
           {% endfor %}
-          {% for produto in produtos%}
-           <td>{{produto.nomeProduto}}</td>
-          {% endfor %}
-          <tr style="background-color: #fc6565;"> 
-            <td>Saída</td>
-            <td>Batata-Palha</td>
-            <td>3</td>
-            <td>03/09/2024</td>
-            <td>18:30</td>
-            <td>R$13,99</td>
-            <td>Elma Chips</td>
-          </tr>
       </tbody>
   </table>
     <!-- 
