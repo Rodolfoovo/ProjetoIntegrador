@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 
 class Fornecedor(models.Model):
     idFornecedor = models.AutoField(primary_key=True)
-    nomeFornecedor = models.CharField(max_length=30, validators = [valida_texto])
+    nomeFornecedor = models.CharField(max_length=30, validators = [valida_texto], unique=True)
     endereco = models.CharField(max_length=30)
     telefone = models.CharField(max_length=20)
     cep = models.CharField(max_length=8)
