@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'navbar.html' %}
 {% load static %}
 
 {% block title %}Cadastrar Transacao{% endblock %}
@@ -6,13 +6,10 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/forms.css' %}">
 
-<div class="retangulo">
-    <ul>
-        <li>
-            <a href="{% url 'transacao_view' %}" class="btn btn-transparent">Voltar para Transações</a>
-        </li>
-    </ul>
-</div>
+<button onclick="history.back(); return false;" class="btn btn-light" style="margin: 4px">
+    <i class="bi bi-arrow-return-left"></i>
+</button>
+
 {% if messages %}
     <ul class="messages">
         {% for message in messages %}
@@ -28,17 +25,19 @@
             <div class="form-control_campos">
                 <label for="dataTransacao">Data</label>
                 <input type="date" class="form-control"  id="dataTransacao" name="dataTransacao" required>
+
+                <label for="horaTransacao">Horario</label>
+                <input type="time" class="form-control"  id="horaTransacao" name="horaTransacao" required>
+
+                <label class="form-label" for="tipoTransacao">Tipo:</label>
+                <select class="tipoTransacao form-select" id="tipoTransacao" name="tipoTransacao" required>
+                    <option value="ENTRADA">ENTRADA</option>
+                    <option value="SAIDA">SAIDA</option>
+                </select>   
             </div>
 
             <div class="Select-Fornecedor">
-                <label class="form-label" for="tipoTransacao">Tipo:</label>
-                <select class="idTransacao form-select" id="tipoTransacao" name="tipoTransacao" required>
-                    <option value="ENTRADA">ENTRADA</option>
-                    <option value="SAIDA">SAIDA</option>
-                </select>
             </div>
-
-
         </div>
         <button type="submit" class="btn-submit">Cadastrar</button>
     </form>

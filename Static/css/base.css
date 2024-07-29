@@ -63,3 +63,10 @@
   border-bottom: 1px solid #ccc;
 }
   
+.entrada {
+    background-color: #90EE90; /* Verde */
+}
+
+.saida {
+    background-color: #FFB6C1; /* Vermelho claro */
+}

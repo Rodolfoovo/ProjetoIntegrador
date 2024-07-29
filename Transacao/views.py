@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from Fornecedores.models import Fornecedor
 from .models import Transacao
 from django.core.exceptions import ValidationError
 from django.http import HttpResponse
@@ -7,8 +8,9 @@ from django.contrib import messages
 
 def transacao_view(request):
     if verifica_login(request):
-        transacoes = Transacao.objects.all()
-        return render(request, "transacao.html", {"transacoes": transacoes})
+        transacoes = Transacao.objects.all().order_by('-dataTransacao', '-horaTransacao')
+        fornecedores = Fornecedor.objects.all()
+        return render(request, "transacao.html", {"transacoes": transacoes, "fornecedores": fornecedores})
     else:
         return redirect(login_view)
 
@@ -16,8 +18,9 @@ def cadastrarTransacao_view(request):
     if verifica_login(request):
         if request.method == 'POST':
             vDataTransacao = request.POST.get("dataTransacao")
+            vHoraTransacao = request.POST.get("horaTransacao")
             vTipoTransacao = request.POST.get("tipoTransacao")
-            transacao = Transacao(dataTransacao=vDataTransacao, tipoTransacao=vTipoTransacao)
+            transacao = Transacao(dataTransacao=vDataTransacao, tipoTransacao=vTipoTransacao, horaTransacao=vHoraTransacao)
             if(transacao.validar_dados(transacao) == False):
                 messages.warning(request,"Dados de criação incorretos!")
                 return redirect(cadastrarTransacao_view)

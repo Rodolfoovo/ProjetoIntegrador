@@ -14,6 +14,7 @@
                 <i class="bi bi-search"></i>
             </button>
         </form>
+        <a href="{% url 'cadastrarTransacao_view' %}" class="btn btn-dark ms-auto">Cadastrar Transação</a>
     </div>
     <table class="table table-bordered table-responsive-lg">
       <thead class="table-dark">
@@ -23,45 +24,28 @@
               <th scope="col">Horário</th>
               <th scope="col">Valor total</th>
               <th scope="col">Fornecedor</th>
+              <th scope="col" colspan="2">Gerenciar</th>
           </tr>
       </thead>
       <tbody id="transTable">
-        {% for transacao in transacoes%}
-            <tr style="background-color: #90EE90;">  
-            <td>{{transacao.tipoTransacao}}</td>
-            <td>{{transacao.dataTransacao | date:'d/m/Y'}}</td>
-            <td>{{transacao.horaTransacao | time:'H:i'}}</td>
-            <td>R$43,99</td>
-            <td>Batavo</td>
-          </tr>
-          {% endfor %}
-      </tbody>
-  </table>
-    <!-- 
-    <table class="table table-striped table-responsive-lg">
-        <thead class="table-dark">
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Produto</th>
-                <th scope="col">Horário</th>
-                <th scope="col">Tipo</th>
-                <th scope="col">Fornecedor ou Cliente</th>
-            </tr>
-        </thead>
-        <tbody id="transTable">
-            {% for transacao in transacoes %}
-            <tr>
-                <!--teoricamente esses vao ser os valores eu acho 
-                <td>{{ transacao.idTransacao }}</td>
-                <td>{{ transacao.produto }}</td>
-                <td>{{ transacao.idDataTransacao }}</td>
+        {% for transacao in transacoes %}
+            <tr class="{% if transacao.tipoTransacao == 'ENTRADA' %}entrada{% elif transacao.tipoTransacao == 'SAIDA' %}saida{% endif %}">
                 <td>{{ transacao.tipoTransacao }}</td>
-                <td>{{ transacao.clienteFornecedor }}</td>
+                <td>{{ transacao.dataTransacao | date:'d/m/Y' }}</td>
+                <td>{{ transacao.horaTransacao | time:'H:i' }}</td>
+                <td>R$43,99</td>
+                <td>Batavo</td>
+                <td>
+                  <a href="{% url 'editarTransacao_view' transacao.idTransacao %}" class="btn btn-outline-primary btn-sm">Editar</a>
+                </td>
+                <td>
+                  <a href="{% url 'deletarTransacao_view' transacao.idTransacao %}" class="btn btn-outline-danger btn-sm">Deletar</a>
+                </td>
             </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    -->
+        {% endfor %}
+    </tbody>
+    
+  </table>
 </div>
 
 <script>

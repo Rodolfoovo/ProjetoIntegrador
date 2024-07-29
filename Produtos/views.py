@@ -6,13 +6,13 @@ from django.contrib.auth.decorators import login_required
 from login.views import verifica_login, login_view
 from Transacao.models import Transacao
 from django.contrib import messages
+
 def produtos_view(request):
     if(verifica_login(request)):
         produtos = Produtos.objects.all()
         fornecedores = Fornecedor.objects.all()
         transacoes = Transacao.objects.all()
-        return render(request, "produtos.html", {"produtos": produtos, "fornecedores": fornecedores, 
-                                                 "transacoes":transacoes})
+        return render(request, "produtos.html", {"produtos": produtos, "fornecedores": fornecedores, "transacoes":transacoes})
     else:
         return redirect(login_view)
 
