@@ -50,6 +50,13 @@
                     <input type="text" id="funcao" name="funcao" value="{{funcionario.funcao}}">
                 </div>
             </div>
+            {% if messages %}
+                <div class="alert alert-danger" role="alert">
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+            </div>
+            {% endif %}
             <button type="submit" class="btn-submit">Atualizar</button>
         </form>
     </div>

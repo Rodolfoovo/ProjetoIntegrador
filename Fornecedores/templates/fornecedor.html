@@ -5,7 +5,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'css/fornecedor.css' %}">
 {% endblock %}
     
-{% block content%}
+{% block content %}
 
 <div class="container-table">
     <div class="rectangle">
@@ -30,15 +30,15 @@
                 <th scope="col" colspan="2">Gerenciar</th>
             </tr>
         </thead>
-        <tbody class="fornTable">
+        <tbody class="fornTable" id="fornTable">
             {% for fornecedor in fornecedores %}
                 <tr>
-                    <td>{{fornecedor.idFornecedor}}</td>
-                    <td>{{fornecedor.nomeFornecedor}}</td>
-                    <td>{{fornecedor.telefone}}</td>
-                    <td>{{fornecedor.cnpj}}</td>
-                    <td>{{fornecedor.cep}}</td>
-                    <td>{{fornecedor.endereco}}</td>
+                    <td>{{ fornecedor.idFornecedor }}</td>
+                    <td>{{ fornecedor.nomeFornecedor }}</td>
+                    <td class="telefone">{{ fornecedor.telefone }}</td>
+                    <td class="cnpj">{{ fornecedor.cnpj }}</td>
+                    <td class="cep">{{ fornecedor.cep }}</td>
+                    <td>{{ fornecedor.endereco }}</td>
                     <td>
                         <a href="{% url 'editarFornecedor_view' fornecedor.idFornecedor %}" class="btn btn-outline-primary btn-sm">EDITAR</a>
                     </td>
@@ -52,19 +52,56 @@
 </div>
 
 <script>
+    function formatTelefone(telefone) {
+        if (telefone.length === 11) {
+            return telefone.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+        } else if (telefone.length === 10) {
+            return telefone.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
+        }
+        return telefone; // Se o telefone não tiver 10 ou 11 dígitos, retorna como está
+    }
+
+    function formatCEP(cep) {
+        return cep.replace(/(\d{5})(\d{3})/, '$1-$2');
+    }
+
+    function formatCNPJ(cnpj) {
+        return cnpj.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
+    }
+
+    function formatarCampos() {
+        let telefoneElements = document.querySelectorAll('.telefone');
+        let cepElements = document.querySelectorAll('.cep');
+        let cnpjElements = document.querySelectorAll('.cnpj');
+
+        telefoneElements.forEach(function (element) {
+            element.textContent = formatTelefone(element.textContent);
+        });
+
+        cepElements.forEach(function (element) {
+            element.textContent = formatCEP(element.textContent);
+        });
+
+        cnpjElements.forEach(function (element) {
+            element.textContent = formatCNPJ(element.textContent);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', formatarCampos);
+
     document.getElementById('searchInput').addEventListener('keyup', function() {
-  var input = this.value.toLowerCase();
-  var rows = document.querySelectorAll('#fornTable tr');
-  rows.forEach(function(row) {
-    var cells = row.querySelectorAll('td');
-    var match = false;
-    cells.forEach(function(cell) {
-      if (cell.textContent.toLowerCase().includes(input)) {
-        match = true;
-      }
+        var input = this.value.toLowerCase();
+        var rows = document.querySelectorAll('#fornTable tr');
+        rows.forEach(function(row) {
+            var cells = row.querySelectorAll('td');
+            var match = false;
+            cells.forEach(function(cell) {
+                if (cell.textContent.toLowerCase().includes(input)) {
+                    match = true;
+                }
+            });
+            row.style.display = match || input === '' ? '' : 'none';
+        });
     });
-    row.style.display = match || input === '' ? '' : 'none';
-  });
-});
 </script>
 {% endblock %}

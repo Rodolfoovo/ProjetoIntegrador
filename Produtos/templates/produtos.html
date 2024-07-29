@@ -40,7 +40,7 @@
                 <td>{{ produto.nomeProduto }}</td>
                 <td>{{ produto.idFornecedor.nomeFornecedor }}</td>
                 <td>{{ produto.idTransacao.idTransacao }}</td>
-                <td>{{ produto.valorUnit }}</td>
+                <td>R${{ produto.valorUnit | floatformat:2 }}</td>
                 <td>{{ produto.qntEstoque }}</td>
                 <td>{{ produto.categoria }}</td>
                 <td>{{ produto.subCategoria }}</td>
@@ -59,18 +59,18 @@
 
 <script>
     document.getElementById('searchInput').addEventListener('keyup', function() {
-  var input = this.value.toLowerCase();
-  var rows = document.querySelectorAll('#productTable tr');
-  rows.forEach(function(row) {
+    var input = this.value.toLowerCase();
+    var rows = document.querySelectorAll('#productTable tr');
+    rows.forEach(function(row) {
     var cells = row.querySelectorAll('td');
     var match = false;
     cells.forEach(function(cell) {
       if (cell.textContent.toLowerCase().includes(input)) {
         match = true;
       }
+        });
+        row.style.display = match || input === '' ? '' : 'none';
     });
-    row.style.display = match || input === '' ? '' : 'none';
-  });
-});
+    });
 </script>
 {% endblock %}

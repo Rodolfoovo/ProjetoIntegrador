@@ -18,9 +18,9 @@ def cadastrarTransacao_view(request):
         if request.method == 'POST':
             vDataTransacao = request.POST.get("dataTransacao")
             vTipoTransacao = request.POST.get("tipoTransacao")
+            vHoraTransacao = request.POST.get("horaTransacao")
             fornecedor = request.POST.get("idFornecedor")
-            transacao = Transacao(dataTransacao=vDataTransacao,idFornecedor = fornecedor,
-                                   tipoTransacao=vTipoTransacao)
+            transacao = Transacao(dataTransacao=vDataTransacao,idFornecedor = fornecedor, tipoTransacao=vTipoTransacao, horaTransacao=vHoraTransacao)
             if(transacao.validar_dados(transacao) == False):
                 messages.warning(request,"Dados de criação incorretos!")
                 return redirect(cadastrarTransacao_view)
@@ -47,6 +47,7 @@ def updateTransacao_view(request, id):
             transacao.dataTransacao = request.POST.get("dataTransacao")
             transacao.tipoTransacao = request.POST.get("tipoTransacao")
             transacao.idFornecedor = request.POST.get("idFornecedor")
+            transacao.horaTransacao = request.POST.get("horaTransacao")
             if(transacao.validar_dados(transacao) == False):
                 messages.warning(request,"Dados de edição incorretos!")
                 return redirect('editarTransacao_view', id=id)

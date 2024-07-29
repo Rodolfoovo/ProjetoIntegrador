@@ -3,6 +3,7 @@ from CRUDfuncionario.models import Funcionario
 from django.http import HttpResponse
 from login.views import login_view, verifica_login
 from django.contrib import messages
+
 def Funcionarios(request):
     if verifica_login(request):
         funcionarios = Funcionario.objects.all()
@@ -70,7 +71,7 @@ def updateFuncionario_view(request, id):
             funcionario.funcao = request.POST.get("funcao")
             if(funcionario.validar_dados(funcionario) == False):
                 messages.warning(request,"Dados na edição incorretos!")
-                return redirect('editarFuncionario_view', id=id)
+                return render(request, "updateFuncionario.html", {"funcionario": funcionario})
             funcionario.save()
             return redirect(Funcionarios)
         else:

@@ -46,17 +46,7 @@ class Produtos(models.Model):
       fim = date(hoje.year, hoje.month, calendar.monthrange(hoje.year, hoje.month)[1]) # Data de fim do período
       # Itera sobre cada produto e adiciona sua quantidade de estoque ao total
       for produto in produtos:
-         # Obtém a transação associada ao produto dentro do período especificado
-         try:
-               transacao = Transacao.objects.get(idTransacao=produto.idTransacao.idTransacao, dataTransacao__range=(inicio, fim))
-               if transacao.tipoTransacao == "ENTRADA":
-                  estoque_total += produto.qntEstoque*produto.valorUnit
-               else:
-                  estoque_total -= produto.qntEstoque*produto.valorUnit
-         except Transacao.DoesNotExist:
-               # Caso não haja transação associada, trata como erro ou define um comportamento padrão
-               pass
-
+         estoque_total += produto.qntEstoque*produto.valorUnit
       return estoque_total
 
    def entrada_produtos_mensal():

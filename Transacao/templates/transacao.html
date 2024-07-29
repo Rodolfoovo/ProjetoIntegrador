@@ -29,7 +29,7 @@
       </thead>
       <tbody id="transTable">
         {% for transacao in transacoes %}
-            <tr class="{% if transacao.tipoTransacao == 'ENTRADA' %}entrada{% elif transacao.tipoTransacao == 'SAIDA' %}saida{% endif %}">
+            <tr>
                 <td>{{ transacao.tipoTransacao }}</td>
                 <td>{{ transacao.dataTransacao | date:'d/m/Y' }}</td>
                 <td>{{ transacao.horaTransacao | time:'H:i' }}</td>

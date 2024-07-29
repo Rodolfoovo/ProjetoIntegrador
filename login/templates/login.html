@@ -24,6 +24,13 @@
         <div class="retangulo_login">
             <div class="title_login">LOGIN</div>
             <form action="{% url 'login' %}" method="POST" class="login-form">{% csrf_token %}
+                {% if messages %}
+                    <div class="alert alert-danger" role="alert">
+                        {% for message in messages %}
+                            {{ message }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
                 <div class="custom-form-group">
                     <div class="custom-form-control" id="username">
                         <input type="text" id="username" name="username" placeholder="Digite seu email">

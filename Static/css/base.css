@@ -70,3 +70,13 @@
 .saida {
     background-color: #FFB6C1; /* Vermelho claro */
 }
+.retangulo_esq {
+    width: 600px;
+    height: 100%;
+    background-color: red;
+    position: absolute;
+    left: 0;
+    top: 46px;
+    bottom: 0;
+}
+
