@@ -18,6 +18,7 @@
         {% endfor %}
     </ul>
 {% endif %}
+
 <div class="retangulo_Editar">
     <h2>Cadastrar Novo Produto</h2>
     <form method="POST">
@@ -74,5 +75,9 @@
         <button type="submit" class="btn-submit">Cadastrar</button>
     </form>
 </div>
-
+<script>
+    IMask(document.getElementById('valorUnit'), {
+            mask: 'R$ num{digits:2}.num{digits:2}'
+        });
+</script>
 {% endblock %}

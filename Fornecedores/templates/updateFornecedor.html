@@ -43,6 +43,13 @@
                     <input type="text" id="endereco" name="endereco" value="{{fornecedor.endereco}}">
                 </div>
             </div> 
+            {% if messages %}
+                <div class="alert alert-danger" role="alert">
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+            </div>
+            {% endif %}
             <button type="submit" class="btn-submit">Atualizar</button>
         </form>
     </div>
